@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AccountService, AlertService } from '../_services';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 // import { AccountService, AlertService } from '@app/_services';
 
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private accountService: AccountService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    public snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -53,6 +55,7 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         (data) => {
+          this.snackBar.open('You Login successfully!', '×', { panelClass: 'success', verticalPosition: 'top',horizontalPosition:'right', duration: 3000 });
           this.router.navigate([this.returnUrl]);
         },
         (error) => {

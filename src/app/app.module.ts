@@ -1,26 +1,3 @@
-// import { BrowserModule } from '@angular/platform-browser';
-// import { NgModule } from '@angular/core';
-
-// import { AppRoutingModule } from './app-routing.module';
-// import { AppComponent } from './app.component';
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-// import { FlexLayoutModule } from "@angular/flex-layout";
-
-// @NgModule({
-//   declarations: [
-//     AppComponent
-//   ],
-//   imports: [
-//     BrowserModule,
-//     AppRoutingModule,
-//     BrowserAnimationsModule,
-//     FlexLayoutModule
-//   ],
-//   providers: [],
-//   bootstrap: [AppComponent]
-// })
-// export class AppModule { }
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -38,6 +15,7 @@ import { HomeComponent } from './home';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   imports: [
@@ -47,7 +25,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     AppRoutingModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    SharedModule
   ],
   declarations: [AppComponent, AlertComponent, HomeComponent],
   providers: [
