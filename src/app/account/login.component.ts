@@ -5,8 +5,6 @@ import { first } from 'rxjs/operators';
 import { AccountService, AlertService } from '../_services';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-// import { AccountService, AlertService } from '@app/_services';
-
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
   form: FormGroup;
@@ -55,7 +53,12 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         (data) => {
-          this.snackBar.open('You Login successfully!', '×', { panelClass: 'success', verticalPosition: 'top',horizontalPosition:'right', duration: 3000 });
+          this.snackBar.open('You Login successfully!', '×', {
+            panelClass: 'success',
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
+            duration: 3000,
+          });
           this.router.navigate([this.returnUrl]);
         },
         (error) => {
