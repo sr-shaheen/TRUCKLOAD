@@ -16,7 +16,11 @@
   </svg>
 
 </div> -->
+<div class="app-container" [ngClass]="{ 'bg-light': user }">
+  <alert></alert>
+  <router-outlet></router-outlet>
+</div>
 
 
-<router-outlet></router-outlet>
+<!-- <router-outlet></router-outlet> -->
 

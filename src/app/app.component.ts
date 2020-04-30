@@ -11,7 +11,7 @@
 
 import { Component } from '@angular/core';
 
-import { AccountService } from './_services';
+import { AccountService, AlertService } from './_services';
 import { User } from './_models';
 
 @Component({
@@ -23,11 +23,17 @@ export class AppComponent {
   title = 'truckload';
   user: User;
 
-  constructor(private accountService: AccountService) {
+  constructor(
+    private accountService: AccountService,
+    private alertService: AlertService
+  ) {
     this.accountService.user.subscribe((x) => (this.user = x));
   }
 
   logout() {
     this.accountService.logout();
+    this.alertService.success('Logout successful', {
+      keepAfterRouteChange: true,
+    });
   }
 }
