@@ -71,6 +71,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatStepperModule,
   ],
   exports: [
+    CommonModule,
     RouterModule,
     FlexLayoutModule,
     MatAutocompleteModule,

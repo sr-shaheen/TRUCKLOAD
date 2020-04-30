@@ -5,7 +5,10 @@ import { first } from 'rxjs/operators';
 import { AccountService, AlertService } from '../_services';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-@Component({ templateUrl: 'login.component.html' })
+@Component({
+  templateUrl: 'login.component.html',
+  styleUrls: ['./login.component.scss'],
+})
 export class LoginComponent implements OnInit {
   form: FormGroup;
   loading = false;
@@ -62,7 +65,13 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         (error) => {
-          this.alertService.error(error);
+          this.snackBar.open('Username of Password Incorrect', '×', {
+            panelClass: 'success',
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
+            duration: 3000,
+          });
+          // this.alertService.error(error);
           this.loading = false;
         }
       );
