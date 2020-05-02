@@ -17,9 +17,25 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { SharedModule } from './shared/shared.module';
 
+// new added
+import { CommonService } from './shared/services/common.service';
+import { AsyncService } from './shared/services/async.service';
+import { NgxsModule } from '@ngxs/store';
+import { environment } from 'src/environments/environment';
+import { AsyncState } from './shared/state/async.state';
+import { NgxsStoragePluginModule } from "@ngxs/storage-plugin";
+import { NgxsReduxDevtoolsPluginModule } from "@ngxs/devtools-plugin";
+import { NgxsLoggerPluginModule } from "@ngxs/logger-plugin";
+
 @NgModule({
   imports: [
     BrowserModule,
+    NgxsModule.forRoot([ AsyncState], {
+      developmentMode: !environment.production
+    }),
+    NgxsStoragePluginModule.forRoot(),
+    NgxsReduxDevtoolsPluginModule.forRoot({ disabled: environment.production }),
+    NgxsLoggerPluginModule.forRoot({ disabled: environment.production }),
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
@@ -35,6 +51,8 @@ import { SharedModule } from './shared/shared.module';
 
     // provider used to create fake backend
     fakeBackendProvider,
+    CommonService,
+    AsyncService
   ],
   bootstrap: [AppComponent],
 })

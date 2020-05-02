@@ -32,6 +32,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { TruncatePipe } from './pipes/truncate.pipe';
+import { ConfirmDialogComponent } from './components/confirmation-dialog.component';
+import { AvatarComponent } from './components/avatar.component';
 
 @NgModule({
   imports: [
@@ -105,9 +108,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatToolbarModule,
     MatTooltipModule,
     MatStepperModule,
+    TruncatePipe,
+    AvatarComponent
   ],
-  declarations: [],
-  entryComponents: [],
-  providers: [],
+  declarations: [TruncatePipe, ConfirmDialogComponent,AvatarComponent],
+  entryComponents: [ConfirmDialogComponent],
+  providers: [TruncatePipe],
 })
 export class SharedModule {}

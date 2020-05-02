@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { AccountService, AlertService } from './_services';
 import { User } from './_models';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CommonService } from './shared/services/common.service';
 
 @Component({
   selector: 'app',
@@ -16,6 +17,7 @@ export class AppComponent {
   constructor(
     private accountService: AccountService,
     private alertService: AlertService,
+    private commonService:CommonService,
     public snackBar: MatSnackBar
   ) {
     this.accountService.user.subscribe((x) => (this.user = x));
@@ -23,8 +25,11 @@ export class AppComponent {
 
   logout() {
     this.accountService.logout();
-    this.snackBar.open('Logout successfully!', '×', { panelClass: 'success', verticalPosition: 'top',horizontalPosition:'right', duration: 3000 });
-  //   this.alertService.success('Logout successful', {
+    this.commonService.showSuccessMsg("logout sucessfully");
+    // this.snackBar.open('Logout successfully!', '×', { panelClass: 'success', verticalPosition: 'top',horizontalPosition:'right', duration: 3000 });
+
+
+    //   this.alertService.success('Logout successful', {
   //     keepAfterRouteChange: true,
   //   });
   }
