@@ -35,6 +35,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { ConfirmDialogComponent } from './components/confirmation-dialog.component';
 import { AvatarComponent } from './components/avatar.component';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
 
 @NgModule({
   imports: [
@@ -109,9 +110,10 @@ import { AvatarComponent } from './components/avatar.component';
     MatTooltipModule,
     MatStepperModule,
     TruncatePipe,
-    AvatarComponent
+    AvatarComponent,
+    NavMenuComponent
   ],
-  declarations: [TruncatePipe, ConfirmDialogComponent,AvatarComponent],
+  declarations: [TruncatePipe, ConfirmDialogComponent,AvatarComponent,NavMenuComponent],
   entryComponents: [ConfirmDialogComponent],
   providers: [TruncatePipe],
 })

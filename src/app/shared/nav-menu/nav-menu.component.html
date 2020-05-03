@@ -1,0 +1,38 @@
+<div id="container">
+  <mat-toolbar class="toolbar" *ngIf="user">
+    <mat-toolbar-row style="height: 120px; border-bottom: 1px solid crimson;">
+      <img width="200" alt="Angular Logo" src="../assets/images/logo.png" />
+      <span class="spacer"></span>
+      <div class="topnav">
+        <a class="active" href="#home">Dashboard</a>
+        <a href="#news">Orders</a>
+        <a href="#contact">Customer</a>
+        <a href="#about">Maps</a>
+      </div>
+      <span class="spacer"></span>
+      <avatar [matMenuTriggerFor]="menu" [size]="35"></avatar>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          {{ user?.firstName }} {{ user?.lastName }}
+        </button>
+        <button mat-menu-item>Settings</button>
+        <button mat-menu-item (click)="logout()">Logout</button>
+      </mat-menu>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-card
+    [ngClass]="[
+      user ? 'card' : 'card-auth'
+    ]"
+  >
+    <mat-card-content>
+      <router-outlet></router-outlet>
+      <div class="footer" *ngIf="user">
+        <div>
+          &copy; Copyright TruckLoad.All rights reserved || Designed by
+          ERA-InfoTech Limited.
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
