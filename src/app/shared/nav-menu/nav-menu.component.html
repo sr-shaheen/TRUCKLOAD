@@ -4,10 +4,18 @@
       <img width="200" alt="Angular Logo" src="../assets/images/logo.png" />
       <span class="spacer"></span>
       <div class="topnav">
-        <a class="active" (click)="dashboard()">Dashboard</a>
-        <a (click)="orders()">Orders</a>
-        <a (click)="customer()">Customer</a>
-        <a (click)="maps()">Maps</a>
+        <a [routerLink]="['/dashboard']" [routerLinkActive]="['active']"
+          >Dashboard</a
+        >
+        <a [routerLink]="['/orders']" [routerLinkActive]="['active']"
+          >Orders</a
+        >
+        <a [routerLink]="['/customer']" [routerLinkActive]="['active']"
+          >Customer</a
+        >
+        <a [routerLink]="['/maps']" [routerLinkActive]="['active']"
+          >Maps</a
+        >
       </div>
       <span class="spacer"></span>
 
