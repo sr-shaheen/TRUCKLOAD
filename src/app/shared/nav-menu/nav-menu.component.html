@@ -1,7 +1,7 @@
 <div id="container">
   <mat-toolbar class="toolbar" *ngIf="user">
     <mat-toolbar-row style="height: 120px; border-bottom: 1px solid crimson;">
-      <img width="200" alt="Angular Logo" src="../assets/images/logo.png" />
+      <img [routerLink]="['/']" style="cursor: pointer;" width="200" alt="Angular Logo" src="../assets/images/logo.png" />
       <span class="spacer"></span>
       <div class="topnav">
         <a [routerLink]="['/dashboard']" [routerLinkActive]="['active']"
