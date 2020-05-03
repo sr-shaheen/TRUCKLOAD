@@ -9,7 +9,7 @@ import {
   Input,
 } from '@angular/core';
 import { Observable, Subscription, of } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CommonService } from '../services/common.service';
 import { AsyncService } from '../services/async.service';
 import { AccountService } from 'src/app/_services';
@@ -23,12 +23,26 @@ import { User } from 'src/app/_models';
 export class NavMenuComponent implements OnInit, OnDestroy {
   user: User;
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private accountService: AccountService,
     private commonService: CommonService
   ) {
     this.accountService.user.subscribe((x) => (this.user = x));
   }
 
+  dashboard() {
+    this.router.navigate(['/dashboard']);
+  }
+  orders() {
+    this.router.navigate(['/orders']);
+  }
+  customer() {
+    this.router.navigate(['/customer']);
+  }
+  maps() {
+    this.router.navigate(['/maps']);
+  }
   ngOnInit(): void {}
 
   logout() {

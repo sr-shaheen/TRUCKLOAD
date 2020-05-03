@@ -4,14 +4,17 @@
       <img width="200" alt="Angular Logo" src="../assets/images/logo.png" />
       <span class="spacer"></span>
       <div class="topnav">
-        <a class="active" href="#home">Dashboard</a>
-        <a href="#news">Orders</a>
-        <a href="#contact">Customer</a>
-        <a href="#about">Maps</a>
+        <a class="active" (click)="dashboard()">Dashboard</a>
+        <a (click)="orders()">Orders</a>
+        <a (click)="customer()">Customer</a>
+        <a (click)="maps()">Maps</a>
       </div>
       <span class="spacer"></span>
 
-      <mat-icon style="color: green;margin-right: 20px;" matBadge="15" matBadgeColor="warn"
+      <mat-icon
+        style="color: green; margin-right: 20px;"
+        matBadge="15"
+        matBadgeColor="warn"
         >notification_important</mat-icon
       >
 
