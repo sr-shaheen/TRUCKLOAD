@@ -22,6 +22,7 @@ import { User } from 'src/app/_models';
 })
 export class NavMenuComponent implements OnInit, OnDestroy {
   user: User;
+  link:string;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -33,17 +34,32 @@ export class NavMenuComponent implements OnInit, OnDestroy {
 
   dashboard() {
     this.router.navigate(['/dashboard']);
+    this.link=this.router.url
+    console.log(this.link);
+
   }
   orders() {
     this.router.navigate(['/orders']);
+    this.link=this.router.url
+    console.log(this.link);
+
   }
   customer() {
     this.router.navigate(['/customer']);
+    this.link=this.router.url
+    console.log(this.link);
+
   }
   maps() {
     this.router.navigate(['/maps']);
+    this.link=this.router.url
+    console.log(this.link);
+
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.router.url,'oninit');
+
+  }
 
   logout() {
     this.accountService.logout();
