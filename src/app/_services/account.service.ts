@@ -6,8 +6,6 @@ import { map } from 'rxjs/operators';
 import { User } from '../_models';
 import { environment } from 'src/environments/environment';
 
-// import { environment } from '@environments/environment';
-// import { User } from '@app/_models';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -29,7 +27,6 @@ export class AccountService {
     login(username, password) {
         return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
             .pipe(map(user => {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));
                 this.userSubject.next(user);
                 return user;
@@ -37,7 +34,6 @@ export class AccountService {
     }
 
     logout() {
-        // remove user from local storage and set current user to null
         localStorage.removeItem('user');
         this.userSubject.next(null);
         this.router.navigate(['/account/login']);
