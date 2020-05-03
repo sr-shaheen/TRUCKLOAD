@@ -4,8 +4,6 @@ import { Subscription } from 'rxjs';
 import { AlertService } from '../_services';
 import { Alert, AlertType } from '../_models';
 
-// import { Alert, AlertType } from '@app/_models';
-// import { AlertService } from '@app/_services';
 
 @Component({ selector: 'alert', templateUrl: 'alert.component.html' })
 export class AlertComponent implements OnInit, OnDestroy {

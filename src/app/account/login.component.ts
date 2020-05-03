@@ -2,8 +2,9 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { AccountService, AlertService } from '../_services';
+import { AccountService } from '../_services';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CommonService } from '../shared/services/common.service';
 
 @Component({
   templateUrl: 'login.component.html',
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private accountService: AccountService,
-    private alertService: AlertService,
+    private commonService: CommonService,
     public snackBar: MatSnackBar
   ) {}
 
@@ -42,9 +43,6 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    // reset alerts on submit
-    this.alertService.clear();
-
     // stop here if form is invalid
     if (this.form.invalid) {
       return;
@@ -56,23 +54,18 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         (data) => {
-          this.snackBar.open('You Login successfully!', '×', {
-            panelClass: 'success',
-            verticalPosition: 'top',
-            horizontalPosition: 'right',
-            duration: 3000,
-          });
+          this.commonService.showSuccessMsg('You Login successfully!');
           // this.router.navigate([this.returnUrl]);
           this.router.navigate(['/dashboard']);
         },
         (error) => {
-          this.snackBar.open('Username of Password Incorrect', '×', {
-            panelClass: 'success',
-            verticalPosition: 'top',
-            horizontalPosition: 'right',
-            duration: 3000,
-          });
-          // this.alertService.error(error);
+          // this.snackBar.open('Username of Password Incorrect', '×', {
+          //   panelClass: 'success',
+          //   verticalPosition: 'top',
+          //   horizontalPosition: 'right',
+          //   duration: 3000,
+          // });
+          this.commonService.showErrorMsg('Username of Password Incorrect');
           this.loading = false;
         }
       );
