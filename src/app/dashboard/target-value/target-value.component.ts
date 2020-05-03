@@ -9,86 +9,80 @@ const data = {
     // numbersuffix: "%",
     // drawcrossline: "1",
     // plottooltext: "<b>$dataValue</b> of youth were on $seriesName",
-    theme: "fusion"
+    theme: 'fusion',
   },
   categories: [
     {
       category: [
         {
-          label: "Week 1"
+          label: 'Week 1',
         },
         {
-          label: "Week 2"
+          label: 'Week 2',
         },
         {
-          label: "Week 3"
-        }
-      
-      ]
-    }
+          label: 'Week 3',
+        },
+      ],
+    },
   ],
   dataset: [
     {
-      seriesname: "Target Value",
+      seriesname: 'Target Value',
       data: [
         {
-          value: "62"
+          value: '62',
         },
         {
-          value: "64"
+          value: '64',
         },
         {
-          value: "64"
+          value: '64',
         },
         {
-          value: "66"
+          value: '66',
         },
         {
-          value: "78"
-        }
-      ]
+          value: '78',
+        },
+      ],
     },
     {
-      seriesname: "Actual Projection",
+      seriesname: 'Actual Projection',
       data: [
         {
-          value: "16"
+          value: '16',
         },
         {
-          value: "28"
+          value: '28',
         },
         {
-          value: "34"
+          value: '34',
         },
         {
-          value: "42"
+          value: '42',
         },
         {
-          value: "54"
-        }
-      ]
+          value: '54',
+        },
+      ],
     },
-
-
-  ]
+  ],
 };
 
 @Component({
   selector: 'app-target-value',
   templateUrl: './target-value.component.html',
-  styleUrls: ['./target-value.component.scss']
+  styleUrls: ['./target-value.component.scss'],
 })
 export class TargetValueComponent implements OnInit {
-
   width = 500;
   height = 300;
-  type = "msline";
-  dataFormat = "json";
+  type = 'msline';
+  dataFormat = 'json';
   dataSource = data;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
