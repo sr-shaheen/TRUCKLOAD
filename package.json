@@ -25,7 +25,9 @@
     "@ngxs/storage-plugin": "^3.6.2",
     "@ngxs/store": "^3.6.2",
     "@types/googlemaps": "^3.39.4",
+    "angular-fusioncharts": "^3.0.4",
     "bootstrap": "^4.4.1",
+    "fusioncharts": "^3.15.1-sr.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

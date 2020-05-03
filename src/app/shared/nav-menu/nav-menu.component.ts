@@ -1,14 +1,8 @@
-import { MediaMatcher } from '@angular/cdk/layout';
 import {
-  ChangeDetectorRef,
   Component,
   OnDestroy,
   OnInit,
-  ViewChild,
-  AfterViewInit,
-  Input,
 } from '@angular/core';
-import { Observable, Subscription, of } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CommonService } from '../services/common.service';
 import { AsyncService } from '../services/async.service';
@@ -22,6 +16,7 @@ import { User } from 'src/app/_models';
 })
 export class NavMenuComponent implements OnInit, OnDestroy {
   user: User;
+  link:string;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -31,19 +26,8 @@ export class NavMenuComponent implements OnInit, OnDestroy {
     this.accountService.user.subscribe((x) => (this.user = x));
   }
 
-  dashboard() {
-    this.router.navigate(['/dashboard']);
+  ngOnInit(): void {
   }
-  orders() {
-    this.router.navigate(['/orders']);
-  }
-  customer() {
-    this.router.navigate(['/customer']);
-  }
-  maps() {
-    this.router.navigate(['/maps']);
-  }
-  ngOnInit(): void {}
 
   logout() {
     this.accountService.logout();

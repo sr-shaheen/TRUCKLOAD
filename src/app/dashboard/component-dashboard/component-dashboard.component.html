@@ -1,1 +1,23 @@
-<p>component-dashboard works!</p>
+
+<div fxLayout="column" fxLayoutAlign="space-around none" fxFlex="100%">
+
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="1.5%" fxLayoutAlign="space-around center">
+  
+      <div fxFlex="10%">
+        <app-completed-trip></app-completed-trip>
+      </div>
+      <div fxFlex="30%">
+      <app-gross-profit></app-gross-profit>
+      </div>
+   
+    </div>
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="space-around center"
+    style="margin-top: 20px;">
+      <div fxFlex="30%">
+        <app-trip></app-trip>
+        </div>
+        <div fxFlex="30%">
+          <app-target-value></app-target-value>
+          </div>
+   </div>
+      </div>
