@@ -10,6 +10,11 @@
         <a href="#about">Maps</a>
       </div>
       <span class="spacer"></span>
+
+      <mat-icon style="color: green;margin-right: 20px;" matBadge="15" matBadgeColor="warn"
+        >notification_important</mat-icon
+      >
+
       <avatar [matMenuTriggerFor]="menu" [size]="35"></avatar>
       <mat-menu #menu="matMenu">
         <button mat-menu-item>
@@ -20,11 +25,7 @@
       </mat-menu>
     </mat-toolbar-row>
   </mat-toolbar>
-  <mat-card
-    [ngClass]="[
-      user ? 'card' : 'card-auth'
-    ]"
-  >
+  <mat-card [ngClass]="[user ? 'card' : 'card-auth']">
     <mat-card-content>
       <router-outlet></router-outlet>
       <div class="footer" *ngIf="user">

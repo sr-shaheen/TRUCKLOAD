@@ -32,6 +32,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatBadgeModule} from '@angular/material/badge';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { ConfirmDialogComponent } from './components/confirmation-dialog.component';
 import { AvatarComponent } from './components/avatar.component';
@@ -73,6 +74,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
     MatToolbarModule,
     MatTooltipModule,
     MatStepperModule,
+    MatBadgeModule
   ],
   exports: [
     CommonModule,
@@ -109,6 +111,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
     MatToolbarModule,
     MatTooltipModule,
     MatStepperModule,
+    MatBadgeModule,
     TruncatePipe,
     AvatarComponent,
     NavMenuComponent
