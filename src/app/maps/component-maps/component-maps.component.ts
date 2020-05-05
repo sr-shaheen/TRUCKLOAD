@@ -1,4 +1,5 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { empty } from 'rxjs';
 
 @Component({
   selector: 'app-component-maps',
@@ -31,6 +32,7 @@ export class ComponentMapsComponent implements AfterViewInit {
         num = 3;
         break;
       default:
+        num = 0;
         break;
     }
     this.loadAllMarkers(num);
@@ -185,6 +187,8 @@ load Capacity:20 ton`,
 
   //Default Marker
 
+
+
   marker = new google.maps.Marker({
     position: new google.maps.LatLng(23.0595873, 90.856946),
     map: this.map,
@@ -196,6 +200,7 @@ load Capacity:20 ton`,
     this.mapInitializer();
   }
 
+  
   mapInitializer(): void {
     this.map = new google.maps.Map(this.gmap.nativeElement, this.mapOptions);
 
@@ -207,14 +212,14 @@ load Capacity:20 ton`,
       infoWindow.open(this.marker.getMap(), this.marker);
     });
 
-    //Adding default marker to map
-    this.marker.setMap(this.map);
-
     //Adding other markers
-    this.loadAllMarkers(1);
+    this.loadAllMarkers(0);
   }
 
+  markers = [];
+  
   loadAllMarkers(num): void {
+    
     this.allMarker[num].forEach((markerInfo) => {
       const marker = new google.maps.Marker({
         icon: '/assets/P.png',
@@ -232,8 +237,27 @@ load Capacity:20 ton`,
         infoWindow.open(marker.getMap(), marker);
       });
 
-      //Addng marker to google map
-      marker.setMap(this.map);
+      for (var i=0; i<this.markers.length; i++) {
+
+        this.markers[i].setMap(null);
+
+        console.log("null a dhukse"+marker[i]);              
+      }
+      this.markers.length = 0;
+
+      setTimeout(() => 
+      {
+        this.markers.push(marker);
+
+        //Addng marker to google map
+        for (var i=0; i<this.markers.length; i++) {
+  
+          this.markers[i].setMap(this.map);
+         
+        } 
+      },
+      250);
+
     });
   }
 }
