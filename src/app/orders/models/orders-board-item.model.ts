@@ -1,17 +1,14 @@
 export interface OrdersBoardItem {
-  _id: string;
-  customerName: string;
   customerId: string;
+  customerName: string;
   cellNo: string;
-  registrationNo: string;
   email: string;
-  status: string;
   imagePath?: string;
-  carModel: string;
-  modelCode?: string;
-  chasisNo: string;
-  serviceId?: string;
-  warrantyStartDate?: Date;
-  makeYear?: number;
-  nextServiceId?: string;
+  status: string;
+  loadingDate?: string;
+  arrivalDate?: string;
+  loadingPoint?: string;
+  unloadingPoint: string;
+  vehicalReg?: string;
+  driverPhn?: Date;
 }

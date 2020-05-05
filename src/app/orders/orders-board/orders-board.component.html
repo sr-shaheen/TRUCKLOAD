@@ -17,7 +17,7 @@
         [style.background-color]="colors.ordersPlaced.bgColor"
         [style.color]="colors.ordersPlaced.color"
       >
-        {{status.ordersPlaced}} ({{ ordersPlaced.length }})
+        {{ status.ordersPlaced }} ({{ ordersPlaced.length }})
       </div>
     </div>
 
@@ -28,7 +28,7 @@
         [style.background-color]="colors.detailsCollected.bgColor"
         [style.color]="colors.detailsCollected.color"
       >
-      {{status.detailsCollected}} ({{ detailsCollected.length }})
+        {{ status.detailsCollected }} ({{ detailsCollected.length }})
       </div>
     </div>
 
@@ -39,7 +39,7 @@
         [style.background-color]="colors.orderConfirmed.bgColor"
         [style.color]="colors.orderConfirmed.color"
       >
-      {{status.orderConfirmed}} ({{ orderConfirmed.length }})
+        {{ status.orderConfirmed }} ({{ orderConfirmed.length }})
       </div>
     </div>
 
@@ -50,7 +50,7 @@
         [style.background-color]="colors.loadCompleted.bgColor"
         [style.color]="colors.loadCompleted.color"
       >
-      {{status.loadCompleted}} ({{ loadCompleted.length }})
+        {{ status.loadCompleted }} ({{ loadCompleted.length }})
       </div>
     </div>
 
@@ -61,7 +61,7 @@
         [style.background-color]="colors.inTransit.bgColor"
         [style.color]="colors.inTransit.color"
       >
-      {{status.inTransit}} ({{ inTransit.length }})
+        {{ status.inTransit }} ({{ inTransit.length }})
       </div>
     </div>
     <div fxFlex="14.258%" fxFlex.xs="155px" fxFlex.sm="155px">
@@ -71,7 +71,7 @@
         [style.background-color]="colors.uploadComplete.bgColor"
         [style.color]="colors.uploadComplete.color"
       >
-      {{status.uploadComplete}} ({{ uploadComplete.length }})
+        {{ status.uploadComplete }} ({{ uploadComplete.length }})
       </div>
     </div>
     <div fxFlex="14.258%" fxFlex.xs="155px" fxFlex.sm="155px">
@@ -81,9 +81,202 @@
         [style.background-color]="colors.consignmentDone.bgColor"
         [style.color]="colors.consignmentDone.color"
       >
-      {{status.consignmentDone}} ({{ consignmentDone.length }})
+        {{ status.consignmentDone }} ({{ consignmentDone.length }})
       </div>
     </div>
   </div>
 
+  <!--start card design -->
+  <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="15px">
+    <div fxFlex="14.258%" fxFlex.xs="155px" fxFlex.sm="155px">
+      <div
+        [id]="'ordersPlaced'"
+        class="item-container"
+        cdkDropList
+        #ordersPlacedList="cdkDropList"
+        [cdkDropListData]="ordersPlaced"
+        [cdkDropListConnectedTo]="[detailsCollectedList,orderConfirmedList]"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          class="item"
+          cdkDrag
+          *ngFor="let item of ordersPlaced"
+          [style.background-color]="colors.ordersPlaced.bgColor"
+          [style.color]="colors.ordersPlaced.color"
+        >
+          <orders-board-item [order]="item"></orders-board-item>
+          <avatar
+            [size]="30"
+            [imageSrc]="item.imagePath"
+            class="item-avatar"
+          ></avatar>
+        </div>
+      </div>
+    </div>
+
+    <div fxFlex="14.258%" fxFlex.xs="155px" fxFlex.sm="155px">
+      <div
+        [id]="'detailsCollected'"
+        class="item-container"
+        cdkDropList
+        #detailsCollectedList="cdkDropList"
+        [cdkDropListData]="detailsCollected"
+        [cdkDropListConnectedTo]="[ordersPlacedList, orderConfirmedList]"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          class="item"
+          cdkDrag
+          *ngFor="let item of detailsCollected"
+          [style.background-color]="colors.detailsCollected.bgColor"
+          [style.color]="colors.detailsCollected.color"
+        >
+          <orders-board-item [order]="item"></orders-board-item>
+          <avatar
+            [size]="30"
+            [imageSrc]="item.imagePath"
+            class="item-avatar"
+          ></avatar>
+        </div>
+      </div>
+    </div>
+
+    <div fxFlex="14.258%" fxFlex.xs="155px" fxFlex.sm="155px">
+      <div
+        [id]="'orderConfirmed'"
+        class="item-container"
+        cdkDropList
+        #orderConfirmedList="cdkDropList"
+        [cdkDropListData]="orderConfirmed"
+        [cdkDropListConnectedTo]="[detailsCollectedList, loadCompletedList]"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          class="item"
+          cdkDrag
+          *ngFor="let item of orderConfirmed"
+          [style.background-color]="colors.orderConfirmed.bgColor"
+          [style.color]="colors.orderConfirmed.color"
+        >
+          <orders-board-item [order]="item"></orders-board-item>
+          <avatar
+            [size]="30"
+            [imageSrc]="item.imagePath"
+            class="item-avatar"
+          ></avatar>
+        </div>
+      </div>
+    </div>
+
+    <div fxFlex="14.258%" fxFlex.xs="155px" fxFlex.sm="155px">
+      <div
+        [id]="'loadCompleted'"
+        class="item-container"
+        cdkDropList
+        #loadCompletedList="cdkDropList"
+        [cdkDropListData]="loadCompleted"
+        [cdkDropListConnectedTo]="[orderConfirmedList, inTransitList]"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          class="item"
+          cdkDrag
+          *ngFor="let item of loadCompleted"
+          [style.background-color]="colors.loadCompleted.bgColor"
+          [style.color]="colors.loadCompleted.color"
+        >
+          <orders-board-item [order]="item"></orders-board-item>
+          <avatar
+            [size]="30"
+            [imageSrc]="item.imagePath"
+            class="item-avatar"
+          ></avatar>
+        </div>
+      </div>
+    </div>
+
+    <div fxFlex="14.258%" fxFlex.xs="155px" fxFlex.sm="155px">
+      <div
+        [id]="'inTransit'"
+        class="item-container"
+        cdkDropList
+        #inTransitList="cdkDropList"
+        [cdkDropListData]="inTransit"
+        [cdkDropListConnectedTo]="[loadCompletedList, uploadCompleteList]"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          class="item"
+          cdkDrag
+          *ngFor="let item of inTransit"
+          [style.background-color]="colors.inTransit.bgColor"
+          [style.color]="colors.inTransit.color"
+        >
+          <orders-board-item [order]="item"></orders-board-item>
+          <avatar
+            [size]="30"
+            [imageSrc]="item.imagePath"
+            class="item-avatar"
+          ></avatar>
+        </div>
+      </div>
+    </div>
+
+    <div fxFlex="14.258%" fxFlex.xs="155px" fxFlex.sm="155px">
+      <div
+        [id]="'uploadComplete'"
+        class="item-container"
+        cdkDropList
+        #uploadCompleteList="cdkDropList"
+        [cdkDropListData]="uploadComplete"
+        [cdkDropListConnectedTo]="[inTransitList, consignmentDoneList]"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          class="item"
+          cdkDrag
+          *ngFor="let item of uploadComplete"
+          [style.background-color]="colors.uploadComplete.bgColor"
+          [style.color]="colors.uploadComplete.color"
+        >
+          <orders-board-item [order]="item"></orders-board-item>
+          <avatar
+            [size]="30"
+            [imageSrc]="item.imagePath"
+            class="item-avatar"
+          ></avatar>
+        </div>
+      </div>
+    </div>
+
+    <div fxFlex="14.258%" fxFlex.xs="155px" fxFlex.sm="155px">
+      <div
+        [id]="'consignmentDone'"
+        class="item-container"
+        cdkDropList
+        #consignmentDoneList="cdkDropList"
+        [cdkDropListData]="consignmentDone"
+        [cdkDropListConnectedTo]="[uploadCompleteList]"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          class="item"
+          cdkDrag
+          *ngFor="let item of consignmentDone"
+          [style.background-color]="colors.consignmentDone.bgColor"
+          [style.color]="colors.consignmentDone.color"
+        >
+          <orders-board-item [order]="item"></orders-board-item>
+          <avatar
+            [size]="30"
+            [imageSrc]="item.imagePath"
+            class="item-avatar"
+          ></avatar>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--end card design -->
 </div>

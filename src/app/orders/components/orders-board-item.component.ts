@@ -9,20 +9,19 @@ import { OrdersBoardItem } from '../models/orders-board-item.model';
       <p>Name: {{ order?.customerName }}</p>
       <p>Cell No: {{ order?.cellNo }}</p>
       <p>Email: {{ order?.email }}</p>
-      <p>Registration NO: {{ order?.registrationNo }}</p>
+      <p>Unloading:{{ order?.unloadingPoint }}</p>
     </div>
   `,
   styles: [
     `
       p {
-        line-height: 20px;
+        line-height: 5px;
       }
-    `
-  ]
+    `,
+  ],
 })
 export class OrdersBoardItemComponent implements OnInit {
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
   @Input() order: OrdersBoardItem;
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }
