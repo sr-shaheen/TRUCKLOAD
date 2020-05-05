@@ -33,6 +33,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatBadgeModule} from '@angular/material/badge';
+
+import {CdkTableModule} from '@angular/cdk/table';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {CdkTreeModule} from '@angular/cdk/tree';
+
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { ConfirmDialogComponent } from './components/confirmation-dialog.component';
 import { AvatarComponent } from './components/avatar.component';
@@ -74,7 +79,10 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
     MatToolbarModule,
     MatTooltipModule,
     MatStepperModule,
-    MatBadgeModule
+    MatBadgeModule,
+    CdkTableModule,
+    CdkTreeModule,
+    DragDropModule,
   ],
   exports: [
     CommonModule,
@@ -112,6 +120,9 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
     MatTooltipModule,
     MatStepperModule,
     MatBadgeModule,
+    CdkTableModule,
+    CdkTreeModule,
+    DragDropModule,
     TruncatePipe,
     AvatarComponent,
     NavMenuComponent

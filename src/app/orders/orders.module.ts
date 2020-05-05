@@ -1,15 +1,13 @@
 import { NgModule } from '@angular/core';
-
-import { OrdersRoutingModule } from './orders-routing.module';
-import { ComponentOrdersComponent } from './component-orders/component-orders.component';
 import { SharedModule } from '../shared/shared.module';
 
+import { OrdersRoutingModule } from './orders-routing.module';
+
+import { OrdersBoardItemComponent } from './components/orders-board-item.component';
+import { OrdersBoardComponent } from './orders-board/orders-board.component';
 
 @NgModule({
-  declarations: [ComponentOrdersComponent],
-  imports: [
-    SharedModule,
-    OrdersRoutingModule
-  ]
+  declarations: [OrdersBoardComponent, OrdersBoardItemComponent],
+  imports: [SharedModule, OrdersRoutingModule],
 })
-export class OrdersModule { }
+export class OrdersModule {}
