@@ -1,1 +1,89 @@
-<p>orders-board works!</p>
+<div fxLayout="row" fxLayoutAlign="end start">
+  <button class="btn">Add new orders</button>
+</div>
+<mat-divider> </mat-divider>
+
+<div fxLayout="column" class="orders-board-container">
+  <div
+    fxLayout="row"
+    class="item-group-container"
+    fxLayoutAlign="space-between start"
+    fxLayoutGap="15px"
+  >
+    <div fxFlex="14.258%" fxFlex.xs="155px" fxFlex.sm="155px">
+      <div
+        class="item-group"
+        fxFlexAlign="center"
+        [style.background-color]="colors.ordersPlaced.bgColor"
+        [style.color]="colors.ordersPlaced.color"
+      >
+        {{status.ordersPlaced}} ({{ ordersPlaced.length }})
+      </div>
+    </div>
+
+    <div fxFlex="14.258%" fxFlex.xs="155px" fxFlex.sm="155px">
+      <div
+        class="item-group"
+        fxFlexAlign="center"
+        [style.background-color]="colors.detailsCollected.bgColor"
+        [style.color]="colors.detailsCollected.color"
+      >
+      {{status.detailsCollected}} ({{ detailsCollected.length }})
+      </div>
+    </div>
+
+    <div fxFlex="14.258%" fxFlex.xs="155px" fxFlex.sm="155px">
+      <div
+        class="item-group"
+        fxFlexAlign="center"
+        [style.background-color]="colors.orderConfirmed.bgColor"
+        [style.color]="colors.orderConfirmed.color"
+      >
+      {{status.orderConfirmed}} ({{ orderConfirmed.length }})
+      </div>
+    </div>
+
+    <div fxFlex="14.258%" fxFlex.xs="155px" fxFlex.sm="155px">
+      <div
+        class="item-group"
+        fxFlexAlign="center"
+        [style.background-color]="colors.loadCompleted.bgColor"
+        [style.color]="colors.loadCompleted.color"
+      >
+      {{status.loadCompleted}} ({{ loadCompleted.length }})
+      </div>
+    </div>
+
+    <div fxFlex="14.258%" fxFlex.xs="155px" fxFlex.sm="155px">
+      <div
+        class="item-group"
+        fxFlexAlign="center"
+        [style.background-color]="colors.inTransit.bgColor"
+        [style.color]="colors.inTransit.color"
+      >
+      {{status.inTransit}} ({{ inTransit.length }})
+      </div>
+    </div>
+    <div fxFlex="14.258%" fxFlex.xs="155px" fxFlex.sm="155px">
+      <div
+        class="item-group"
+        fxFlexAlign="center"
+        [style.background-color]="colors.uploadComplete.bgColor"
+        [style.color]="colors.uploadComplete.color"
+      >
+      {{status.uploadComplete}} ({{ uploadComplete.length }})
+      </div>
+    </div>
+    <div fxFlex="14.258%" fxFlex.xs="155px" fxFlex.sm="155px">
+      <div
+        class="item-group"
+        fxFlexAlign="center"
+        [style.background-color]="colors.consignmentDone.bgColor"
+        [style.color]="colors.consignmentDone.color"
+      >
+      {{status.consignmentDone}} ({{ consignmentDone.length }})
+      </div>
+    </div>
+  </div>
+
+</div>
