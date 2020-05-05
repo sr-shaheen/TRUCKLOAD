@@ -72,31 +72,40 @@ import { Component, OnInit } from '@angular/core';
 const categories =  [
   {
     "category": [
-      { "label": "Q1" },
-      { "label": "Q2" },
-      { "label": "Q3" },
-      { "label": "Q4" }
+      { "label": "Today" },
+      { "label": "Last Week" },
+      { "label": "Last Month" },
+
     ]
   }
 ]
 // STEP 3- Construct the dataset comprising multiple series
 const dataset = [
   {
-    "seriesname": "Previous Year",
+    "seriesname": "Individual",
     "data": [
       { "value": "12000" },
-      { "value": "10500" },
+      { "value": "15000" },
       { "value": "23500" },
-      { "value": "16000" }
+ 
     ]
   },
   {
-    "seriesname": "Current Year",
+    "seriesname": "SME",
+    "data": [
+      { "value": "400" },
+      { "value": "2900" },
+      { "value": "8000" },
+    
+    ]
+  },
+  {
+    "seriesname": "Corporate",
     "data": [
       { "value": "24400" },
-      { "value": "29800" },
+      { "value": "8000" },
       { "value": "20800" },
-      { "value": "26800" }
+  
     ]
   }
 ]
@@ -112,11 +121,13 @@ export class AdminCompletedTripComponent implements OnInit {
   this.dataSource = {
   "chart": {
   "theme": "fusion",
+  "valuePadding": "5",
   "caption": "Total Trip",
   // "xAxisname": "Quarter",
   // "yAxisName": "Revenues (In USD)",
   // "numberPrefix": "\$",
   "plotFillAlpha": "80",
+  "canvasPadding": "30",
   "divLineIsDashed": "1",
   "divLineDashLen": "1",
   "divLineGapLen": "1"
