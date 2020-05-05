@@ -358,7 +358,7 @@ load Capacity:20 ton`,
 
   mapOptions: google.maps.MapOptions = {
     center: this.coordinates,
-    zoom: 9,
+    zoom: ,
   };
 
   //Default Marker
