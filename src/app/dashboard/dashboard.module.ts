@@ -14,6 +14,9 @@ import { CompletedTripComponent } from './completed-trip/completed-trip.componen
 import { GrossProfitComponent } from './gross-profit/gross-profit.component';
 import { TargetValueComponent } from './target-value/target-value.component';
 import { TripComponent } from './trip/trip.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { TotalCompletedTripComponent } from './total-completed-trip/total-completed-trip.component';
+import { AdminCompletedTripComponent } from './admin-completed-trip/admin-completed-trip.component';
 
 FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
 @NgModule({
@@ -23,6 +26,9 @@ FusionChartsModule.fcRoot(FusionCharts, charts, FusionTheme);
     GrossProfitComponent,
     TargetValueComponent,
     TripComponent,
+    AdminDashboardComponent,
+    TotalCompletedTripComponent,
+    AdminCompletedTripComponent,
   ],
   imports: [FusionChartsModule, SharedModule, DashboardRoutingModule],
 })
