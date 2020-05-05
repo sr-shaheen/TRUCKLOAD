@@ -1,0 +1,138 @@
+
+
+<div fxLayout="column" fxLayoutAlign="space-around none" fxFlex="100%">
+    <!-- <mat-toolbar-row style="height: 120px; border-bottom: 1px solid crimson;"> -->
+      <!-- <mat-sidenav-container class = "tp-container">
+        <mat-sidenav mode = "side" opened>
+           <section class = "tp-section">
+              <span>File</span>
+           </section>
+           <section class = "tp-section">
+              <span>Edit</span>
+           </section>
+        </mat-sidenav> -->
+  
+        <mat-sidenav-container class="example-container"  >
+          <mat-sidenav mode="side" opened style=" border-left: 1px solid rgb(220, 20, 60);border-right: 1px solid crimson;">
+            <section class = "tp-section1">
+              <a>Overall</a>
+           </section>
+           <section class = "tp-section">
+            <a [routerLink]="['/dashboard/customer-dashboard']" [routerLinkActive]="['active']" >
+              <img src="../assets/images/company_photo/litheGroup.jpg"  alt="my picture" height="128" width="128" />
+            </a >
+           </section>
+           <section class = "tp-section">
+            <a [routerLink]="['/dashboard/customer-dashboard']" [routerLinkActive]="['active']">
+              <img src="../assets/images/company_photo/nannuSpinningMills.jpg"  alt="my picture" height="120" width="120" />
+            </a>
+           </section>
+           <section class = "tp-section">
+            <a>
+              <img src="../assets/images/company_photo/Kazi_Farms_Kitchen_logo.jpg"  alt="my picture" height="120" width="120" />
+            </a>
+           </section>
+           <section class = "tp-section">
+            <a>
+              <img src="../assets/images/company_photo/steelTech.jpg"  alt="my picture" height="120" width="120" />
+            </a>
+           </section>
+           <!-- <section class = "tp-section">
+            <a>
+              <img src="../assets/images/company_photo/unilever.jpg"  alt="my picture"  />
+            </a>
+           </section> -->
+  
+          </mat-sidenav>
+          <!-- <mat-sidenav-content>Main content</mat-sidenav-content> -->
+       
+          <div class="container-test">
+    <div
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutWrap
+      fxLayoutGap="1.5%"
+      fxLayoutAlign="space-around center"
+    >
+  
+      <div fxFlex="50%">
+        <app-total-completed-trip></app-total-completed-trip>
+      </div>
+      <div fxFlex="50%">
+        <app-admin-completed-trip></app-admin-completed-trip>
+      </div>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutWrap
+      fxLayoutGap="0.5%"
+      fxLayoutAlign="space-around center"
+     style="margin-top: 5px;"
+    >
+      <div fxFlex="50%">
+        <app-admin-target-value></app-admin-target-value>
+      </div>
+      <div fxFlex="45%">
+        <div fxLayout="row">
+          <div fxFlex="60%" class= "example-card1">
+            <!-- <h3 style="margin-left: 15%">Order</h3> -->
+            <h3>Total Order</h3>
+              <circle-progress
+  [percent]="70"
+  [titleColor] = "'#ffffff'" 
+  [unitsColor] = "'#ffffff'" 
+  [radius]="60"
+  [space]="-10"
+  [outerStrokeWidth]="10"
+  [innerStrokeWidth]="10"
+  [outerStrokeColor]="'#78C000'"
+  [innerStrokeColor]="'#e7e8ea'"
+  [animation]="true"
+  [animationDuration]="300"
+></circle-progress>
+          </div>
+          <div fxFlex="50%" class= "example-card1">
+            <h3 style="margin-left: 15%">Total Completed</h3>
+              <circle-progress
+              [percent]="30"
+              [radius]="60"
+              [space]="-10"
+              [titleColor] = "'#ffffff'" 
+              [unitsColor] = "'#ffffff'" 
+              [outerStrokeWidth]="10"
+              [innerStrokeWidth]="10"
+              [outerStrokeColor]="'#4882c2'"
+              [innerStrokeColor]="'#e7e8ea'"
+              [animation]="true"
+              [animationDuration]="300"
+            ></circle-progress>
+
+          </div>
+          <div fxFlex="50%" class= "example-card1">
+            <h3 style="margin-left: 15%">Total Failed</h3>
+              <circle-progress
+              [percent]="80"
+              [radius]="60"
+              [space]="-10"
+              [titleColor] = "'#ffffff'" 
+              [unitsColor] = "'#ffffff'" 
+              [outerStrokeWidth]="10"
+              [innerStrokeWidth]="10"
+              [outerStrokeColor]="'#f32305'"
+              [innerStrokeColor]="'#e7e8ea'"
+              [animation]="true"
+              [animationDuration]="300"
+            ></circle-progress>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- </mat-sidenav-container> -->
+  <!-- </mat-toolbar-row> -->
+  </mat-sidenav-container>
+
+
+</div>

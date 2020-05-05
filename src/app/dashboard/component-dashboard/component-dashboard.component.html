@@ -1,4 +1,25 @@
 <div fxLayout="column" fxLayoutAlign="space-around none" fxFlex="100%">
+  <!-- <mat-toolbar-row style="height: 120px; border-bottom: 1px solid crimson;"> -->
+    <!-- <mat-sidenav-container class = "tp-container">
+      <mat-sidenav mode = "side" opened>
+         <section class = "tp-section">
+            <span>File</span>
+         </section>
+         <section class = "tp-section">
+            <span>Edit</span>
+         </section>
+      </mat-sidenav> -->
+
+      <mat-sidenav-container class="example-container"  >
+        <mat-sidenav mode="side" opened style=" border-left: 1px solid rgb(220, 20, 60);border-right: 1px solid crimson;">
+          <section class = "tp-section1">
+            <a>Customer Board</a>
+         </section>
+        
+        </mat-sidenav>
+        <!-- <mat-sidenav-content>Main content</mat-sidenav-content> -->
+     
+
   <div
     fxLayout="row"
     fxLayout.xs="column"
@@ -6,10 +27,11 @@
     fxLayoutGap="1.5%"
     fxLayoutAlign="space-around center"
   >
-    <div fxFlex="10%">
+
+    <div fxFlex="45%">
       <app-completed-trip></app-completed-trip>
     </div>
-    <div fxFlex="30%">
+    <div fxFlex="45%">
       <app-gross-profit></app-gross-profit>
     </div>
   </div>
@@ -21,11 +43,15 @@
     fxLayoutAlign="space-around center"
     style="margin-top: 20px;"
   >
-    <div fxFlex="30%">
+    <div fxFlex="45%">
       <app-trip></app-trip>
     </div>
-    <div fxFlex="30%">
+    <div fxFlex="45%">
       <app-target-value></app-target-value>
     </div>
   </div>
+
+<!-- </mat-sidenav-container> -->
+<!-- </mat-toolbar-row> -->
+</mat-sidenav-container>
 </div>

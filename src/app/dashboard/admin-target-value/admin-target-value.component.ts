@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 const data = {
   chart: {
     caption: "Today's Target Value",
@@ -23,6 +22,9 @@ const data = {
         {
           label: 'Week 3',
         },
+        {
+          label: 'Week 4',
+        },
       ],
     },
   ],
@@ -34,16 +36,16 @@ const data = {
           value: '62',
         },
         {
-          value: '64',
+          value: '34',
         },
         {
-          value: '64',
+          value: '14',
         },
         {
-          value: '66',
+          value: '106',
         },
         {
-          value: '78',
+          value: '88',
         },
       ],
     },
@@ -51,13 +53,13 @@ const data = {
       seriesname: 'Actual Projection',
       data: [
         {
-          value: '16',
+          value: '0',
         },
         {
-          value: '28',
+          value: '100',
         },
         {
-          value: '34',
+          value: '84',
         },
         {
           value: '42',
@@ -69,20 +71,20 @@ const data = {
     },
   ],
 };
-
 @Component({
-  selector: 'app-target-value',
-  templateUrl: './target-value.component.html',
-  styleUrls: ['./target-value.component.scss'],
+  selector: 'app-admin-target-value',
+  templateUrl: './admin-target-value.component.html',
+  styleUrls: ['./admin-target-value.component.scss']
 })
-export class TargetValueComponent implements OnInit {
+export class AdminTargetValueComponent implements OnInit {
   width = 520;
-  height = 250;
+  height = 200;
   type = 'msline';
   dataFormat = 'json';
   dataSource = data;
+  constructor() { }
 
-  constructor() {}
+  ngOnInit(): void {
+  }
 
-  ngOnInit(): void {}
 }
