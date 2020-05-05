@@ -19,6 +19,10 @@ export class ComponentMapsComponent implements AfterViewInit {
     this.selectTurcklocation = event.target.value;
 
     switch (this.selectTurcklocation) {
+      
+      case "all":
+        num=4;
+        break;
       case 'square':
         num = 0;
         break;
@@ -31,8 +35,9 @@ export class ComponentMapsComponent implements AfterViewInit {
       case 'bata':
         num = 3;
         break;
+
       default:
-        num = 0;
+        num = 4;
         break;
     }
     this.loadAllMarkers(num);
@@ -44,6 +49,7 @@ export class ComponentMapsComponent implements AfterViewInit {
         position: new google.maps.LatLng(24.0595873, 89.856946),
         map: this.map,
         title: `Smart-truck-01
+      company:Square
       Engine:-4636377
       size:-Heavy
       load Capacity:20 ton`,
@@ -52,15 +58,17 @@ export class ComponentMapsComponent implements AfterViewInit {
         position: new google.maps.LatLng(23.5095873, 90.506946),
         map: this.map,
         title: `Smart-truck-02
+      company:Square
       Engine:-4636377
       size:-Heavy
       load Capacity:20 ton`,
       },
 
       {
-        position: new google.maps.LatLng(23.3095873, 90.406946),
+        position: new google.maps.LatLng(23.3095873, 90.706946),
         map: this.map,
         title: `Smart-truck-03
+      company:Square
       Engine:-4636377
       size:-Heavy
       load Capacity:20 ton`,
@@ -70,6 +78,7 @@ export class ComponentMapsComponent implements AfterViewInit {
         position: new google.maps.LatLng(24.0597973, 89.856946),
         map: this.map,
         title: `Smart-truck-04
+      company:Square
       Engine:-4636377
       size:-Heavy
       load Capacity:20 ton`,
@@ -78,6 +87,7 @@ export class ComponentMapsComponent implements AfterViewInit {
         position: new google.maps.LatLng(23.0999873, 89.706946),
         map: this.map,
         title: `Smart-truck-05
+      company:Square
       Engine:-4636377
       size:-Heavy
       load Capacity:20 ton`,
@@ -89,6 +99,7 @@ export class ComponentMapsComponent implements AfterViewInit {
         position: new google.maps.LatLng(23.4095873, 90.406946),
         map: this.map,
         title: `Smart-truck-06
+  company:Brac
   Engine:-4636377
   size:-Heavy
   load Capacity:20 ton`,
@@ -98,6 +109,7 @@ export class ComponentMapsComponent implements AfterViewInit {
         position: new google.maps.LatLng(23.6095873, 90.906946),
         map: this.map,
         title: `Smart-truck-07
+  company:Brac
   Engine:-4636377
   size:-Heavy
   load Capacity:20 ton`,
@@ -107,6 +119,7 @@ export class ComponentMapsComponent implements AfterViewInit {
         position: new google.maps.LatLng(23.1595873, 90.896946),
         map: this.map,
         title: `Smart-truck-08
+  company:Brac
   Engine:-4636377
   size:-Heavy
   load Capacity:20 ton`,
@@ -114,7 +127,8 @@ export class ComponentMapsComponent implements AfterViewInit {
       {
         position: new google.maps.LatLng(23.9995873, 90.999946),
         map: this.map,
-        title: `Smart-truck-09
+        title: `Smart-truck-09  
+  company:Brac
   Engine:-4636377
   size:-Heavy
   load Capacity:20 ton`,
@@ -125,6 +139,7 @@ export class ComponentMapsComponent implements AfterViewInit {
         position: new google.maps.LatLng(24.0989587, 89.456846),
         map: this.map,
         title: `Smart-truck-10
+  company:Walton
   Engine:-4636377
   size:-Heavy
   load Capacity:20 ton`,
@@ -133,6 +148,7 @@ export class ComponentMapsComponent implements AfterViewInit {
         position: new google.maps.LatLng(23.9095873, 90.3406946),
         map: this.map,
         title: `Smart-truck-11
+  company:Walton
   Engine:-4636377
   size:-Heavy
   load Capacity:20 ton`,
@@ -144,6 +160,7 @@ export class ComponentMapsComponent implements AfterViewInit {
         position: new google.maps.LatLng(23.9095873, 90.906946),
         map: this.map,
         title: `Smart-truck-06
+company:Bata
 Engine:-4636377
 size:-Heavy
 load Capacity:20 ton`,
@@ -153,6 +170,7 @@ load Capacity:20 ton`,
         position: new google.maps.LatLng(23.6095873, 90.906946),
         map: this.map,
         title: `Smart-truck-07
+company:Bata
 Engine:-4636377
 size:-Heavy
 load Capacity:20 ton`,
@@ -162,6 +180,7 @@ load Capacity:20 ton`,
         position: new google.maps.LatLng(23.1595873, 89.856946),
         map: this.map,
         title: `Smart-truck-08
+company:Bata
 Engine:-4636377
 size:-Heavy
 load Capacity:20 ton`,
@@ -170,11 +189,168 @@ load Capacity:20 ton`,
         position: new google.maps.LatLng(23.0795573, 90.896946),
         map: this.map,
         title: `Smart-truck-09
+company:Bata
+Engine:-4636377
+size:-Heavy
+load Capacity:20 ton`,
+      },
+    
+    ],
+
+    [
+    
+      {
+        position: new google.maps.LatLng(24.0595873, 89.856946),
+        map: this.map,
+        title: `Smart-truck-01
+      company:Square
+      Engine:-4636377
+      size:-Heavy
+      load Capacity:20 ton`,
+      },
+      {
+        position: new google.maps.LatLng(23.5095873, 90.506946),
+        map: this.map,
+        title: `Smart-truck-02
+      company:Square
+      Engine:-4636377
+      size:-Heavy
+      load Capacity:20 ton`,
+      },
+
+      {
+        position: new google.maps.LatLng(23.3095873, 90.706946),
+        map: this.map,
+        title: `Smart-truck-03
+      company:Square
+      Engine:-4636377
+      size:-Heavy
+      load Capacity:20 ton`,
+      },
+
+      {
+        position: new google.maps.LatLng(24.0597973, 89.856946),
+        map: this.map,
+        title: `Smart-truck-04
+      company:Square
+      Engine:-4636377
+      size:-Heavy
+      load Capacity:20 ton`,
+      },
+      {
+        position: new google.maps.LatLng(23.0999873, 89.706946),
+        map: this.map,
+        title: `Smart-truck-05
+      company:Square
+      Engine:-4636377
+      size:-Heavy
+      load Capacity:20 ton`,
+      },
+    
+
+    
+      {
+        position: new google.maps.LatLng(23.4095873, 90.406946),
+        map: this.map,
+        title: `Smart-truck-06
+  company:Brac
+  Engine:-4636377
+  size:-Heavy
+  load Capacity:20 ton`,
+      },
+
+      {
+        position: new google.maps.LatLng(23.6095873, 90.906946),
+        map: this.map,
+        title: `Smart-truck-07
+  company:Brac
+  Engine:-4636377
+  size:-Heavy
+  load Capacity:20 ton`,
+      },
+
+      {
+        position: new google.maps.LatLng(23.1595873, 90.896946),
+        map: this.map,
+        title: `Smart-truck-08
+  company:Brac
+  Engine:-4636377
+  size:-Heavy
+  load Capacity:20 ton`,
+      },
+      {
+        position: new google.maps.LatLng(23.9995873, 90.999946),
+        map: this.map,
+        title: `Smart-truck-09  
+  company:Brac
+  Engine:-4636377
+  size:-Heavy
+  load Capacity:20 ton`,
+      },
+    
+    
+      {
+        position: new google.maps.LatLng(24.0989587, 89.456846),
+        map: this.map,
+        title: `Smart-truck-10
+  company:Walton
+  Engine:-4636377
+  size:-Heavy
+  load Capacity:20 ton`,
+      },
+      {
+        position: new google.maps.LatLng(23.9095873, 90.3406946),
+        map: this.map,
+        title: `Smart-truck-11
+  company:Walton
+  Engine:-4636377
+  size:-Heavy
+  load Capacity:20 ton`,
+      },
+    
+
+    
+      {
+        position: new google.maps.LatLng(23.9095873, 90.906946),
+        map: this.map,
+        title: `Smart-truck-06
+company:Bata
+Engine:-4636377
+size:-Heavy
+load Capacity:20 ton`,
+      },
+
+      {
+        position: new google.maps.LatLng(23.6095873, 90.906946),
+        map: this.map,
+        title: `Smart-truck-07
+company:Bata
+Engine:-4636377
+size:-Heavy
+load Capacity:20 ton`,
+      },
+
+      {
+        position: new google.maps.LatLng(23.1595873, 89.856946),
+        map: this.map,
+        title: `Smart-truck-08
+company:Bata
+Engine:-4636377
+size:-Heavy
+load Capacity:20 ton`,
+      },
+      {
+        position: new google.maps.LatLng(23.0795573, 90.896946),
+        map: this.map,
+        title: `Smart-truck-09
+company:Bata
 Engine:-4636377
 size:-Heavy
 load Capacity:20 ton`,
       },
     ],
+
+
   ];
 
   //Coordinates to set the center of the map
@@ -182,7 +358,7 @@ load Capacity:20 ton`,
 
   mapOptions: google.maps.MapOptions = {
     center: this.coordinates,
-    zoom: 8,
+    zoom: 9,
   };
 
   //Default Marker
@@ -213,7 +389,7 @@ load Capacity:20 ton`,
     });
 
     //Adding other markers
-    this.loadAllMarkers(0);
+    this.loadAllMarkers(4);
   }
 
   markers = [];

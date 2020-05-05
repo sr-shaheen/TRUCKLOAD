@@ -1,5 +1,5 @@
 #map {
-  height: 400px;
+  height: 500px;
   width: 100%;
 }
 
@@ -14,8 +14,9 @@
 }
 
 .select-selected {
-  background-color: DodgerBlue;
-  border-radius: 7px;
+  background-color:rgba(16, 83, 16, 0.562);
+  border-radius: 8px;
+  margin-left: 10px;
 }
 
 /* Style the arrow inside the select element: */
@@ -40,16 +41,18 @@
 .select-items div,
 .select-selected {
   color: #ffffff;
-  padding: 8px 16px;
+  padding: 8px 12px 12px 6px;
   border: 1px solid transparent;
   border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
   cursor: pointer;
+  position: absolute;
+  
 }
 
 /* Style items (options): */
 .select-items {
   position: absolute;
-  background-color: DodgerBlue;
+  background-color:rgba(94, 172, 94, 0.562);
   top: 100%;
   left: 0;
   right: 0;
