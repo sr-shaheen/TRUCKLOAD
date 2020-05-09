@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+import { NgModule} from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -46,6 +47,8 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 @NgModule({
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
     RouterModule,
     FlexLayoutModule,
     MatAutocompleteModule,
@@ -86,6 +89,8 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
   ],
   exports: [
     CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
     RouterModule,
     FlexLayoutModule,
     MatAutocompleteModule,

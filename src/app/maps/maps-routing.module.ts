@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ComponentMapsComponent } from './component-maps/component-maps.component';
 
 
+
 const routes: Routes = [{
   path: '', component: ComponentMapsComponent,
 }];
