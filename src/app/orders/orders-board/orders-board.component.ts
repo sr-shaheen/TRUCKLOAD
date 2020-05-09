@@ -128,7 +128,16 @@ export class OrdersBoardComponent implements OnInit {
       {
         customerId: '1',
         customerName: 'Nabi',
-        cellNo: '01680004100',
+        cellNo: '01580004100',
+        email: 'Nabi@gmail.com',
+        status: 'ordersPlaced',
+        unloadingPoint: 'Dhaka',
+      },
+
+      {
+        customerId: '1',
+        customerName: 'Alif',
+        cellNo: '01580004100',
         email: 'Nabi@gmail.com',
         status: 'ordersPlaced',
         unloadingPoint: 'Dhaka',
