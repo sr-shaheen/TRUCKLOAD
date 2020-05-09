@@ -10,6 +10,11 @@ import { CustomerAddModalComponent } from '../customer-add-modal/customer-add-mo
 })
 export class ComponentCustomerComponent implements OnInit {
 
+  color = 'warn';
+  mode = 'indeterminate';
+  value = 50;
+  bufferValue = 75;
+
   constructor(
     public dialog: MatDialog
   ) { }

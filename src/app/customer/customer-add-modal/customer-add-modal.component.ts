@@ -61,7 +61,6 @@ export class CustomerAddModalComponent implements OnInit {
   }
 
   onSubmit(customer: Customer) {
-
     if (this.form.valid) {
       this.asyncService.start();
       let observer = of(null);
@@ -74,29 +73,25 @@ export class CustomerAddModalComponent implements OnInit {
         observer = this.customerService.addCustomer(customer);
       }
 
-      this.customerServiceSub = this.customerService
-        .addCustomer(customer)
-        .subscribe(
-          (isAdded) => {
-            this.asyncService.finish();
-            if (isAdded) {
-              this.commonService.showSuccessMsg(
-                'Success! The complaint has been added successfully.'
-              );
-            } else {
-              this.asyncService.finish();
-              this.commonService.showErrorMsg(
-                'Error! The complaint is not added.'
-              );
-            }
-          },
-          (error) => {
+      this.customerServiceSub = observer.subscribe(
+        (isAdded) => {
+          this.asyncService.finish();
+          if (isAdded) {
+            this.commonService.showSuccessMsg(
+              'Success! The Customer has been added successfully.'
+            );
+          } else {
             this.asyncService.finish();
             this.commonService.showErrorMsg(
               'Error! The complaint is not added.'
             );
           }
-        );
+        },
+        (error) => {
+          this.asyncService.finish();
+          this.commonService.showErrorMsg('Error! The complaint is not added.');
+        }
+      );
     }
   }
 }
