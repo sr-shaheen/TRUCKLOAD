@@ -1,14 +1,138 @@
-<h3 mat-dialog-title>
-  Customer Profile {{ data ? "Edit" : "Add" }}
-</h3>
+<h3 mat-dialog-title>Customer Profile {{ data ? "Edit" : "Add" }}</h3>
 
+<div mat-dialog-content>
+  <form
+    [id]="formId"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit(form.value)"
+    novalidate
+  >
+    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" class="tab">
+      <div
+        fxLayout="row wrap"
+        fxLayoutGap="10px"
+        fxFlex="100%"
+        fxFlex.sm="50%"
+        fxLayout.lt-sm="column"
+        fxFlex.xs="100%"
+        fxLayoutAlign="flex-start"
+      >
+        <mat-form-field
+          fxFlex="0 1 calc(100% - 10px)"
+          fxFlex.lt-md="0 1 calc(100% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
+          <mat-label>Customer Name</mat-label>
+          <input
+            matInput
+            placeholder="Customer"
+            formControlName="customer_name"
+            required
+          />
+          <mat-error
+            *ngIf="
+              customer_name.invalid &&
+              (customer_name.dirty || customer_name.touched)
+            "
+          >
+            <ng-container *ngIf="customer_name.hasError('required')"
+              >Customer Name is required.</ng-container
+            >
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          fxFlex="0 1 calc(100% - 10px)"
+          fxFlex.lt-md="0 1 calc(100% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
+          <mat-label>Customer Phone</mat-label>
+          <input
+            matInput
+            placeholder="Customer Phone"
+            formControlName="customer_phn"
+            required
+          />
+          <mat-error
+            *ngIf="
+              customer_phn.invalid &&
+              (customer_phn.dirty || customer_phn.touched)
+            "
+          >
+            <ng-container *ngIf="customer_phn.hasError('required')"
+              >Customer phone is required.</ng-container
+            >
+          </mat-error>
+        </mat-form-field>
 
+        <mat-form-field
+          fxFlex="0 1 calc(100% - 10px)"
+          fxFlex.lt-md="0 1 calc(100% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
+          <mat-label>Customer Email</mat-label>
+          <input
+            matInput
+            placeholder="Customer Emal"
+            formControlName="customer_email"
+            required
+          />
+          <mat-error
+            *ngIf="
+              customer_email.invalid &&
+              (customer_email.dirty || customer_email.touched)
+            "
+          >
+            <ng-container *ngIf="customer_email.hasError('required')"
+              >Customer email is required.</ng-container
+            >
+            <ng-container *ngIf="customer_email.hasError('email')"
+              >Invalid Email address</ng-container
+            >
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          fxFlex="0 1 calc(100% - 10px)"
+          fxFlex.lt-md="0 1 calc(100% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
+          <mat-label>Customer Type</mat-label>
+          <mat-select formControlName="customer_type" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let type of types" [value]="type.value">
+              {{ type.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="
+              customer_type.invalid &&
+              (customer_type.dirty || customer_type.touched)
+            "
+          >
+            <ng-container *ngIf="customer_type.hasError('required')"
+              >Customer Type is required.</ng-container
+            >
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>
+<br />
 
 <div mat-dialog-actions fxLayoutAlign="end end">
   <button type="button" class="mat-raised-button" [mat-dialog-close]>
     Cancel
   </button>
   <button
+    [attr.form]="formId"
     type="submit"
     class="mat-raised-button mat-primary"
     [disabled]="asyncService?.isLoading | async"

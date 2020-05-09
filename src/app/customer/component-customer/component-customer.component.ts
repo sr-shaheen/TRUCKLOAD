@@ -21,8 +21,8 @@ export class ComponentCustomerComponent implements OnInit {
     console.log('aschi');
 
     const dialogRef = this.dialog.open(CustomerAddModalComponent, {
-      width: '600px',
-      height:'400px'
+      width: '400px',
+      height:'500px'
       // data: {name: this.name, animal: this.animal}
     })
 
