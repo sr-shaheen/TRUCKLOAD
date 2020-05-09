@@ -83,15 +83,21 @@ export class CustomerAddModalComponent implements OnInit {
           } else {
             this.asyncService.finish();
             this.commonService.showErrorMsg(
-              'Error! The complaint is not added.'
+              'Error! The Customer is not added.'
             );
           }
         },
         (error) => {
           this.asyncService.finish();
-          this.commonService.showErrorMsg('Error! The complaint is not added.');
+          this.commonService.showErrorMsg('Error! The Customer is not added.');
         }
       );
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.customerServiceSub) {
+      this.customerServiceSub.unsubscribe();
     }
   }
 }

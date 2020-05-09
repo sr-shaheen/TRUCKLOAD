@@ -1,22 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
-// @import "~bootstrap/dist/css/bootstrap.css";
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 //new
 a { cursor: pointer; }
 
-.app-container {
-    min-height: 320px;
-    overflow: hidden;
-}
+// .app-container {
+//     min-height: 320px;
+//     overflow: hidden;
+// }
 
-.btn-delete-user {
-    width: 40px;
-    text-align: center;
-    box-sizing: content-box;
-}
+// .btn-delete-user {
+//     width: 40px;
+//     text-align: center;
+//     box-sizing: content-box;
+// }
 
 //own
 .snackbar-container {
@@ -40,3 +35,6 @@ a { cursor: pointer; }
   font-size: 13px;
   margin-left: 25px;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

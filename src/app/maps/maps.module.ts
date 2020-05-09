@@ -5,11 +5,14 @@ import { MapsRoutingModule } from './maps-routing.module';
 import { ComponentMapsComponent } from './component-maps/component-maps.component';
 
 
+
 @NgModule({
   declarations: [ComponentMapsComponent],
   imports: [
     SharedModule,
     MapsRoutingModule
+    
+    
   ]
 })
 export class MapsModule { }

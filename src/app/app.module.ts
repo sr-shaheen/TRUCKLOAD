@@ -11,7 +11,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { SharedModule } from './shared/shared.module';
@@ -39,7 +38,6 @@ import { NgxsLoggerPluginModule } from "@ngxs/logger-plugin";
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NoopAnimationsModule,
     FlexLayoutModule,
     SharedModule
   ],

@@ -8,6 +8,8 @@ import { OrdersBoardComponent } from './orders-board/orders-board.component';
 import { CustomerAddModalComponent } from '../customer/customer-add-modal/customer-add-modal.component';
 import { TruckAddModalComponent } from './truck-add-modal/truck-add-modal.component';
 import { OrderAddModalComponent } from './order-add-modal/order-add-modal.component';
+import { CustomerService } from '../customer/services/customer.service';
+import { OrderService } from './services/orders.service';
 
 @NgModule({
   declarations: [
@@ -22,5 +24,6 @@ import { OrderAddModalComponent } from './order-add-modal/order-add-modal.compon
     OrderAddModalComponent,
   ],
   imports: [SharedModule, OrdersRoutingModule],
+  providers: [CustomerService,OrderService],
 })
 export class OrdersModule {}

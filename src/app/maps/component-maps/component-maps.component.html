@@ -1,14 +1,20 @@
-<div #mapContainer id="map"></div>
-<br />
 
+<div class="margin"#mapContainer id="map"></div>
 <div
-  class="select-selected select-selected.select-arrow-active:after"
+class="select-selected"
   style="width: 100px;"
 >
   <select (change)="selectChange($event)">
+    <option value="all">All</option>
     <option value="square">Square</option>
     <option value="brac">Brac</option>
     <option value="walton">Walton</option>
     <option value="bata">Bata</option>
   </select>
+
 </div>
+
+
+
+
+
