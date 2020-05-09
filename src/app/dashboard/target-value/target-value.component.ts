@@ -76,8 +76,8 @@ const data = {
   styleUrls: ['./target-value.component.scss'],
 })
 export class TargetValueComponent implements OnInit {
-  width = 520;
-  height = 250;
+  width = '100%';
+  height = 200;
   type = 'msline';
   dataFormat = 'json';
   dataSource = data;
