@@ -157,3 +157,4 @@
 [0505/022715.812:ERROR:crash_report_database_win.cc(469)] failed to stat report
 [0505/022715.813:ERROR:crash_report_database_win.cc(469)] failed to stat report
 [0505/022715.813:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0510/023210.967:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
