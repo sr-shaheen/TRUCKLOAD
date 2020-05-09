@@ -1,42 +1,51 @@
-﻿
-<div class=" page ">
-    <div class="container-fluid ">
-        <h6>Login</h6>
-        <div class="container-fluid imgBackground hei image-box__overlay">
-          <div class="d-flex justify-content-end img "> <img src="../assets/images/logo.png " width="270"  alt=""></div>
-         <div class="d-flex justify-content-end img2 ">
-           <div class="center">
-             <form [formGroup]="form" (ngSubmit)="onSubmit()">
-               <div class="col-md-12" >
-                 <input type="text" formControlName="username" class="form-control button" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" style="text-align: center;color:white" placeholder="User Name"/>
+﻿﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>login</title>
+  </head>
+  <body>
+    <header id="showcase1">
+      <h6 class="h6">login</h6>
+         <div class="overlay" id="showcase">
+           <div class="logo"><img src="../assets/images/logo.png " width="200"  alt="logo.img"></div>
+         <div class="input">
+           <form [formGroup]="form" (ngSubmit)="onSubmit()">
+               <div class="" >
+                 <input type="text" formControlName="username"  [ngClass]="{ 'is-invalid': submitted && f.username.errors }" style="text-align: center" placeholder="User Name"/>
                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                        <div *ngIf="f.username.errors.required">Username is required</div>
                    </div>
-               </div><br>
+               </div> 
 
-               <div class="col-md-12">
-                 <input type="password" formControlName="password" class="form-control button" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" style="text-align: center;color:white" placeholder="Password"/>
+               <div class="">
+                 <input type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" style="text-align: center" placeholder="Password"/>
                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                        <div *ngIf="f.password.errors.required">Password is required</div>
                     </div>
-               </div><br>
+               </div> 
 
 
-               <div class="col-md-12">
+               <div class="">
                  <button [disabled]="loading" class="button-click">
-                  <span *ngIf="loading" style="color: aliceblue;" class="spinner-border spinner-border-sm mr-1"></span>
-
                     <strong>LOGIN</strong>
                    </button>
-                   <a routerLink="../register" class="btn btn-link">Register</a>
+                <br>
+
+                   <a routerLink="../register" class="">Register</a>
                </div>
              </form>
-           </div>
+
+             
+             </div>
 
          </div>
 
 
-        </div>
-       </div>
+    </header>
 
-   </div>
+    
+
+
+  </body>
+</html>

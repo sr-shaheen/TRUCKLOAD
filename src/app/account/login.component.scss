@@ -1,81 +1,126 @@
-.page{
-    background-color: #e1f4f3;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
-
-}
-.imgBackground {
-    background-image: url('../../assets/5229.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size:cover;
-    border-radius: 5px;
-    width:100%;
+*{
+  margin:0;
+  padding:0;
 }
 
-.hei{
-    height: 630px;
-    border: 1px solid #ccc;
+body{
+  margin:0;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size:17px;
+  color:black;
+  line-height:1.6;
 }
-.image-box__overlay {
+
+#showcase1{
+background-color:#e1f4f3;;
+background-size:cover;
+background-position:center;
+height:100vh;
+}
+
+#showcase{
+  background-image:url('../../assets/5229.jpg');
+  background-size:cover;
+  background-position:center;
+  height:95.5vh;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+}
+.overlay {
     box-shadow: inset 0 0 0 100vw rgba(255, 255, 255, 0.5);
-  
+
     z-index: 2;
   }
-
-
-.center{
-margin-top: 150px;
+.h6{
+  padding-left: 10px
 }
 
-.button{
-    width: 80%;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 30px;
-    font-size: 16px;
-    background-color: #28a745;
-    background-repeat: no-repeat;
-    padding: 2px 70px 12px ;
-    
- }
+.logo{
+  text-align:right;
+  padding-right: 90px;
+  padding-top: 25px;
+}
+
+.input{
+  text-align:right;
+  padding-right: 80px;
+  padding-top: 170px;
+}
+
+
+
+input[type=text] {
+  width: 20%;
+  border: 2px solid #ccc;
+  border-radius: 30px;
+  font-size: 16px;
+  background-color: #28a745;
+  background-repeat: no-repeat;
+  padding: 6px 3px  6px ;
+  color: white;
+  outline: none;
+  margin: 5px auto;
+
+  
+
+  
+  
+}
+input[type=password] {
+  width: 20%;
+  border: 2px solid #ccc;
+  border-radius: 30px;
+  font-size: 16px;
+  background-color: #28a745;
+  background-repeat: no-repeat;
+  padding: 6px 3px  6px ;
+  color: white;
+  outline: none;
+  margin: 5px auto;
+
+}
+
+
 
  .button-click{
-    width: 80%;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
+    width: 20%;
+    border: 2px solid #ccc;
     border-radius: 30px;
     font-size: 16px;
     background-color:#dc3545;
     background-repeat: no-repeat;
-    padding: 4px 100px 8px ;
+    padding: 6px 3px  6px ;
+    color: white;
+    outline: none;
+    margin: 5px auto;
+
 
  }
+
+
+.copyright{
+
+text-align: center;
+padding-top: 200px;
+
+
+
+
+}
 .button-click:hover {background-color: #3e8e41}
 
-    
-    
-  
+
+
+
   ::placeholder {
     color:white;
+
   }
 
-  strong {
+  #strong {
     color:white;
   }
-
-  .img
-  {
-   padding-right: 100px;
-   padding-top:25px;
-
-  }
-
-  .img2
-  {
-   padding-right: 0px;
-
-  }
-
