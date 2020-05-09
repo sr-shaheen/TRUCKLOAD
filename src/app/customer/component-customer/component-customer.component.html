@@ -1,1 +1,14 @@
-<p>component-customer works!</p>
+<div fxLayout="row" fxLayoutAlign="end start">
+  <button
+    mat-mini-fab
+    color="primary"
+    (click)="customerAdd()"
+    matTooltip="Add Customer"
+    matTooltipPosition="left"
+    matTooltipClass="example-tooltip-green"
+  >
+    <mat-icon>plus_one</mat-icon>
+  </button>
+</div>
+<mat-divider> </mat-divider>
+<mat-progress-bar class="progress-bar" [color]="color" [mode]="mode" [value]="value" [bufferValue]="bufferValue">

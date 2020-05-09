@@ -14,6 +14,10 @@ import { OrdersBoardItem } from '../models/orders-board-item.model';
 import { Subscription } from 'rxjs';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { AsyncService } from 'src/app/shared/services/async.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CustomerAddModalComponent } from 'src/app/customer/customer-add-modal/customer-add-modal.component';
+import { TruckAddModalComponent } from '../truck-add-modal/truck-add-modal.component';
+import { OrderAddModalComponent } from '../order-add-modal/order-add-modal.component';
 @Component({
   selector: 'app-orders-board',
   templateUrl: './orders-board.component.html',
@@ -36,7 +40,8 @@ export class OrdersBoardComponent implements OnInit {
   ordersBoardSub: Subscription;
   constructor(
     private commonService: CommonService,
-    private asyncService: AsyncService
+    private asyncService: AsyncService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -173,5 +178,44 @@ export class OrdersBoardComponent implements OnInit {
         event.currentIndex
       );
     }
+  }
+
+  // All modal functionality
+
+  customerAdd(): void {
+    console.log('aschi');
+
+    const dialogRef = this.dialog.open(CustomerAddModalComponent, {
+      width: '250px',
+      // data: {name: this.name, animal: this.animal}
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
+  }
+  truckAdd(): void {
+    console.log('aschi');
+
+    const dialogRef = this.dialog.open(TruckAddModalComponent, {
+      width: '250px',
+      // data: {name: this.name, animal: this.animal}
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
+  }
+  orderAdd(): void {
+    console.log('aschi');
+
+    const dialogRef = this.dialog.open(OrderAddModalComponent, {
+      width: '250px',
+      // data: {name: this.name, animal: this.animal}
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
   }
 }

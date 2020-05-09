@@ -1,5 +1,7 @@
-<div fxLayout="row" fxLayoutAlign="end start">
-  <button class="btn">Add new orders</button>
+<div fxLayout="row">
+  <button class="btn" fxFlex="10"(click)="truckAdd()">Add Truck</button>
+  <button class="btn" fxFlex="10" (click)="customerAdd()" >Add Customer</button>
+  <button class="btn" fxFlexOffset="66" (click)="orderAdd()">Add new orders</button>
 </div>
 <mat-divider> </mat-divider>
 
@@ -95,7 +97,7 @@
         cdkDropList
         #ordersPlacedList="cdkDropList"
         [cdkDropListData]="ordersPlaced"
-        [cdkDropListConnectedTo]="[detailsCollectedList,orderConfirmedList]"
+        [cdkDropListConnectedTo]="[detailsCollectedList, orderConfirmedList]"
         (cdkDropListDropped)="drop($event)"
       >
         <div
