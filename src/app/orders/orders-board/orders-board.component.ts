@@ -71,7 +71,7 @@ export class OrdersBoardComponent implements OnInit {
     this.filterBoardData([
       {
         customerId: '1',
-        customerName: 'Shaheen',
+        customerName: 'Shahin',
         cellNo: '01688024100',
         email: 'shaheen@gmail.com',
         status: 'ordersPlaced',
@@ -187,7 +187,7 @@ export class OrdersBoardComponent implements OnInit {
 
     const dialogRef = this.dialog.open(CustomerAddModalComponent, {
       width: '400px',
-      height:'500px'
+      height: '500px',
       // data: {name: this.name, animal: this.animal}
     });
 
@@ -196,13 +196,10 @@ export class OrdersBoardComponent implements OnInit {
     });
   }
   truckAdd(): void {
-    console.log('aschi');
-
     const dialogRef = this.dialog.open(TruckAddModalComponent, {
-      width: '250px',
-      // data: {name: this.name, animal: this.animal}
+      width: '400px',
+      height: '550px',
     });
-
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
     });

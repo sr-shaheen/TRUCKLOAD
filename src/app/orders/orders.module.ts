@@ -9,6 +9,7 @@ import { CustomerAddModalComponent } from '../customer/customer-add-modal/custom
 import { TruckAddModalComponent } from './truck-add-modal/truck-add-modal.component';
 import { OrderAddModalComponent } from './order-add-modal/order-add-modal.component';
 import { CustomerService } from '../customer/services/customer.service';
+import { OrderService } from './services/orders.service';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,6 @@ import { CustomerService } from '../customer/services/customer.service';
     OrderAddModalComponent,
   ],
   imports: [SharedModule, OrdersRoutingModule],
-  providers:[CustomerService]
+  providers: [CustomerService,OrderService],
 })
 export class OrdersModule {}

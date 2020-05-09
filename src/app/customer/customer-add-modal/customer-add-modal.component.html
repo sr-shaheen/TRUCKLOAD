@@ -1,7 +1,10 @@
 <h3 mat-dialog-title>Customer Profile {{ data ? "Edit" : "Add" }}</h3>
 
 <div mat-dialog-content>
-  <mat-progress-bar *ngIf="(asyncService?.isLoading | async)" mode="indeterminate">
+  <mat-progress-bar
+    *ngIf="asyncService?.isLoading | async"
+    mode="indeterminate"
+  >
   </mat-progress-bar>
   <form
     [id]="formId"
@@ -107,7 +110,6 @@
         >
           <mat-label>Customer Type</mat-label>
           <mat-select formControlName="customer_type" required>
-            <mat-option>--</mat-option>
             <mat-option *ngFor="let type of types" [value]="type.value">
               {{ type.name }}
             </mat-option>
