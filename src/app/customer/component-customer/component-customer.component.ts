@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomerAddModalComponent } from '../customer-add-modal/customer-add-modal.component';
 
 @Component({
   selector: 'app-component-customer',
   templateUrl: './component-customer.component.html',
-  styleUrls: ['./component-customer.component.scss']
+  styleUrls: ['./component-customer.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ComponentCustomerComponent implements OnInit {
 
