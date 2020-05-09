@@ -1,126 +1,129 @@
-*{
-  margin:0;
-  padding:0;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-body{
-  margin:0;
+body {
+  margin: 0;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  font-size:17px;
-  color:black;
-  line-height:1.6;
+  font-size: 17px;
+  color: black;
+  line-height: 1.6;
 }
 
-#showcase1{
-background-color:#e1f4f3;;
-background-size:cover;
-background-position:center;
-height:100vh;
+#showcase1 {
+  background-color: #e1f4f3;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
 }
 
-#showcase{
-  background-image:url('../../assets/5229.jpg');
-  background-size:cover;
-  background-position:center;
-  height:95.5vh;
+#showcase {
+  background-image: url("../../assets/5229.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 95.5vh;
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
-
 }
 .overlay {
-    box-shadow: inset 0 0 0 100vw rgba(255, 255, 255, 0.5);
+  box-shadow: inset 0 0 0 100vw rgba(255, 255, 255, 0.5);
 
-    z-index: 2;
-  }
-.h6{
-  padding-left: 10px
+  z-index: 2;
+}
+.h6 {
+  padding-left: 10px;
 }
 
-.logo{
-  text-align:right;
+.logo {
+  text-align: right;
   padding-right: 90px;
   padding-top: 25px;
 }
 
-.input{
-  text-align:right;
+.input {
+  text-align: right;
   padding-right: 80px;
   padding-top: 170px;
 }
 
-
-
-input[type=text] {
+input[type="text"] {
   width: 20%;
   border: 2px solid #ccc;
   border-radius: 30px;
   font-size: 16px;
   background-color: #28a745;
   background-repeat: no-repeat;
-  padding: 6px 3px  6px ;
+  padding: 6px 3px 6px;
   color: white;
   outline: none;
   margin: 5px auto;
-
-  
-
-  
-  
 }
-input[type=password] {
+input[type="password"] {
   width: 20%;
   border: 2px solid #ccc;
   border-radius: 30px;
   font-size: 16px;
   background-color: #28a745;
   background-repeat: no-repeat;
-  padding: 6px 3px  6px ;
+  padding: 6px 3px 6px;
   color: white;
   outline: none;
   margin: 5px auto;
-
 }
 
-
-
- .button-click{
-    width: 20%;
-    border: 2px solid #ccc;
-    border-radius: 30px;
-    font-size: 16px;
-    background-color:#dc3545;
-    background-repeat: no-repeat;
-    padding: 6px 3px  6px ;
-    color: white;
-    outline: none;
-    margin: 5px auto;
-
-
- }
-
-
-.copyright{
-
-text-align: center;
-padding-top: 200px;
-
-
-
-
+.button-click {
+  width: 20%;
+  // border: 2px solid #ccc;
+  border-radius: 30px;
+  font-size: 16px;
+  background-color: #dc3545;
+  background-repeat: no-repeat;
+  // padding: 6px 3px  6px ;
+  color: white;
+  outline: none;
+  margin: 5px auto;
 }
-.button-click:hover {background-color: #3e8e41}
 
+.copyright {
+  text-align: center;
+  padding-top: 200px;
+}
+.button-click:hover {
+  background-color: #3e8e41;
+}
 
+::placeholder {
+  color: white;
+}
 
+#strong {
+  color: white;
+}
 
-  ::placeholder {
-    color:white;
+// shaheen
 
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
   }
+}
 
-  #strong {
-    color:white;
-  }
+.spinner:before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  border-top-color: #000000;
+  animation: spinner 0.8s linear infinite;
+}

@@ -1,51 +1,74 @@
 ﻿﻿<!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>login</title>
   </head>
   <body>
     <header id="showcase1">
       <h6 class="h6">login</h6>
-         <div class="overlay" id="showcase">
-           <div class="logo"><img src="../assets/images/logo.png " width="200"  alt="logo.img"></div>
-         <div class="input">
-           <form [formGroup]="form" (ngSubmit)="onSubmit()">
-               <div class="" >
-                 <input type="text" formControlName="username"  [ngClass]="{ 'is-invalid': submitted && f.username.errors }" style="text-align: center" placeholder="User Name"/>
-                   <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                       <div *ngIf="f.username.errors.required">Username is required</div>
-                   </div>
-               </div> 
+      <div class="overlay" id="showcase">
+        <div class="logo">
+          <img src="../assets/images/logo.png " width="200" alt="logo.img" />
+        </div>
+        <div class="input">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="">
+              <input
+                type="text"
+                formControlName="username"
+                [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
+                style="text-align: center;"
+                placeholder="User Name"
+              />
+              <div
+                *ngIf="submitted && f.username.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.username.errors.required">
+                  Username is required
+                </div>
+              </div>
+            </div>
 
-               <div class="">
-                 <input type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" style="text-align: center" placeholder="Password"/>
-                   <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                       <div *ngIf="f.password.errors.required">Password is required</div>
-                    </div>
-               </div> 
+            <div class="">
+              <input
+                type="password"
+                formControlName="password"
+                [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                style="text-align: center;"
+                placeholder="Password"
+              />
+              <div
+                *ngIf="submitted && f.password.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.password.errors.required">
+                  Password is required
+                </div>
+              </div>
+            </div>
 
-
-               <div class="">
-                 <button [disabled]="loading" class="button-click">
+            <div class="">
+              <button
+                class="button-click"
+                mat-raised-button
+                color="primary"
+                [class.spinner]="loading"
+                [disabled]="loading"
+              >
+                LOGIN
+              </button>
+              <!-- <button [disabled]="loading" class="button-click">
                     <strong>LOGIN</strong>
-                   </button>
-                <br>
+                   </button> -->
+              <br />
 
-                   <a routerLink="../register" class="">Register</a>
-               </div>
-             </form>
-
-             
-             </div>
-
-         </div>
-
-
+              <a routerLink="../register" class="">Register</a>
+            </div>
+          </form>
+        </div>
+      </div>
     </header>
-
-    
-
-
   </body>
 </html>
