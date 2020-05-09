@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
       .pipe(first())
       .subscribe(
         (data) => {
-          this.commonService.showSuccessMsg('You Login successfully!');
+          this.commonService.showSuccessMsg('You Registration successfully!');
           this.router.navigate(['../login'], { relativeTo: this.route });
         },
         (error) => {
