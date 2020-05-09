@@ -1,6 +1,8 @@
 <h3 mat-dialog-title>Customer Profile {{ data ? "Edit" : "Add" }}</h3>
 
 <div mat-dialog-content>
+  <mat-progress-bar *ngIf="(asyncService?.isLoading | async)" mode="indeterminate">
+  </mat-progress-bar>
   <form
     [id]="formId"
     [formGroup]="form"

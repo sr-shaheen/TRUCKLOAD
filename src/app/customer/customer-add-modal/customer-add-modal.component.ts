@@ -2,9 +2,10 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AsyncService } from 'src/app/shared/services/async.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subscription, of } from 'rxjs';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { CustomerService } from '../services/customer.service';
+import { Customer } from '../models/customer.model';
 
 @Component({
   selector: 'app-customer-add-modal',
@@ -19,10 +20,10 @@ export class CustomerAddModalComponent implements OnInit {
   form: FormGroup;
 
   types: any[] = [
-    {name: 'Corporate', value: 'corporate'},
-    {name: 'NonCorporate', value: 'Nonorporate'},
-    {name: 'Sample', value: 'Sample'},
-    {name: 'Truck owner', value: 'truckOwner'},
+    { name: 'Corporate', value: 'corporate' },
+    { name: 'NonCorporate', value: 'Nonorporate' },
+    { name: 'Sample', value: 'Sample' },
+    { name: 'Truck owner', value: 'truckOwner' },
   ];
   constructor(
     private fb: FormBuilder,
@@ -30,39 +31,53 @@ export class CustomerAddModalComponent implements OnInit {
     public asyncService: AsyncService,
     private customerService: CustomerService,
     public dialogRef: MatDialogRef<CustomerAddModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: Customer
   ) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
       customer_name: ['', [Validators.required]],
-      customer_email: ['', [Validators.required,Validators.email]],
+      customer_email: ['', [Validators.required, Validators.email]],
       customer_phn: ['', [Validators.required]],
       customer_type: ['', [Validators.required]],
     });
+
+    if (this.data) {
+      this.form.patchValue(this.data);
+    }
   }
 
   get customer_name() {
-    return this.form.get("customer_name");
+    return this.form.get('customer_name');
   }
   get customer_email() {
-    return this.form.get("customer_email");
+    return this.form.get('customer_email');
   }
   get customer_phn() {
-    return this.form.get("customer_phn");
+    return this.form.get('customer_phn');
   }
   get customer_type() {
-    return this.form.get("customer_type");
+    return this.form.get('customer_type');
   }
 
-  onSubmit(customer) {
-    console.log(customer, 'daaaaaaaataaaa');
+  onSubmit(customer: Customer) {
+
     if (this.form.valid) {
       this.asyncService.start();
+      let observer = of(null);
+      if (this.data) {
+        observer = this.customerService.updateCustomer(
+          this.data.customer_id,
+          customer
+        );
+      } else {
+        observer = this.customerService.addCustomer(customer);
+      }
+
       this.customerServiceSub = this.customerService
         .addCustomer(customer)
         .subscribe(
-          isAdded => {
+          (isAdded) => {
             this.asyncService.finish();
             if (isAdded) {
               this.commonService.showSuccessMsg(
@@ -75,7 +90,7 @@ export class CustomerAddModalComponent implements OnInit {
               );
             }
           },
-          error => {
+          (error) => {
             this.asyncService.finish();
             this.commonService.showErrorMsg(
               'Error! The complaint is not added.'
