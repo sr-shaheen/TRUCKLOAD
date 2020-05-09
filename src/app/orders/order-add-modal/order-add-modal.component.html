@@ -1,1 +1,16 @@
-<p>order-add-modal works!</p>
+<h3 mat-dialog-title>
+  Customer Profile
+</h3>
+
+<div mat-dialog-actions fxLayoutAlign="end end">
+  <button type="button" class="mat-raised-button" [mat-dialog-close]>
+    Cancel
+  </button>
+  <button
+    type="submit"
+    class="mat-raised-button mat-primary"
+    [disabled]="asyncService?.isLoading | async"
+  >
+    Submit
+  </button>
+</div>
