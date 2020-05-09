@@ -6,9 +6,14 @@
       <!-- <section class = "tp-section1">
               <a>Overall</a>
            </section> -->
-      <mat-toolbar class="tp-section1">
+      <!-- <mat-toolbar class="tp-section1">
         overall
-      </mat-toolbar>
+      </mat-toolbar> -->
+      <!-- <mat-button-toggle-group name="fontStyle" aria-label="Font Style" class="tp-section1">
+        <mat-button-toggle value="bold">Bold</mat-button-toggle>
+      </mat-button-toggle-group> -->
+      <button class="tp-section1" mat-flat-button  (click)="switchCustomerList()" >Click for customer</button>
+      <div *ngIf="showCustomerList">
       <section class="tp-section">
         <a [routerLink]="['/dashboard/customer-dashboard']" [routerLinkActive]="['active']">
           <img src="../assets/images/company_photo/litheGroup.jpg" alt="my picture" height="128" width="128" />
@@ -30,6 +35,7 @@
           <img src="../assets/images/company_photo/steelTech.jpg" alt="my picture" height="120" width="120" />
         </a>
       </section>
+    </div>
       <!-- <section class = "tp-section">
             <a>
               <img src="../assets/images/company_photo/unilever.jpg"  alt="my picture"  />
@@ -58,21 +64,21 @@
             <div fxFlex="60%" class="example-card1">
               <!-- <h3 style="margin-left: 15%">Order</h3> -->
               <h3>Total Order</h3>
-              <circle-progress [percent]="70" [titleColor]="'#ffffff'" [unitsColor]="'#ffffff'" [radius]="60"
+              <circle-progress [percent]="70" [titleColor]="'#444444'" [unitsColor]="'#444444'" [radius]="60"
                 [space]="-10" [outerStrokeWidth]="10" [innerStrokeWidth]="10" [outerStrokeColor]="'#78C000'"
                 [innerStrokeColor]="'#e7e8ea'" [animation]="true" [animationDuration]="300"></circle-progress>
             </div>
             <div fxFlex="50%" class="example-card1">
               <h3 style="margin-left: 15%">Total Completed</h3>
-              <circle-progress [percent]="30" [radius]="60" [space]="-10" [titleColor]="'#ffffff'"
-                [unitsColor]="'#ffffff'" [outerStrokeWidth]="10" [innerStrokeWidth]="10" [outerStrokeColor]="'#4882c2'"
+              <circle-progress [percent]="30" [radius]="60" [space]="-10" [titleColor]="'#444444'"
+                [unitsColor]="'#444444'" [outerStrokeWidth]="10" [innerStrokeWidth]="10" [outerStrokeColor]="'#4882c2'"
                 [innerStrokeColor]="'#e7e8ea'" [animation]="true" [animationDuration]="300"></circle-progress>
 
             </div>
             <div fxFlex="50%" class="example-card1">
               <h3 style="margin-left: 15%">Total Failed</h3>
-              <circle-progress [percent]="80" [radius]="60" [space]="-10" [titleColor]="'#ffffff'"
-                [unitsColor]="'#ffffff'" [outerStrokeWidth]="10" [innerStrokeWidth]="10" [outerStrokeColor]="'#f32305'"
+              <circle-progress [percent]="80" [radius]="60" [space]="-10" [titleColor]="'#444444'"
+                [unitsColor]="'#444444'" [outerStrokeWidth]="10" [innerStrokeWidth]="10" [outerStrokeColor]="'#f32305'"
                 [innerStrokeColor]="'#e7e8ea'" [animation]="true" [animationDuration]="300"></circle-progress>
 
             </div>

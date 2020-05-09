@@ -37,8 +37,8 @@ export class GrossProfitComponent implements OnInit {
   // width = '100%';
   // height = 300;
   // type = 'doughnut2d';
-  width = 520;
-  height = 250;
+  width = '100%';
+  height = 200;
   type = 'doughnut3d';
   dataFormat = 'json';
   dataSource: any = defaultData;

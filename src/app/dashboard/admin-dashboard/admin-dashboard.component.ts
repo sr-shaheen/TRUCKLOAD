@@ -7,7 +7,7 @@ import { AsyncService } from 'src/app/shared/services/async.service';
   styleUrls: ['./admin-dashboard.component.scss']
 })
 export class AdminDashboardComponent implements OnInit {
-
+  showCustomerList: boolean = false;
   constructor(
     
     private asyncService: AsyncService
@@ -16,4 +16,7 @@ export class AdminDashboardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  switchCustomerList(){
+    this.showCustomerList = true;
+}
 }

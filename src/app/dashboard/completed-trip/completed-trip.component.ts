@@ -38,8 +38,8 @@ const logdata = {
 export class CompletedTripComponent implements OnInit {
   // width = '100%';
   // height = 330;
-  width = 520;
-  height = 250;
+  width = '100%';
+  height = 200;
   type = 'doughnut2d';
   dataFormat = 'json';
   dataSource: any = logdata;

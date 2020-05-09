@@ -41,8 +41,8 @@ export class TripComponent implements OnInit {
   // width = '100%';
   // height = 230;
   // type = 'scrollstackedcolumn2d';
-  width = 520;
-  height = 250;
+  width = '100%';
+  height = 200;
   type = 'column2d';
   dataFormat = 'json';
   dataSource = data;
