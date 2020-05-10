@@ -11,6 +11,8 @@ import { CommonService } from 'src/app/shared/services/common.service';
 import { OrderService } from '../services/orders.service';
 import { map, startWith } from 'rxjs/operators';
 
+import * as moment from 'moment';
+
 export interface Customer {
   customer_id: string;
   customer_name: string;
@@ -32,6 +34,16 @@ export class OrderAddModalComponent implements OnInit {
   customerId = new FormControl();
   filteredStates: Observable<Customer[]>;
 
+  items = [];
+  capacities: any[] = [
+    { name: '3 ton', value: '3' },
+    { name: '5 ton', value: '5' },
+    { name: '7 ton', value: '7' },
+  ];
+  types: any[] = [
+    { name: 'Covered', value: 'covered' },
+    { name: 'Open', value: 'open' },
+  ];
   customers: Customer[] = [
     {
       customer_id: '1',
@@ -78,11 +90,45 @@ export class OrderAddModalComponent implements OnInit {
     );
     this.form = this.fb.group({
       customer_name: ['', [Validators.required]],
-      customer_email: ['', [Validators.required, Validators.email]],
-      customer_phn: ['', [Validators.required]],
-      customer_type: ['', [Validators.required]],
+      expected_delivery_date: ['', [Validators.required]],
+      loading_date: ['', [Validators.required]],
+      starting_date: ['', [Validators.required]],
+      loading_point: ['', [Validators.required]],
+      unloading_point: ['', [Validators.required]],
+      capacity: [''],
+      type: [''],
+      quantity: [''],
     });
   }
+
+  get customer_name() {
+    return this.form.get('customer_name');
+  }
+  get expected_delivery_date() {
+    return this.form.get('expected_delivery_date');
+  }
+  get loading_date() {
+    return this.form.get('loading_date');
+  }
+  get starting_date() {
+    return this.form.get('starting_date');
+  }
+  get loading_point() {
+    return this.form.get('loading_point');
+  }
+  get unloading_point() {
+    return this.form.get('unloading_point');
+  }
+  get capacity() {
+    return this.form.get('capacity');
+  }
+  get quantity() {
+    return this.form.get('quantity');
+  }
+  get type() {
+    return this.form.get('type');
+  }
+
   private _filterStates(value: string): Customer[] {
     const filterValue = value.toLowerCase();
 
@@ -97,5 +143,30 @@ export class OrderAddModalComponent implements OnInit {
     this.customerId.patchValue(cus.customer_name);
   }
 
-  onSubmit(order) {}
+  addItem() {
+    if (this.capacity.value && this.quantity.value && this.type.value) {
+      const item = {
+        capacity: this.capacity.value,
+        quantity: this.quantity.value,
+        type: this.type.value,
+      };
+      // if (!this.items.find(i => i.itemId === item.itemId)) {
+      this.items = [item, ...this.items];
+      // } else {
+      //   this.commonService.showErrorMsg("Item already added!!!!");
+      // }
+      this.capacity.patchValue('');
+      this.quantity.patchValue('');
+      this.type.patchValue('');
+    } else {
+      this.commonService.showErrorMsg('All feilds required!');
+    }
+  }
+
+  deleteItem(index) {
+    this.items.splice(index, 1);
+  }
+  onSubmit(order) {
+    console.log(order, 'submit');
+  }
 }
