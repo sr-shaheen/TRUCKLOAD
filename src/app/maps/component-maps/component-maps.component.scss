@@ -1,5 +1,5 @@
 #map {
-  height: 500px;
+  height:600px;
   width: 100%;
 }
 
@@ -70,11 +70,20 @@
 }
 
 .example-form {
-  min-width: 150px;
+  margin-left: 5px;
+  min-width: 250px;
   max-width: 500px;
-  width: 100%;
+  width: 60%;
 }
 
 .example-full-width {
-  width: 100%;
+  width: 60%;
 }
+
+.container{
+
+  margin-left: 45px;
+  margin-top: 5px;
+}
+
+

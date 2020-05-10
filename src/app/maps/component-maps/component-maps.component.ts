@@ -4,8 +4,10 @@ import { decimalDigest } from '@angular/compiler/src/i18n/digest';
 import { delay } from 'rxjs/operators';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
 import { Title } from '@angular/platform-browser';
-import { FormControl } from '@angular/forms';
-
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
 
 @Component({
   selector: 'app-component-maps',
@@ -13,19 +15,11 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./component-maps.component.scss'],
 })
 export class ComponentMapsComponent implements AfterViewInit {
-
- 
-
   @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
   map: google.maps.Map;
   lat = 24.0595873;
   lng = 89.856946;
   selectTurcklocation: string = '';
-
- 
-  
-
-
   contentString = '<div id="content">'+
             '<div id="siteNotice">'+
             '</div>'+
@@ -48,10 +42,33 @@ export class ComponentMapsComponent implements AfterViewInit {
             '</div>';
 
 
-  selectChange(event: any) {
+            myControl = new FormControl();
+            options: string[] = ['Square', 'Brac', 'Walton','Bata'];
+            filteredOptions: Observable<string[]>;
+          
+            ngOnInit() {
+              this.filteredOptions = this.myControl.valueChanges
+                .pipe(
+                  startWith(''),
+                  map(value => this._filter(value))
+                );
+            }
+          
+            private _filter(value: string): string[] {
+              const filterValue = value.toLowerCase();
+          
+              return this.options.filter(option => option.toLowerCase().includes(filterValue));
+
+            }
+            
+          
+  
+    selected(value: string)  {
     var num;
 
-    this.selectTurcklocation = event.target.value;
+
+
+    this.selectTurcklocation = value.toLocaleLowerCase();
 
     switch (this.selectTurcklocation) {
       
@@ -76,6 +93,8 @@ export class ComponentMapsComponent implements AfterViewInit {
         break;
     }
     this.loadAllMarkers(num);
+    console.log(value)
+
   }
 
   allMarker = [
