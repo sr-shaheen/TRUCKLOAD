@@ -34,7 +34,7 @@ export class OrderAddModalComponent implements OnInit {
   customerId = new FormControl();
   filteredStates: Observable<Customer[]>;
 
-  items = [];
+  truckTypes = [];
   capacities: any[] = [
     { name: '3 ton', value: '3' },
     { name: '5 ton', value: '5' },
@@ -150,8 +150,8 @@ export class OrderAddModalComponent implements OnInit {
         quantity: this.quantity.value,
         type: this.type.value,
       };
-      // if (!this.items.find(i => i.itemId === item.itemId)) {
-      this.items = [item, ...this.items];
+      // if (!this.truckTypes.find(i => i.itemId === item.itemId)) {
+      this.truckTypes = [item, ...this.truckTypes];
       // } else {
       //   this.commonService.showErrorMsg("Item already added!!!!");
       // }
@@ -164,9 +164,10 @@ export class OrderAddModalComponent implements OnInit {
   }
 
   deleteItem(index) {
-    this.items.splice(index, 1);
+    this.truckTypes.splice(index, 1);
   }
-  onSubmit(order) {
-    console.log(order, 'submit');
+  onSubmit({ type, quantity, capacity, ...order }: any): void {
+    const data = order as any;
+    console.log(data, 'submit');
   }
 }

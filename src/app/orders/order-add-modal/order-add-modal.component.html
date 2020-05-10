@@ -101,15 +101,15 @@
           <mat-label>Loading date</mat-label>
           <input
             matInput
-            [matDatepicker]="picker"
+            [matDatepicker]="picker1"
             formControlName="loading_date"
             placeholder="Loading date"
           />
           <mat-datepicker-toggle
             matSuffix
-            [for]="picker"
+            [for]="picker1"
           ></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          <mat-datepicker #picker1></mat-datepicker>
           <mat-error
             *ngIf="
               loading_date.invalid &&
@@ -132,15 +132,15 @@
           <mat-label>Starting date</mat-label>
           <input
             matInput
-            [matDatepicker]="picker"
+            [matDatepicker]="picker2"
             formControlName="starting_date"
             placeholder="Starting date"
           />
           <mat-datepicker-toggle
             matSuffix
-            [for]="picker"
+            [for]="picker2"
           ></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          <mat-datepicker #picker2></mat-datepicker>
           <mat-error
             *ngIf="
               starting_date.invalid &&
@@ -281,7 +281,7 @@
     </div>
   </form>
 
-  <table [hidden]="items.length === 0">
+  <table [hidden]="truckTypes.length === 0">
     <thead>
       <th>Truck type</th>
       <th>Truck capacity</th>
@@ -289,7 +289,7 @@
       <th>Action</th>
     </thead>
     <tbody style="width: 80%; text-align: center;">
-      <tr *ngFor="let item of items; let i = index">
+      <tr *ngFor="let item of truckTypes; let i = index">
         <td>{{ item?.type }}</td>
         <td>{{ item?.capacity }} Tons</td>
         <td>{{ item?.quantity }}</td>
