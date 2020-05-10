@@ -1,6 +1,68 @@
 <h3 mat-dialog-title>
-  Customer Profile
+  Order Add
 </h3>
+
+<div mat-dialog-content>
+  <mat-progress-bar
+    *ngIf="asyncService?.isLoading | async"
+    mode="indeterminate"
+  >
+  </mat-progress-bar>
+  <form
+    [id]="formId"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit(form.value)"
+    novalidate
+  >
+    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" class="tab">
+      <div
+        fxLayout="row wrap"
+        fxLayoutGap="10px"
+        fxFlex="100%"
+        fxFlex.sm="50%"
+        fxLayout.lt-sm="column"
+        fxFlex.xs="100%"
+        fxLayoutAlign="flex-start"
+      >
+        <mat-form-field
+          fxFlex="0 1 calc(50% - 10px)"
+          fxFlex.lt-md="0 1 calc(100% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
+        <mat-label>Search Customer</mat-label>
+          <input
+            matInput
+            placeholder="Customer Name | Phone"
+            aria-label="State"
+            [matAutocomplete]="auto"
+            [formControl]="customerId"
+          />
+          <mat-icon matSuffix>search</mat-icon>
+          <mat-autocomplete
+            #auto="matAutocomplete"
+            (optionSelected)="onSelectCustomer($event.option.value)"
+          >
+            <mat-option
+              *ngFor="let state of filteredStates | async"
+              [value]="state.customer_id"
+            >
+              <img
+                class="example-option-img"
+                aria-hidden
+                [src]="state.image_path"
+                height="25"
+              />
+              <span>{{ state.customer_name }}</span> |
+              <small>Phone: {{ state.customer_phn }}</small>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>
 
 <div mat-dialog-actions fxLayoutAlign="end end">
   <button type="button" class="mat-raised-button" [mat-dialog-close]>

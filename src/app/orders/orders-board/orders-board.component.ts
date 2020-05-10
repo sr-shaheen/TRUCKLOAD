@@ -198,7 +198,7 @@ export class OrdersBoardComponent implements OnInit {
   truckAdd(): void {
     const dialogRef = this.dialog.open(TruckAddModalComponent, {
       width: '400px',
-      height: '550px',
+      height: '580px',
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
@@ -208,8 +208,8 @@ export class OrdersBoardComponent implements OnInit {
     console.log('aschi');
 
     const dialogRef = this.dialog.open(OrderAddModalComponent, {
-      width: '250px',
-      // data: {name: this.name, animal: this.animal}
+      width: '550px',
+      height: '550px',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
