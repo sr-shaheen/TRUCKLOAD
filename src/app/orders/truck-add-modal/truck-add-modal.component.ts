@@ -28,6 +28,7 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
   formId = 'customerFrom';
 
   customerServiceSub: Subscription;
+  loadVendorSub: Subscription;
 
   form: FormGroup;
 
@@ -82,6 +83,21 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    // this.loadVendorSub = this.orderService.getVendor().subscribe(
+    //   (data) => {
+    //     if (data) {
+    //       this.vendors = data;
+    //     } else {
+    //       this.asyncService.finish();
+    //       this.commonService.showErrorMsg('Error! Vendors could not found');
+    //     }
+    //   },
+    //   (error) => {
+    //     this.asyncService.finish();
+    //     this.commonService.showErrorMsg('Error! Vendors could not found');
+    //   }
+    // );
+
     this.filteredStates = this.vendorControl.valueChanges.pipe(
       startWith(''),
       map((state) => (state ? this._filterStates(state) : this.vendors.slice()))
@@ -162,5 +178,9 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
     if (this.customerServiceSub) {
       this.customerServiceSub.unsubscribe();
     }
+    if (this.loadVendorSub) {
+      this.loadVendorSub.unsubscribe();
+    }
+    this.asyncService.finish();
   }
 }

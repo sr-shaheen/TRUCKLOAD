@@ -30,4 +30,21 @@ export class OrderService {
       catchError(error => of([]))
     );
   }
+
+  getCustomer(): Observable<any[]> {
+    return this.http.get<any>("http://localhost:7075/api/trucks").pipe(
+      map(response =>
+        response.isExecuted && response.data ? response.data : []
+      ),
+      catchError(error => of([]))
+    );
+  }
+  getVendor(): Observable<any[]> {
+    return this.http.get<any>("http://localhost:7075/api/trucks").pipe(
+      map(response =>
+        response.isExecuted && response.data ? response.data : []
+      ),
+      catchError(error => of([]))
+    );
+  }
 }
