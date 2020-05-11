@@ -1,1 +1,149 @@
-<p>order-confirmed-modal works!</p>
+<h3 mat-dialog-title style="text-align: center;">
+  Order confirmed
+</h3>
+<mat-divider></mat-divider>
+<mat-progress-bar *ngIf="asyncService?.isLoading | async" mode="indeterminate">
+</mat-progress-bar>
+
+<table>
+  <thead>
+    <th>Truck type</th>
+    <th>Truck capacity</th>
+    <th>quantity</th>
+  </thead>
+  <tbody style="width: 80%; text-align: center;">
+    <tr *ngFor="let item of truckTypes; let i = index">
+      <td>{{ item?.type }}</td>
+      <td>{{ item?.capacity }} Tons</td>
+      <td>{{ item?.quantity }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div mat-dialog-content style="height: 250px;margin-top: 20px;">
+  <form
+    [id]="formId"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit(form.value)"
+    novalidate
+  >
+    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" class="tab">
+      <div
+        fxLayout="row wrap"
+        fxLayoutGap="10px"
+        fxFlex="100%"
+        fxFlex.sm="50%"
+        fxLayout.lt-sm="column"
+        fxFlex.xs="100%"
+        fxLayoutAlign="flex-start"
+      >
+        <mat-form-field
+          fxFlex="0 1 calc(28% - 10px)"
+          fxFlex.lt-md="0 1 calc(50% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
+          <mat-label>Capacity</mat-label>
+          <mat-select formControlName="capacity">
+            <mat-option
+              *ngFor="let capacity of capacities"
+              [value]="capacity.value"
+            >
+              {{ capacity.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="capacity.invalid && (capacity.dirty || capacity.touched)"
+          >
+            <ng-container *ngIf="capacity.hasError('required')"
+              >Capacity is required.</ng-container
+            >
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field
+          fxFlex="0 1 calc(28% - 10px)"
+          fxFlex.lt-md="0 1 calc(50% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
+          <mat-label>Type</mat-label>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let type of types" [value]="type.value">
+              {{ type.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="type.invalid && (type.dirty || type.touched)">
+            <ng-container *ngIf="type.hasError('required')"
+              >Type is required.</ng-container
+            >
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field
+          fxFlex="0 1 calc(28% - 10px)"
+          fxFlex.lt-md="0 1 calc(50% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
+          <mat-label>Truck Reg</mat-label>
+          <mat-select formControlName="truck_reg">
+            <mat-option *ngFor="let type of types" [value]="type.value">
+              {{ type.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="truck_reg.invalid && (truck_reg.dirty || truck_reg.touched)"
+          >
+            <ng-container *ngIf="truck_reg.hasError('required')"
+              >Truck Reg is required.</ng-container
+            >
+          </mat-error>
+        </mat-form-field>
+        <div style="width: 50px;">
+          <button type="button" mat-mini-fab (click)="addItem()">
+            <mat-icon>add box</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <table [hidden]="truckProvide.length === 0">
+    <thead>
+      <th>Truck type</th>
+      <th>Truck capacity</th>
+      <th>Truck Reg</th>
+      <th>Action</th>
+    </thead>
+    <tbody style="width: 80%; text-align: center;">
+      <tr *ngFor="let item of truckProvide; let i = index">
+        <td>{{ item?.type }}</td>
+        <td>{{ item?.capacity }} Tons</td>
+        <td>{{ item?.reg }}</td>
+        <td>
+          <button (click)="deleteItem(i)" mat-mini-fab color="warn">
+            <mat-icon>delete forever</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div fxLayoutAlign="end end">
+  <button type="button" class="mat-raised-button" [mat-dialog-close]>
+    Cancel
+  </button>
+  <button
+    [attr.form]="formId"
+    type="submit"
+    class="mat-raised-button mat-primary"
+    [disabled]="asyncService?.isLoading | async"
+  >
+    Submit
+  </button>
+</div>

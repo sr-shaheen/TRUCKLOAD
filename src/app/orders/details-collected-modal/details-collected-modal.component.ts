@@ -21,7 +21,7 @@ export interface Customer {
   styleUrls: ['./details-collected-modal.component.scss'],
 })
 export class DetailsCollectedModalComponent implements OnInit, OnDestroy {
-  formId = 'orderFrom';
+  formId = 'detailsCollectedFrom';
 
   detailsCollectedSub: Subscription;
 

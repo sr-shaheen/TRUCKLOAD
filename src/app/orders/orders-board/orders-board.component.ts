@@ -95,6 +95,19 @@ export class OrdersBoardComponent implements OnInit {
         customer_phn: '01709874653',
         customer_email: 'juthi@gmail.com',
         status: 'detailsCollected',
+        truck_type:[
+          {
+            type:'covered',
+            capacity:"3",
+            quantity:'3'
+          },
+          {
+            type:'open',
+            capacity:"3",
+            quantity:'3'
+          },
+        ]
+
       },
       {
         customer_id: '1',
@@ -190,6 +203,7 @@ export class OrdersBoardComponent implements OnInit {
           const dialogRef = this.dialog.open(OrderConfirmedModalComponent, {
             width: '800px',
             height: '550px',
+            data: this.movingItem.item,
           });
 
           dialogRef.afterClosed().subscribe((result) => {
