@@ -227,5 +227,6 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
     if (this.orderAddSub) {
       this.orderAddSub.unsubscribe();
     }
+    this.asyncService.finish();
   }
 }

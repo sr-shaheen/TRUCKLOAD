@@ -40,7 +40,7 @@ export interface Customer {
 @Component({
   selector: 'app-details-collected-modal',
   templateUrl: './details-collected-modal.component.html',
-  styleUrls: ['./details-collected-modal.component.scss']
+  styleUrls: ['./details-collected-modal.component.scss'],
 })
 export class DetailsCollectedModalComponent implements OnInit, OnDestroy {
   formId = 'orderFrom';
@@ -210,9 +210,6 @@ export class DetailsCollectedModalComponent implements OnInit, OnDestroy {
 
       order.truck_type = this.truckTypes;
 
-      console.log(order, 'valid');
-      this.close();
-
       this.detailsCollectedSub = this.orderService.addOrder(order).subscribe(
         (isAdded) => {
           if (isAdded) {
@@ -244,6 +241,6 @@ export class DetailsCollectedModalComponent implements OnInit, OnDestroy {
     if (this.detailsCollectedSub) {
       this.detailsCollectedSub.unsubscribe();
     }
+    this.asyncService.finish();
   }
 }
-

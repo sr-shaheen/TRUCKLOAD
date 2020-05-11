@@ -41,7 +41,6 @@ export class CustomerAddModalComponent implements OnInit {
       customer_phn: ['', [Validators.required]],
       customer_type: ['', [Validators.required]],
     });
-
     if (this.data) {
       this.form.patchValue(this.data);
     }

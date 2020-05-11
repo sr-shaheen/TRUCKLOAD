@@ -19,6 +19,7 @@ import { CustomerAddModalComponent } from 'src/app/customer/customer-add-modal/c
 import { TruckAddModalComponent } from '../truck-add-modal/truck-add-modal.component';
 import { OrderAddModalComponent } from '../order-add-modal/order-add-modal.component';
 import { DetailsCollectedModalComponent } from '../details-collected-modal/details-collected-modal.component';
+import { OrderConfirmedModalComponent } from '../order-confirmed-modal/order-confirmed-modal.component';
 @Component({
   selector: 'app-orders-board',
   templateUrl: './orders-board.component.html',
@@ -172,14 +173,6 @@ export class OrdersBoardComponent implements OnInit {
         event.currentIndex
       );
     } else {
-      // transferArrayItem(
-      //   event.previousContainer.data,
-      //   event.container.data,
-      //   event.previousIndex,
-      //   event.currentIndex
-      // );
-
-      //new code
       try {
         this.movingItem = {
           item: event.previousContainer.data[event.previousIndex],
@@ -198,13 +191,26 @@ export class OrdersBoardComponent implements OnInit {
               console.log(result, 'The dialog was closed');
             }
           });
+        } else if (event.container.id === 'orderConfirmed') {
+          const dialogRef = this.dialog.open(OrderConfirmedModalComponent, {
+            width: '800px',
+            height: '550px',
+          });
+
+          dialogRef.afterClosed().subscribe((result) => {
+            if (result) {
+              this.loadOrdersBoard();
+            } else {
+              console.log(result, 'The dialog was closed');
+            }
+          });
         } else {
           this.commonService.showDialog(
             {
-              title: `Confirmation (Service ID#: ${
+              title: `Move!!  ${
                 event.previousContainer.data[event.previousIndex].status
-              })`,
-              content: 'Are you sure',
+              } ==> ${event.container.id}.`,
+              content: 'Are you sure?',
             },
             () => this.updateOrdersBoard(event)
           );
@@ -220,18 +226,16 @@ export class OrdersBoardComponent implements OnInit {
     data?: any,
     callback?: Function
   ): void => {
-    this.asyncService.start();
     const currentStatus = event.previousContainer.id;
     const nextStatus = event.container.id;
     const draggedServiceData =
       event.previousContainer.data[event.previousIndex];
 
-    console.log(
-      currentStatus,
-      'ddddd',
-      nextStatus,
-      'ddddd',
-      draggedServiceData
+    transferArrayItem(
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
     );
   };
   // All modal functionality
