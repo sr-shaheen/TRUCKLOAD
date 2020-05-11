@@ -1,16 +1,22 @@
 export interface OrdersBoardItem {
-  customerId: string;
-  customerName: string;
-  cellNo: string;
-  email: string;
-  imagePath?: string;
+  customer_id: string;
+  customer_name: string;
+  customer_phn: string;
+  customer_email: string;
+  image_path?: string;
   status: string;
-  loadingDate?: string;
-  arrivalDate?: string;
-  loadingPoint?: string;
-  unloadingPoint: string;
-  vehicalReg?: string;
-  driverPhn?: Date;
+  expected_delivery_date?: string;
+  loading_date?: string;
+  starting_date?: string;
+  arrival_date?: string;
+  loading_point?: string;
+  unloading_point?: string;
+  truck_type?:TruckType[];
+}
+export interface TruckType {
+  type: string;
+  capacity: string;
+  quantity: string;
 }
 export interface MovingItem {
   item: OrdersBoardItem;

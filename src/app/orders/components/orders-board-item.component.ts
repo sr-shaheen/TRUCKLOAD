@@ -6,10 +6,10 @@ import { OrdersBoardItem } from '../models/orders-board-item.model';
   selector: 'orders-board-item',
   template: `
     <div style="cursor: pointer;">
-      <p>Name: {{ order?.customerName }}</p>
-      <p>Cell No: {{ order?.cellNo }}</p>
-      <p>Email: {{ order?.email }}</p>
-      <p>Unloading:{{ order?.unloadingPoint }}</p>
+      <p>Name: {{ order?.customer_name }}</p>
+      <p>Cell No: {{ order?.customer_phn }}</p>
+      <p>Email: {{ order?.customer_email }}</p>
+      <!-- <p>Unloading:{{ order?.unloadingPoint }}</p> -->
     </div>
   `,
   styles: [
