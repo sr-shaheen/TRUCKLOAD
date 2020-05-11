@@ -10,7 +10,7 @@ import { Order } from '../models/order.model';
 @Injectable()
 export class OrderService {
   constructor(private http: HttpClient) {}
-  addTruck(trucks: Truck): Observable<boolean> {
+  addTruck(trucks: any): Observable<boolean> {
     return this.http.post<any>('http://localhost:7075/api/trucks', trucks).pipe(
       map((response) => (response.isExecuted && response.data ? true : false)),
       catchError((error) => of(false))
