@@ -152,10 +152,8 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
 
   onSubmit(truck: Truck) {
     if (this.form.valid) {
-      const postData = { item: truck };
       this.asyncService.start();
-
-      this.customerServiceSub = this.orderService.addTruck(postData).subscribe(
+      this.customerServiceSub = this.orderService.addTruck(truck).subscribe(
         (isAdded) => {
           this.asyncService.finish();
           if (isAdded) {

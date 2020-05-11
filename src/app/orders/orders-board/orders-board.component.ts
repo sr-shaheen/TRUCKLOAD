@@ -20,6 +20,7 @@ import { TruckAddModalComponent } from '../truck-add-modal/truck-add-modal.compo
 import { OrderAddModalComponent } from '../order-add-modal/order-add-modal.component';
 import { DetailsCollectedModalComponent } from '../details-collected-modal/details-collected-modal.component';
 import { OrderConfirmedModalComponent } from '../order-confirmed-modal/order-confirmed-modal.component';
+import { OrderService } from '../services/orders.service';
 @Component({
   selector: 'app-orders-board',
   templateUrl: './orders-board.component.html',
@@ -40,9 +41,12 @@ export class OrdersBoardComponent implements OnInit {
   boardData: OrdersBoardItem;
 
   ordersBoardSub: Subscription;
+  updateBoardSub: Subscription;
+
   constructor(
     private commonService: CommonService,
     private asyncService: AsyncService,
+    private orderService: OrderService,
     public dialog: MatDialog
   ) {}
 
@@ -135,8 +139,8 @@ export class OrdersBoardComponent implements OnInit {
         status: 'ordersPlaced',
       },
     ]);
-    // this.feedbackBoardSub = this.feedbackBoardService
-    //   .getFeedbackBoardData()
+    // this.ordersBoardSub = this.orderService
+    //   .getOrdersBoard()
     //   .subscribe(
     //     (data) => {
     //       if (data) {
@@ -147,7 +151,7 @@ export class OrdersBoardComponent implements OnInit {
     //     (error) => {
     //       this.asyncService.finish();
     //       this.commonService.showErrorMsg(
-    //         'Error! Feedback board data is not loaded.'
+    //         'Error! Order board data is not loaded.'
     //       );
     //     }
     //   );
@@ -172,7 +176,7 @@ export class OrdersBoardComponent implements OnInit {
           const dialogRef = this.dialog.open(DetailsCollectedModalComponent, {
             width: '800px',
             height: '550px',
-            data:this.movingItem.item
+            data: this.movingItem.item,
           });
 
           dialogRef.afterClosed().subscribe((result) => {
@@ -222,6 +226,24 @@ export class OrdersBoardComponent implements OnInit {
     const draggedServiceData =
       event.previousContainer.data[event.previousIndex];
 
+    // this.updateBoardSub = this.orderService
+    //   .updateBoardStatus(draggedServiceData.customer_id, draggedServiceData)
+    //   .subscribe(
+    //     (data) => {
+    //       if (data) {
+    //         this.asyncService.finish();
+    //         this.commonService.showSuccessMsg("Board Updated!!!")
+    //       } else {
+    //         this.asyncService.finish();
+    //         this.commonService.showErrorMsg('Error! Not Updated!!');
+    //       }
+    //     },
+    //     (error) => {
+    //       this.asyncService.finish();
+    //       this.commonService.showErrorMsg('Error! Not Updated!!');
+    //     }
+    //   );
+
     transferArrayItem(
       event.previousContainer.data,
       event.container.data,
@@ -259,5 +281,15 @@ export class OrdersBoardComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.ordersBoardSub) {
+      this.ordersBoardSub.unsubscribe();
+    }
+    if (this.updateBoardSub) {
+      this.updateBoardSub.unsubscribe();
+    }
+    this.asyncService.finish();
   }
 }
