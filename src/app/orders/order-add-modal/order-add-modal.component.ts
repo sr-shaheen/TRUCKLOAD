@@ -12,6 +12,8 @@ import { OrderService } from '../services/orders.service';
 import { map, startWith } from 'rxjs/operators';
 
 import * as moment from 'moment';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Order } from '../models/order.model';
 
 export interface Customer {
   customer_id: string;
@@ -27,11 +29,11 @@ export interface Customer {
 export class OrderAddModalComponent implements OnInit {
   formId = 'orderFrom';
 
-  orderSub: Subscription;
+  orderAddSub: Subscription;
 
   form: FormGroup;
 
-  customerId = new FormControl();
+  customerControl = new FormControl();
   filteredStates: Observable<Customer[]>;
 
   truckTypes = [];
@@ -78,17 +80,19 @@ export class OrderAddModalComponent implements OnInit {
     private fb: FormBuilder,
     private commonService: CommonService,
     public asyncService: AsyncService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    public dialogRef: MatDialogRef<OrderAddModalComponent>
   ) {}
 
   ngOnInit(): void {
-    this.filteredStates = this.customerId.valueChanges.pipe(
+    this.filteredStates = this.customerControl.valueChanges.pipe(
       startWith(''),
       map((state) =>
         state ? this._filterStates(state) : this.customers.slice()
       )
     );
     this.form = this.fb.group({
+      customer_id: ['', [Validators.required]],
       customer_name: ['', [Validators.required]],
       expected_delivery_date: ['', [Validators.required]],
       loading_date: ['', [Validators.required]],
@@ -98,9 +102,13 @@ export class OrderAddModalComponent implements OnInit {
       capacity: [''],
       type: [''],
       quantity: [''],
+      truck_type: [''],
     });
   }
 
+  get customer_id() {
+    return this.form.get('customer_id');
+  }
   get customer_name() {
     return this.form.get('customer_name');
   }
@@ -128,6 +136,9 @@ export class OrderAddModalComponent implements OnInit {
   get type() {
     return this.form.get('type');
   }
+  get truck_type() {
+    return this.form.get('truck_type');
+  }
 
   private _filterStates(value: string): Customer[] {
     const filterValue = value.toLowerCase();
@@ -140,7 +151,9 @@ export class OrderAddModalComponent implements OnInit {
   }
   onSelectCustomer(id) {
     const cus = this.customers.find((item) => item.customer_id === id);
-    this.customerId.patchValue(cus.customer_name);
+    this.customerControl.patchValue(cus.customer_name);
+    this.customer_name.patchValue(cus.customer_name);
+    this.customer_id.patchValue(cus.customer_id);
   }
 
   addItem() {
@@ -166,8 +179,47 @@ export class OrderAddModalComponent implements OnInit {
   deleteItem(index) {
     this.truckTypes.splice(index, 1);
   }
-  onSubmit({ type, quantity, capacity, ...order }: any): void {
-    const data = order as any;
-    console.log(data, 'submit');
+  onSubmit({ type, quantity, capacity, ...data }: any): void {
+    const order = data as Order;
+    console.log(order, 'submit');
+
+    if (this.form.valid) {
+      this.asyncService.start();
+
+      order.expected_delivery_date = moment(
+        order.expected_delivery_date
+      ).format('YYYY-MM-DD');
+      order.loading_date = moment(order.loading_date).format('YYYY-MM-DD');
+      order.starting_date = moment(order.starting_date).format('YYYY-MM-DD');
+
+      order.truck_type = this.truckTypes;
+
+      console.log(order, 'valid');
+
+      this.orderAddSub = this.orderService.addOrder(order).subscribe(
+        (isAdded) => {
+          if (isAdded) {
+            this.commonService.showSuccessMsg(
+              'Success! The order has beed created!'
+            );
+            this.asyncService.finish();
+            this.close();
+          } else {
+            this.asyncService.finish();
+            this.commonService.showErrorMsg('Error! The order is not created!');
+          }
+        },
+        (error) => {
+          this.asyncService.finish();
+          this.commonService.showErrorMsg(
+            'Error! The customer information is not added!'
+          );
+        }
+      );
+    }
   }
+
+  close = (): void => {
+    this.dialogRef.close();
+  };
 }
