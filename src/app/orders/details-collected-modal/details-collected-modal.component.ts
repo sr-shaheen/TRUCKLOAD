@@ -211,6 +211,7 @@ export class DetailsCollectedModalComponent implements OnInit, OnDestroy {
       order.truck_type = this.truckTypes;
 
       console.log(order, 'valid');
+      this.close();
 
       this.detailsCollectedSub = this.orderService.addOrder(order).subscribe(
         (isAdded) => {
@@ -236,7 +237,7 @@ export class DetailsCollectedModalComponent implements OnInit, OnDestroy {
   }
 
   close = (): void => {
-    this.dialogRef.close();
+    this.dialogRef.close(true);
   };
 
   ngOnDestroy(): void {
