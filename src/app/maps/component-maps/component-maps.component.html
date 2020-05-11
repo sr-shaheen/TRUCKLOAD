@@ -1,9 +1,29 @@
+<div container>
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <input type="text"
+             placeholder="Trucks Location Search"
+             aria-label="Number"
+             matInput
+             [formControl]="myControl"
+             [matAutocomplete]="auto">
+             <mat-autocomplete #auto="matAutocomplete" (optionSelected)='selected($event.option.value)'>       
+             <mat-option *ngFor="let option of filteredOptions | async" [value]="option" >
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+  
 
 <div class="margin"#mapContainer id="map"></div>
-<div
+
+</div>
+
+<!-- <div
 class="select-selected"
   style="width: 100px;"
->
+> 
   <select (change)="selectChange($event)">
     <option value="all">All</option>
     <option value="square">Square</option>
@@ -12,7 +32,10 @@ class="select-selected"
     <option value="bata">Bata</option>
   </select>
 
-</div>
+</div>  -->
+
+
+
 
 
 

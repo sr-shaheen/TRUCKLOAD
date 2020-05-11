@@ -12,3 +12,7 @@ export interface OrdersBoardItem {
   vehicalReg?: string;
   driverPhn?: Date;
 }
+export interface MovingItem {
+  item: OrdersBoardItem;
+  title?: string;
+}

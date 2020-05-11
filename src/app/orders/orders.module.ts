@@ -10,6 +10,8 @@ import { TruckAddModalComponent } from './truck-add-modal/truck-add-modal.compon
 import { OrderAddModalComponent } from './order-add-modal/order-add-modal.component';
 import { CustomerService } from '../customer/services/customer.service';
 import { OrderService } from './services/orders.service';
+import { DetailsCollectedModalComponent } from './details-collected-modal/details-collected-modal.component';
+import { OrderConfirmedModalComponent } from './order-confirmed-modal/order-confirmed-modal.component';
 
 @NgModule({
   declarations: [
@@ -17,11 +19,15 @@ import { OrderService } from './services/orders.service';
     OrdersBoardItemComponent,
     TruckAddModalComponent,
     OrderAddModalComponent,
+    DetailsCollectedModalComponent,
+    OrderConfirmedModalComponent,
   ],
   entryComponents: [
     CustomerAddModalComponent,
     TruckAddModalComponent,
     OrderAddModalComponent,
+    DetailsCollectedModalComponent,
+    OrderConfirmedModalComponent
   ],
   imports: [SharedModule, OrdersRoutingModule],
   providers: [CustomerService,OrderService],

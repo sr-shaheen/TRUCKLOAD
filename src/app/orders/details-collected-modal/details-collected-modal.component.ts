@@ -1,3 +1,19 @@
+// import { Component, OnInit } from '@angular/core';
+
+// @Component({
+//   selector: 'app-details-collected-modal',
+//   templateUrl: './details-collected-modal.component.html',
+//   styleUrls: ['./details-collected-modal.component.scss']
+// })
+// export class DetailsCollectedModalComponent implements OnInit {
+
+//   constructor() { }
+
+//   ngOnInit(): void {
+//   }
+
+// }
+
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AsyncService } from 'src/app/shared/services/async.service';
 import { Subscription, Observable } from 'rxjs';
@@ -22,14 +38,14 @@ export interface Customer {
   image_path: string;
 }
 @Component({
-  selector: 'app-order-add-modal',
-  templateUrl: './order-add-modal.component.html',
-  styleUrls: ['./order-add-modal.component.scss'],
+  selector: 'app-details-collected-modal',
+  templateUrl: './details-collected-modal.component.html',
+  styleUrls: ['./details-collected-modal.component.scss'],
 })
-export class OrderAddModalComponent implements OnInit, OnDestroy {
+export class DetailsCollectedModalComponent implements OnInit, OnDestroy {
   formId = 'orderFrom';
 
-  orderAddSub: Subscription;
+  detailsCollectedSub: Subscription;
 
   form: FormGroup;
 
@@ -81,7 +97,7 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
     private commonService: CommonService,
     public asyncService: AsyncService,
     private orderService: OrderService,
-    public dialogRef: MatDialogRef<OrderAddModalComponent>
+    public dialogRef: MatDialogRef<DetailsCollectedModalComponent>
   ) {}
 
   ngOnInit(): void {
@@ -194,9 +210,7 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
 
       order.truck_type = this.truckTypes;
 
-      console.log(order, 'valid');
-
-      this.orderAddSub = this.orderService.addOrder(order).subscribe(
+      this.detailsCollectedSub = this.orderService.addOrder(order).subscribe(
         (isAdded) => {
           if (isAdded) {
             this.commonService.showSuccessMsg(
@@ -220,12 +234,12 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
   }
 
   close = (): void => {
-    this.dialogRef.close();
+    this.dialogRef.close(true);
   };
 
   ngOnDestroy(): void {
-    if (this.orderAddSub) {
-      this.orderAddSub.unsubscribe();
+    if (this.detailsCollectedSub) {
+      this.detailsCollectedSub.unsubscribe();
     }
     this.asyncService.finish();
   }

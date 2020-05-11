@@ -10,7 +10,7 @@ import {
   ordersBoardColors,
   statusList,
 } from '../data/orders-board.constant';
-import { OrdersBoardItem } from '../models/orders-board-item.model';
+import { OrdersBoardItem, MovingItem } from '../models/orders-board-item.model';
 import { Subscription } from 'rxjs';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { AsyncService } from 'src/app/shared/services/async.service';
@@ -18,6 +18,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { CustomerAddModalComponent } from 'src/app/customer/customer-add-modal/customer-add-modal.component';
 import { TruckAddModalComponent } from '../truck-add-modal/truck-add-modal.component';
 import { OrderAddModalComponent } from '../order-add-modal/order-add-modal.component';
+import { DetailsCollectedModalComponent } from '../details-collected-modal/details-collected-modal.component';
+import { OrderConfirmedModalComponent } from '../order-confirmed-modal/order-confirmed-modal.component';
 @Component({
   selector: 'app-orders-board',
   templateUrl: './orders-board.component.html',
@@ -31,7 +33,7 @@ export class OrdersBoardComponent implements OnInit {
   inTransit: OrdersBoardItem[] = [];
   uploadComplete: OrdersBoardItem[] = [];
   consignmentDone: OrdersBoardItem[] = [];
-
+  movingItem: MovingItem = null;
   colors = ordersBoardColors;
 
   status = statusDictionary;
@@ -171,20 +173,73 @@ export class OrdersBoardComponent implements OnInit {
         event.currentIndex
       );
     } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
+      try {
+        this.movingItem = {
+          item: event.previousContainer.data[event.previousIndex],
+        };
+
+        if (event.container.id === 'detailsCollected') {
+          const dialogRef = this.dialog.open(DetailsCollectedModalComponent, {
+            width: '800px',
+            height: '550px',
+          });
+
+          dialogRef.afterClosed().subscribe((result) => {
+            if (result) {
+              this.loadOrdersBoard();
+            } else {
+              console.log(result, 'The dialog was closed');
+            }
+          });
+        } else if (event.container.id === 'orderConfirmed') {
+          const dialogRef = this.dialog.open(OrderConfirmedModalComponent, {
+            width: '800px',
+            height: '550px',
+          });
+
+          dialogRef.afterClosed().subscribe((result) => {
+            if (result) {
+              this.loadOrdersBoard();
+            } else {
+              console.log(result, 'The dialog was closed');
+            }
+          });
+        } else {
+          this.commonService.showDialog(
+            {
+              title: `Move!!  ${
+                event.previousContainer.data[event.previousIndex].status
+              } ==> ${event.container.id}.`,
+              content: 'Are you sure?',
+            },
+            () => this.updateOrdersBoard(event)
+          );
+        }
+      } catch (error) {
+        this.movingItem = null;
+        this.commonService.showErrorMsg('Error! The board is not updated.');
+      }
     }
   }
+  private updateOrdersBoard = (
+    event: CdkDragDrop<OrdersBoardItem[]>,
+    data?: any,
+    callback?: Function
+  ): void => {
+    const currentStatus = event.previousContainer.id;
+    const nextStatus = event.container.id;
+    const draggedServiceData =
+      event.previousContainer.data[event.previousIndex];
 
+    transferArrayItem(
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
+    );
+  };
   // All modal functionality
-
   customerAdd(): void {
-    console.log('aschi');
-
     const dialogRef = this.dialog.open(CustomerAddModalComponent, {
       width: '400px',
       height: '500px',
@@ -198,18 +253,16 @@ export class OrdersBoardComponent implements OnInit {
   truckAdd(): void {
     const dialogRef = this.dialog.open(TruckAddModalComponent, {
       width: '400px',
-      height: '550px',
+      height: '580px',
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
     });
   }
   orderAdd(): void {
-    console.log('aschi');
-
     const dialogRef = this.dialog.open(OrderAddModalComponent, {
-      width: '250px',
-      // data: {name: this.name, animal: this.animal}
+      width: '800px',
+      height: '550px',
     });
 
     dialogRef.afterClosed().subscribe((result) => {

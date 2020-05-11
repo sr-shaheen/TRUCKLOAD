@@ -20,9 +20,9 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
   form: FormGroup;
 
   capacities: any[] = [
-    { name: '3 ton', value: 3 },
-    { name: '5 ton', value: 5 },
-    { name: '7 ton', value: 7 },
+    { name: '3 ton', value: '3' },
+    { name: '5 ton', value: '5' },
+    { name: '7 ton', value: '7' },
   ];
   types: any[] = [
     { name: 'Covered', value: 'covered' },
