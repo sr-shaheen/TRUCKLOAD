@@ -183,8 +183,6 @@ export class OrdersBoardComponent implements OnInit {
   // All modal functionality
 
   customerAdd(): void {
-    console.log('aschi');
-
     const dialogRef = this.dialog.open(CustomerAddModalComponent, {
       width: '400px',
       height: '500px',
@@ -205,8 +203,6 @@ export class OrdersBoardComponent implements OnInit {
     });
   }
   orderAdd(): void {
-    console.log('aschi');
-
     const dialogRef = this.dialog.open(OrderAddModalComponent, {
       width: '800px',
       height: '550px',

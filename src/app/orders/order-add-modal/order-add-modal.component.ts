@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AsyncService } from 'src/app/shared/services/async.service';
 import { Subscription, Observable } from 'rxjs';
 import {
@@ -26,7 +26,7 @@ export interface Customer {
   templateUrl: './order-add-modal.component.html',
   styleUrls: ['./order-add-modal.component.scss'],
 })
-export class OrderAddModalComponent implements OnInit {
+export class OrderAddModalComponent implements OnInit, OnDestroy {
   formId = 'orderFrom';
 
   orderAddSub: Subscription;
@@ -222,4 +222,10 @@ export class OrderAddModalComponent implements OnInit {
   close = (): void => {
     this.dialogRef.close();
   };
+
+  ngOnDestroy(): void {
+    if (this.orderAddSub) {
+      this.orderAddSub.unsubscribe();
+    }
+  }
 }
