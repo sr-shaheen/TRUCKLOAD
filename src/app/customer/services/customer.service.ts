@@ -10,15 +10,31 @@ export class CustomerService {
   constructor(private http: HttpClient) {}
 
   addCustomer(customer: Customer): Observable<boolean> {
-    return this.http.post<any>("http://localhost:7075/api/customer", customer).pipe(
-      map(response => (response.isExecuted && response.data ? true : false)),
-      catchError(error => of(false))
-    );
+    return this.http
+      .post<any>('http://localhost:7075/api/customer', customer)
+      .pipe(
+        map((response) =>
+          response.isExecuted && response.data ? true : false
+        ),
+        catchError((error) => of(false))
+      );
   }
-  updateCustomer(id:string,customer: Customer): Observable<boolean> {
-    return this.http.put<any>(`http://localhost:7075/api/customer/${id}`, customer).pipe(
-      map(response => (response.isExecuted && response.data ? true : false)),
-      catchError(error => of(false))
+  updateCustomer(id: string, customer: Customer): Observable<boolean> {
+    return this.http
+      .put<any>(`http://localhost:7075/api/customer/${id}`, customer)
+      .pipe(
+        map((response) =>
+          response.isExecuted && response.data ? true : false
+        ),
+        catchError((error) => of(false))
+      );
+  }
+  getCustomerList(): Observable<Customer[]> {
+    return this.http.get<any>(`http://localhost:7075/api/customerlist`).pipe(
+      map((response) =>
+        response? response.data : null
+      ),
+      catchError((error) => of(null))
     );
   }
 }
