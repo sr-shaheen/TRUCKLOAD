@@ -12,7 +12,7 @@
       <!-- <mat-button-toggle-group name="fontStyle" aria-label="Font Style" class="tp-section1">
         <mat-button-toggle value="bold">Bold</mat-button-toggle>
       </mat-button-toggle-group> -->
-      <button class="tp-section1" mat-flat-button  (click)="switchCustomerList()" >Click for customer</button>
+      <button class="tp-section1" mat-flat-button  (click)="switchCustomerList()" >Click here for Customer</button>
       <div *ngIf="showCustomerList">
       <section class="tp-section">
         <a [routerLink]="['/dashboard/customer-dashboard']" [routerLinkActive]="['active']">
@@ -59,7 +59,7 @@
         <div fxFlex="50%">
           <app-admin-target-value></app-admin-target-value>
         </div>
-        <div fxFlex="45%">
+        <div fxFlex="48%">
           <div fxLayout="row">
             <div fxFlex="60%" class="example-card1">
               <!-- <h3 style="margin-left: 15%">Order</h3> -->
