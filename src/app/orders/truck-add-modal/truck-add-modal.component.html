@@ -39,10 +39,7 @@
             required
           />
           <mat-error
-            *ngIf="
-              truck_reg.invalid &&
-              (truck_reg.dirty || truck_reg.touched)
-            "
+            *ngIf="truck_reg.invalid && (truck_reg.dirty || truck_reg.touched)"
           >
             <ng-container *ngIf="truck_reg.hasError('required')"
               >Truck Reg is required.</ng-container
@@ -57,23 +54,33 @@
           fxFlex.xs="100%"
           appearance="fill"
         >
-          <mat-label>Owner Name</mat-label>
+          <mat-label>Search Vendor</mat-label>
           <input
             matInput
-            placeholder="Owner Name"
-            formControlName="owner_name"
-            required
+            placeholder="Vendor Name | Phone"
+            aria-label="State"
+            [matAutocomplete]="auto"
+            [formControl]="vendorControl"
           />
-          <mat-error
-            *ngIf="
-              owner_name.invalid &&
-              (owner_name.dirty || owner_name.touched)
-            "
+          <mat-icon matSuffix>search</mat-icon>
+          <mat-autocomplete
+            #auto="matAutocomplete"
+            (optionSelected)="onSelectvendor($event.option.value)"
           >
-            <ng-container *ngIf="owner_name.hasError('required')"
-              >Owner Name is required.</ng-container
+            <mat-option
+              *ngFor="let state of filteredStates | async"
+              [value]="state.vendor_id"
             >
-          </mat-error>
+              <img
+                class="example-option-img"
+                aria-hidden
+                [src]="state.image_path"
+                height="25"
+              />
+              <span>{{ state.name }}</span> |
+              <small>Phone: {{ state.phn }}</small>
+            </mat-option>
+          </mat-autocomplete>
         </mat-form-field>
 
         <mat-form-field
@@ -83,24 +90,20 @@
           fxFlex.xs="100%"
           appearance="fill"
         >
-          <mat-label>Owner Phone</mat-label>
+          <mat-label>Vendor phone</mat-label>
           <input
             matInput
-            placeholder="Owner Phone"
-            formControlName="owner_phn"
+            placeholder="vendor_phn"
+            formControlName="vendor_phn"
             required
           />
           <mat-error
             *ngIf="
-              owner_phn.invalid &&
-              (owner_phn.dirty || owner_phn.touched)
+              vendor_phn.invalid && (vendor_phn.dirty || vendor_phn.touched)
             "
           >
-            <ng-container *ngIf="owner_phn.hasError('required')"
-              >Owner Phone is required.</ng-container
-            >
-            <ng-container *ngIf="owner_phn.hasError('invalidNumber')"
-              >Owner Phone should be number</ng-container
+            <ng-container *ngIf="vendor_phn.hasError('required')"
+              >Vendor phone is required.</ng-container
             >
           </mat-error>
         </mat-form-field>
@@ -114,15 +117,15 @@
         >
           <mat-label>Capacity</mat-label>
           <mat-select formControlName="capacity" required>
-            <mat-option *ngFor="let capacity of capacities" [value]="capacity.value">
+            <mat-option
+              *ngFor="let capacity of capacities"
+              [value]="capacity.value"
+            >
               {{ capacity.name }}
             </mat-option>
           </mat-select>
           <mat-error
-            *ngIf="
-              capacity.invalid &&
-              (capacity.dirty || capacity.touched)
-            "
+            *ngIf="capacity.invalid && (capacity.dirty || capacity.touched)"
           >
             <ng-container *ngIf="capacity.hasError('required')"
               >Capacity is required.</ng-container
@@ -143,12 +146,7 @@
               {{ type.name }}
             </mat-option>
           </mat-select>
-          <mat-error
-            *ngIf="
-              type.invalid &&
-              (type.dirty || type.touched)
-            "
-          >
+          <mat-error *ngIf="type.invalid && (type.dirty || type.touched)">
             <ng-container *ngIf="type.hasError('required')"
               >Type is required.</ng-container
             >
@@ -163,16 +161,9 @@
           appearance="fill"
         >
           <mat-label>Device Id</mat-label>
-          <input
-            matInput
-            placeholder="Device Id"
-            formControlName="device_id"
-          />
+          <input matInput placeholder="Device Id" formControlName="device_id" />
           <mat-error
-            *ngIf="
-              device_id.invalid &&
-              (device_id.dirty || device_id.touched)
-            "
+            *ngIf="device_id.invalid && (device_id.dirty || device_id.touched)"
           >
             <ng-container *ngIf="device_id.hasError('required')"
               >Device Id is required.</ng-container

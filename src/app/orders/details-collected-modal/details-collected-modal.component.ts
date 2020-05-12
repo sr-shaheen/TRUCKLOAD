@@ -1,34 +1,12 @@
-// import { Component, OnInit } from '@angular/core';
-
-// @Component({
-//   selector: 'app-details-collected-modal',
-//   templateUrl: './details-collected-modal.component.html',
-//   styleUrls: ['./details-collected-modal.component.scss']
-// })
-// export class DetailsCollectedModalComponent implements OnInit {
-
-//   constructor() { }
-
-//   ngOnInit(): void {
-//   }
-
-// }
-
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { AsyncService } from 'src/app/shared/services/async.service';
-import { Subscription, Observable } from 'rxjs';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  FormControl,
-} from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { OrderService } from '../services/orders.service';
-import { map, startWith } from 'rxjs/operators';
 
 import * as moment from 'moment';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Order } from '../models/order.model';
 
 export interface Customer {
@@ -43,14 +21,11 @@ export interface Customer {
   styleUrls: ['./details-collected-modal.component.scss'],
 })
 export class DetailsCollectedModalComponent implements OnInit, OnDestroy {
-  formId = 'orderFrom';
+  formId = 'detailsCollectedFrom';
 
   detailsCollectedSub: Subscription;
 
   form: FormGroup;
-
-  customerControl = new FormControl();
-  filteredStates: Observable<Customer[]>;
 
   truckTypes = [];
   capacities: any[] = [
@@ -97,19 +72,18 @@ export class DetailsCollectedModalComponent implements OnInit, OnDestroy {
     private commonService: CommonService,
     public asyncService: AsyncService,
     private orderService: OrderService,
-    public dialogRef: MatDialogRef<DetailsCollectedModalComponent>
+    public dialogRef: MatDialogRef<DetailsCollectedModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {
-    this.filteredStates = this.customerControl.valueChanges.pipe(
-      startWith(''),
-      map((state) =>
-        state ? this._filterStates(state) : this.customers.slice()
-      )
-    );
+    console.log(this.data, 'ssssssssssss');
+
     this.form = this.fb.group({
       customer_id: ['', [Validators.required]],
       customer_name: ['', [Validators.required]],
+      customer_phn: ['', [Validators.required]],
+      customer_email: ['', [Validators.required]],
       expected_delivery_date: ['', [Validators.required]],
       loading_date: ['', [Validators.required]],
       starting_date: ['', [Validators.required]],
@@ -120,6 +94,7 @@ export class DetailsCollectedModalComponent implements OnInit, OnDestroy {
       quantity: [''],
       truck_type: [''],
     });
+    this.form.patchValue(this.data);
   }
 
   get customer_id() {
@@ -127,6 +102,12 @@ export class DetailsCollectedModalComponent implements OnInit, OnDestroy {
   }
   get customer_name() {
     return this.form.get('customer_name');
+  }
+  get customer_phn() {
+    return this.form.get('customer_phn');
+  }
+  get customer_email() {
+    return this.form.get('customer_email');
   }
   get expected_delivery_date() {
     return this.form.get('expected_delivery_date');
@@ -154,22 +135,6 @@ export class DetailsCollectedModalComponent implements OnInit, OnDestroy {
   }
   get truck_type() {
     return this.form.get('truck_type');
-  }
-
-  private _filterStates(value: string): Customer[] {
-    const filterValue = value.toLowerCase();
-
-    return this.customers.filter(
-      (state) =>
-        state.customer_name.toLowerCase().indexOf(filterValue) === 0 ||
-        state.customer_phn.toLowerCase().indexOf(filterValue) === 0
-    );
-  }
-  onSelectCustomer(id) {
-    const cus = this.customers.find((item) => item.customer_id === id);
-    this.customerControl.patchValue(cus.customer_name);
-    this.customer_name.patchValue(cus.customer_name);
-    this.customer_id.patchValue(cus.customer_id);
   }
 
   addItem() {

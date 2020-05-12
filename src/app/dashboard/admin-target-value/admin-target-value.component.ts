@@ -77,7 +77,7 @@ const data = {
   styleUrls: ['./admin-target-value.component.scss']
 })
 export class AdminTargetValueComponent implements OnInit {
-  width = 500;
+  width = "100%";
   height = 200;
   type = 'msline';
   dataFormat = 'json';
