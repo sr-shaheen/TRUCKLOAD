@@ -5,7 +5,7 @@
 <mat-progress-bar *ngIf="asyncService?.isLoading | async" mode="indeterminate">
 </mat-progress-bar>
 
-<table>
+<table class="required">
   <thead>
     <th>Truck type</th>
     <th>Truck capacity</th>
@@ -20,7 +20,7 @@
   </tbody>
 </table>
 
-<div mat-dialog-content style="height: 250px;margin-top: 20px;">
+<div mat-dialog-content style="height: 250px; margin-top: 20px;">
   <form
     [id]="formId"
     [formGroup]="form"
@@ -45,7 +45,10 @@
           appearance="fill"
         >
           <mat-label>Capacity</mat-label>
-          <mat-select formControlName="capacity">
+          <mat-select
+            formControlName="capacity"
+            (valueChange)="getCapacity($event)"
+          >
             <mat-option
               *ngFor="let capacity of capacities"
               [value]="capacity.value"
@@ -70,7 +73,7 @@
           appearance="fill"
         >
           <mat-label>Type</mat-label>
-          <mat-select formControlName="type">
+          <mat-select formControlName="type" (valueChange)="getType($event)">
             <mat-option *ngFor="let type of types" [value]="type.value">
               {{ type.name }}
             </mat-option>
@@ -91,8 +94,11 @@
         >
           <mat-label>Truck Reg</mat-label>
           <mat-select formControlName="truck_reg">
-            <mat-option *ngFor="let type of types" [value]="type.value">
-              {{ type.name }}
+            <mat-option
+              *ngFor="let type of truckFilter"
+              [value]="type.truck_reg"
+            >
+              {{ type.truck_reg }}
             </mat-option>
           </mat-select>
           <mat-error
@@ -112,7 +118,7 @@
     </div>
   </form>
 
-  <table [hidden]="truckProvide.length === 0">
+  <table class="confirmed" [hidden]="truckProvide.length === 0">
     <thead>
       <th>Truck type</th>
       <th>Truck capacity</th>
@@ -123,7 +129,7 @@
       <tr *ngFor="let item of truckProvide; let i = index">
         <td>{{ item?.type }}</td>
         <td>{{ item?.capacity }} Tons</td>
-        <td>{{ item?.reg }}</td>
+        <td>{{ item?.truck_reg }}</td>
         <td>
           <button (click)="deleteItem(i)" mat-mini-fab color="warn">
             <mat-icon>delete forever</mat-icon>

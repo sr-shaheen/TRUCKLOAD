@@ -12,7 +12,6 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./order-confirmed-modal.component.scss'],
 })
 export class OrderConfirmedModalComponent implements OnInit {
-
   formId = 'detailsCollectedFrom';
 
   form: FormGroup;
@@ -20,7 +19,7 @@ export class OrderConfirmedModalComponent implements OnInit {
 
   truckTypes = [];
   truckProvide = [];
-
+  truckFilter = [];
   capacities: any[] = [
     { name: '3 ton', value: '3' },
     { name: '5 ton', value: '5' },
@@ -29,6 +28,53 @@ export class OrderConfirmedModalComponent implements OnInit {
   types: any[] = [
     { name: 'Covered', value: 'covered' },
     { name: 'Open', value: 'open' },
+  ];
+  truckData: any[] = [
+    {
+      truck_reg: '12312323',
+      vendor_name: 'mofiz',
+      vendor_id: '55558',
+      device_id: '79879879',
+      vendor_phn: '8798797979898',
+      capacity: '3',
+      type: 'covered',
+    },
+    {
+      truck_reg: '12312323',
+      vendor_name: 'mofiz',
+      vendor_id: '55558',
+      device_id: '79879879',
+      vendor_phn: '8798797979898',
+      capacity: '5',
+      type: 'covered',
+    },
+    {
+      truck_reg: '12312323',
+      vendor_name: 'mofiz',
+      vendor_id: '55558',
+      device_id: '79879879',
+      vendor_phn: '8798797979898',
+      capacity: '3',
+      type: 'open',
+    },
+    {
+      truck_reg: '12312323',
+      vendor_name: 'mofiz',
+      vendor_id: '55558',
+      device_id: '79879879',
+      vendor_phn: '8798797979898',
+      capacity: '5',
+      type: 'open',
+    },
+    {
+      truck_reg: '12312323',
+      vendor_name: 'mofiz',
+      vendor_id: '55558',
+      device_id: '79879879',
+      vendor_phn: '8798797979898',
+      capacity: '7',
+      type: 'open',
+    },
   ];
   constructor(
     private fb: FormBuilder,
@@ -46,44 +92,46 @@ export class OrderConfirmedModalComponent implements OnInit {
       capacity: [''],
       type: [''],
       truck_reg: [''],
-      truck_provide: [''],
     });
-    this.truckTypes=this.data.truck_type;
+    this.truckTypes = this.data.truck_type;
   }
 
   get capacity() {
     return this.form.get('capacity');
   }
-  get quantity() {
-    return this.form.get('quantity');
-  }
+
   get type() {
     return this.form.get('type');
   }
   get truck_reg() {
     return this.form.get('truck_reg');
   }
-  get truck_provide() {
-    return this.form.get('truck_provide');
-  }
 
+  getCapacity(capacity) {
+    console.log(capacity, 'lllllllllll');
+  }
+  getType(type) {
+    console.log(type, 'lllllllllll');
+    this.truckFilter = this.truckData.filter(
+      (item) => item.type === type && item.capacity === this.capacity.value
+    );
+  }
   addItem() {
-    if (this.capacity.value && this.quantity.value && this.type.value&&this.truck_reg.value) {
+    if (this.capacity.value && this.type.value && this.truck_reg.value) {
       const item = {
         capacity: this.capacity.value,
-        quantity: this.quantity.value,
         type: this.type.value,
         truck_reg: this.truck_reg.value,
       };
-      // if (!this.truckTypes.find(i => i.itemId === item.itemId)) {
-      this.truckProvide = [item, ...this.truckProvide];
-      // } else {
-      //   this.commonService.showErrorMsg("Item already added!!!!");
-      // }
+      if (!this.truckProvide.find((i) => i.truck_reg === item.truck_reg)) {
+        this.truckProvide = [item, ...this.truckProvide];
+      } else {
+        this.commonService.showErrorMsg('Item already added!!!!');
+      }
       this.capacity.patchValue('');
-      this.quantity.patchValue('');
       this.type.patchValue('');
       this.truck_reg.patchValue('');
+      this.truckFilter = [];
     } else {
       this.commonService.showErrorMsg('All feilds required!');
     }
@@ -93,8 +141,23 @@ export class OrderConfirmedModalComponent implements OnInit {
     this.truckTypes.splice(index, 1);
   }
 
-  onSubmit(confirmed){
-
-
+  onSubmit(confirmed) {
+    // this.orderConfirmedSub = this.orderService
+    //   .updateBoardStatus('id','data')
+    //   .subscribe(
+    //     (data) => {
+    //       if (data) {
+    //         this.asyncService.finish();
+    //         this.commonService.showSuccessMsg("Board Updated!!!")
+    //       } else {
+    //         this.asyncService.finish();
+    //         this.commonService.showErrorMsg('Error! Not Updated!!');
+    //       }
+    //     },
+    //     (error) => {
+    //       this.asyncService.finish();
+    //       this.commonService.showErrorMsg('Error! Not Updated!!');
+    //     }
+    //   );
   }
 }
