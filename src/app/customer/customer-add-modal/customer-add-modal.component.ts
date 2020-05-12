@@ -5,7 +5,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription, of } from 'rxjs';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { CustomerService } from '../services/customer.service';
-import { Customer } from '../models/customer.model';
+import { Vendor } from '../models/vendor.model';
+import {Customer} from '../models/customer.model';
 
 @Component({
   selector: 'app-customer-add-modal',
@@ -15,15 +16,21 @@ import { Customer } from '../models/customer.model';
 export class CustomerAddModalComponent implements OnInit {
   formId = 'customerFrom';
 
-  customerServiceSub: Subscription;
+  profileServiceSub: Subscription;
 
   form: FormGroup;
 
+  orientations: any[] = [
+    { name: 'Customer', value: 'customer' },
+    { name: 'Vendor', value: 'vendor' },
+
+  ];
+
   types: any[] = [
     { name: 'Corporate', value: 'corporate' },
-    { name: 'NonCorporate', value: 'Nonorporate' },
-    { name: 'Sample', value: 'Sample' },
-    { name: 'Truck owner', value: 'truckOwner' },
+    { name: 'SME', value: 'SME' },
+    { name: 'Individual', value: 'Individual' },
+  
   ];
   constructor(
     private fb: FormBuilder,
@@ -36,43 +43,83 @@ export class CustomerAddModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      customer_name: ['', [Validators.required]],
-      customer_email: ['', [Validators.required, Validators.email]],
-      customer_phn: ['', [Validators.required]],
-      customer_type: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      email: ['', [ Validators.email]],
+      phn: ['', [Validators.required]],
+      orientation: ['', [Validators.required]],
+      type: ['', [Validators.required]],
     });
     if (this.data) {
       this.form.patchValue(this.data);
     }
   }
 
-  get customer_name() {
-    return this.form.get('customer_name');
+  get name() {
+    return this.form.get('name');
   }
-  get customer_email() {
-    return this.form.get('customer_email');
+  get email() {
+    return this.form.get('email');
   }
-  get customer_phn() {
-    return this.form.get('customer_phn');
-  }
-  get customer_type() {
-    return this.form.get('customer_type');
+  get phn() {
+    return this.form.get('phn');
   }
 
-  onSubmit(customer: Customer) {
+  get orientation() {
+    return this.form.get('orientation');
+  }
+  get type() {
+    return this.form.get('type');
+  }
+
+  onSubmit(data:any) {
+    console.log(data,'dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+    
     if (this.form.valid) {
       this.asyncService.start();
       let observer = of(null);
-      if (this.data) {
-        observer = this.customerService.updateCustomer(
-          this.data.customer_id,
-          customer
-        );
-      } else {
-        observer = this.customerService.addCustomer(customer);
+      // if (this.data) {
+      //   observer = this.customerService.updateCustomer(
+      //     this.data.customer_id,
+      //    data
+      //   );
+      // } else {
+      //   observer = this.customerService.addCustomer(customer);
+      // }
+      if(data.orientation==="customer" )
+      {
+        console.log('aschiiiii',data.type);
+        
+        if(!this.email.value)
+        {
+          this.asyncService.finish();
+          this.commonService.showErrorMsg(
+            'Error!Customer email required !'
+          );
+          return;
+        }
+        // const postData = { item: data };
+       
+        let customerData={
+          customer_name: data.name,
+          customer_email: data.email,
+          customer_phn: data.phn,
+          customer_type: data.type,
+          orientation:data.orientation
+        }
+        observer = this.customerService.addCustomer(customerData);
       }
-
-      this.customerServiceSub = observer.subscribe(
+      else {
+        let vendorData={
+          vendor_name: data.name,
+          vendor_email: data.email,
+          vendor_phn: data.phn,
+          vendor_type: data.type,
+          orientation:data.orientation
+        }
+        observer = this.customerService.addVendor(vendorData);
+      }
+   
+      this.profileServiceSub = observer.subscribe(
         (isAdded) => {
           this.asyncService.finish();
           if (isAdded) {
@@ -95,8 +142,8 @@ export class CustomerAddModalComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    if (this.customerServiceSub) {
-      this.customerServiceSub.unsubscribe();
+    if (this.profileServiceSub) {
+      this.profileServiceSub.unsubscribe();
     }
   }
 }

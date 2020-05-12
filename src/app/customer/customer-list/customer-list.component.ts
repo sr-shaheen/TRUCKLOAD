@@ -3,7 +3,7 @@ import { CommonService } from 'src/app/shared/services/common.service';
 import { AsyncService } from 'src/app/shared/services/async.service';
 import { CustomerService } from '../services/customer.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { Customer } from '../models/customer.model';
+import { Vendor } from '../models/vendor.model';
 import { merge, Subscription, of } from 'rxjs';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 
@@ -14,7 +14,7 @@ import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 })
 export class CustomerListComponent implements OnInit {
   displayedColumns: string[] = ['sl', 'Customer', 'actions'];
-  dataSource = new MatTableDataSource<Customer>();
+  dataSource = new MatTableDataSource<Vendor>();
   constructor(
     private commonService: CommonService,
     public asyncService: AsyncService,

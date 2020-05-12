@@ -4,6 +4,7 @@ export interface Customer {
   customer_email: string;
   customer_phn: string;
   customer_type: string;
+  orientation:string;
   timeesstmp?: string;
   pk?: string;
   gk?: string;
