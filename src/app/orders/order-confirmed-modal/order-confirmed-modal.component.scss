@@ -1,4 +1,12 @@
-table {
+.required {
+  border-collapse: collapse;
+  margin-top: 20px;
+  width: 50%;
+  text-align: center;
+  border: 1px solid #cf0505;
+  margin: 0 auto;
+}
+.confirmed {
   border-collapse: collapse;
   margin-top: 20px;
   width: 50%;
@@ -17,7 +25,11 @@ tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-th {
+.required th {
+  background-color: #c40000;
+  color: white;
+}
+.confirmed th {
   background-color: #4caf50;
   color: white;
 }
