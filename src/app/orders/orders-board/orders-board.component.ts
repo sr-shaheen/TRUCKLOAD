@@ -20,6 +20,7 @@ import { TruckAddModalComponent } from '../truck-add-modal/truck-add-modal.compo
 import { OrderAddModalComponent } from '../order-add-modal/order-add-modal.component';
 import { DetailsCollectedModalComponent } from '../details-collected-modal/details-collected-modal.component';
 import { OrderConfirmedModalComponent } from '../order-confirmed-modal/order-confirmed-modal.component';
+import { OrderService } from '../services/orders.service';
 @Component({
   selector: 'app-orders-board',
   templateUrl: './orders-board.component.html',
@@ -40,9 +41,12 @@ export class OrdersBoardComponent implements OnInit {
   boardData: OrdersBoardItem;
 
   ordersBoardSub: Subscription;
+  updateBoardSub: Subscription;
+
   constructor(
     private commonService: CommonService,
     private asyncService: AsyncService,
+    private orderService: OrderService,
     public dialog: MatDialog
   ) {}
 
@@ -72,81 +76,84 @@ export class OrdersBoardComponent implements OnInit {
     // this.asyncService.start();
     this.filterBoardData([
       {
-        customerId: '1',
-        customerName: 'Shahin',
-        cellNo: '01688024100',
-        email: 'shaheen@gmail.com',
+        customer_id: '1',
+        customer_name: 'Shahin',
+        customer_phn: '01688024100',
+        customer_email: 'shaheen@gmail.com',
         status: 'ordersPlaced',
-        unloadingPoint: 'Dhaka',
       },
       {
-        customerId: '1',
-        customerName: 'Sumon',
-        cellNo: '01688024100',
-        email: 'sumon@gmail.com',
+        customer_id: '1',
+        customer_name: 'Sumon',
+        customer_phn: '01688024100',
+        customer_email: 'sumon@gmail.com',
         status: 'ordersPlaced',
-        unloadingPoint: 'Dhaka',
       },
       {
-        customerId: '1',
-        customerName: 'Juthi',
-        cellNo: '01709874653',
-        email: 'juthi@gmail.com',
+        customer_id: '1',
+        customer_name: 'Juthi',
+        customer_phn: '01709874653',
+        customer_email: 'juthi@gmail.com',
         status: 'detailsCollected',
-        unloadingPoint: 'Dhaka',
-      },
-      {
-        customerId: '1',
-        customerName: 'Abrar',
-        cellNo: '01709809853',
-        email: 'abrar@gmail.com',
-        status: 'loadCompleted',
-        unloadingPoint: 'Dhaka',
-      },
-      {
-        customerId: '1',
-        customerName: 'Shahriar',
-        cellNo: '01777024100',
-        email: 'shah@gmail.com',
-        status: 'inTransit',
-        unloadingPoint: 'Dhaka',
-      },
-      {
-        customerId: '1',
-        customerName: 'Adiba',
-        cellNo: '01699924100',
-        email: 'Adiba@gmail.com',
-        status: 'uploadComplete',
-        unloadingPoint: 'Dhaka',
-      },
-      {
-        customerId: '1',
-        customerName: 'Sandil',
-        cellNo: '01685554100',
-        email: 'Sandil@gmail.com',
-        status: 'consignmentDone',
-        unloadingPoint: 'Dhaka',
-      },
-      {
-        customerId: '1',
-        customerName: 'Nabi',
-        cellNo: '01580004100',
-        email: 'Nabi@gmail.com',
-        status: 'ordersPlaced',
-        unloadingPoint: 'Dhaka',
-      },
+        truck_type:[
+          {
+            type:'covered',
+            capacity:"3",
+            quantity:'3'
+          },
+          {
+            type:'open',
+            capacity:"3",
+            quantity:'3'
+          },
+        ]
 
+      },
       {
-        customerId: '1',
-        customerName: 'Alif',
-        cellNo: '01580004100',
-        email: 'Nabi@gmail.com',
+        customer_id: '1',
+        customer_name: 'Abrar',
+        customer_phn: '01709809853',
+        customer_email: 'abrar@gmail.com',
+        status: 'loadCompleted',
+      },
+      {
+        customer_id: '1',
+        customer_name: 'Shahriar',
+        customer_phn: '01777024100',
+        customer_email: 'shah@gmail.com',
+        status: 'inTransit',
+      },
+      {
+        customer_id: '1',
+        customer_name: 'Adiba',
+        customer_phn: '01699924100',
+        customer_email: 'Adiba@gmail.com',
+        status: 'uploadComplete',
+      },
+      {
+        customer_id: '1',
+        customer_name: 'Sandil',
+        customer_phn: '01685554100',
+        customer_email: 'Sandil@gmail.com',
+        status: 'consignmentDone',
+      },
+      {
+        customer_id: '1',
+        customer_name: 'Nabi',
+        customer_phn: '01580004100',
+        customer_email: 'Nabi@gmail.com',
         status: 'ordersPlaced',
-        unloadingPoint: 'Dhaka',
+      },
+      {
+        customer_id: '1',
+        customer_name: 'Alif',
+        customer_phn: '01580004100',
+        customer_email: 'Nabi@gmail.com',
+        status: 'ordersPlaced',
       },
     ]);
-    // this.feedbackBoardSub = this.feedbackBoardService
-    //   .getFeedbackBoardData()
+    // this.ordersBoardSub = this.orderService
+    //   .getOrdersBoard()
     //   .subscribe(
     //     (data) => {
     //       if (data) {
@@ -157,7 +164,7 @@ export class OrdersBoardComponent implements OnInit {
     //     (error) => {
     //       this.asyncService.finish();
     //       this.commonService.showErrorMsg(
-    //         'Error! Feedback board data is not loaded.'
+    //         'Error! Order board data is not loaded.'
     //       );
     //     }
     //   );
@@ -182,6 +189,7 @@ export class OrdersBoardComponent implements OnInit {
           const dialogRef = this.dialog.open(DetailsCollectedModalComponent, {
             width: '800px',
             height: '550px',
+            data: this.movingItem.item,
           });
 
           dialogRef.afterClosed().subscribe((result) => {
@@ -195,6 +203,7 @@ export class OrdersBoardComponent implements OnInit {
           const dialogRef = this.dialog.open(OrderConfirmedModalComponent, {
             width: '800px',
             height: '550px',
+            data: this.movingItem.item,
           });
 
           dialogRef.afterClosed().subscribe((result) => {
@@ -230,6 +239,24 @@ export class OrdersBoardComponent implements OnInit {
     const nextStatus = event.container.id;
     const draggedServiceData =
       event.previousContainer.data[event.previousIndex];
+
+    // this.updateBoardSub = this.orderService
+    //   .updateBoardStatus(draggedServiceData.customer_id, draggedServiceData)
+    //   .subscribe(
+    //     (data) => {
+    //       if (data) {
+    //         this.asyncService.finish();
+    //         this.commonService.showSuccessMsg("Board Updated!!!")
+    //       } else {
+    //         this.asyncService.finish();
+    //         this.commonService.showErrorMsg('Error! Not Updated!!');
+    //       }
+    //     },
+    //     (error) => {
+    //       this.asyncService.finish();
+    //       this.commonService.showErrorMsg('Error! Not Updated!!');
+    //     }
+    //   );
 
     transferArrayItem(
       event.previousContainer.data,
@@ -268,5 +295,15 @@ export class OrdersBoardComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.ordersBoardSub) {
+      this.ordersBoardSub.unsubscribe();
+    }
+    if (this.updateBoardSub) {
+      this.updateBoardSub.unsubscribe();
+    }
+    this.asyncService.finish();
   }
 }

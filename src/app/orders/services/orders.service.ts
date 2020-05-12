@@ -10,19 +10,48 @@ import { Order } from '../models/order.model';
 @Injectable()
 export class OrderService {
   constructor(private http: HttpClient) {}
-  addTruck(trucks: Truck): Observable<boolean> {
-    return this.http.post<any>('http://localhost:7075/api/trucks', trucks).pipe(
+  addTruck(truck: Truck): Observable<boolean> {
+    const postData = { item: truck };
+    return this.http.post<any>('http://localhost:7075/api/trucks', postData).pipe(
       map((response) => (response.isExecuted && response.data ? true : false)),
       catchError((error) => of(false))
     );
   }
   addOrder(order: Order): Observable<boolean> {
-    return this.http.post<any>('http://localhost:7075/api/trucks', order).pipe(
+    const postData = { item: order };
+    return this.http.post<any>('http://localhost:7075/api/trucks', postData).pipe(
       map((response) => (response.isExecuted && response.data ? true : false)),
       catchError((error) => of(false))
     );
   }
   getOrdersBoard(): Observable<any[]> {
+    return this.http.get<any>("http://localhost:7075/api/trucks").pipe(
+      map(response =>
+        response.isExecuted && response.data ? response.data : []
+      ),
+      catchError(error => of([]))
+    );
+  }
+  updateBoardStatus(id: string, data: any): Observable<boolean> {
+    return this.http
+      .put<IContainer>(`/service/appointment-queue/${id}`, data)
+      .pipe(
+        map((response) =>
+          response.isExecuted && response.data ? true : false
+        ),
+        catchError((error) => of(false))
+      );
+  }
+
+  getCustomer(): Observable<any[]> {
+    return this.http.get<any>("http://localhost:7075/api/trucks").pipe(
+      map(response =>
+        response.isExecuted && response.data ? response.data : []
+      ),
+      catchError(error => of([]))
+    );
+  }
+  getVendor(): Observable<any[]> {
     return this.http.get<any>("http://localhost:7075/api/trucks").pipe(
       map(response =>
         response.isExecuted && response.data ? response.data : []

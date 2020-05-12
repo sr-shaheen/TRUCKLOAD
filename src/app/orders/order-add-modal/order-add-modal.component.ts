@@ -17,8 +17,8 @@ import { Order } from '../models/order.model';
 
 export interface Customer {
   customer_id: string;
-  customer_name: string;
-  customer_phn: string;
+  name: string;
+  phn: string;
   image_path: string;
 }
 @Component({
@@ -30,6 +30,7 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
   formId = 'orderFrom';
 
   orderAddSub: Subscription;
+  loadCustomerSub: Subscription;
 
   form: FormGroup;
 
@@ -49,29 +50,29 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
   customers: Customer[] = [
     {
       customer_id: '1',
-      customer_name: 'Arkansas',
-      customer_phn: '0198888888888',
+      name: 'Arkansas',
+      phn: '0198888888888',
       image_path:
         'https://upload.wikimedia.org/wikipedia/commons/9/9d/Flag_of_Arkansas.svg',
     },
     {
       customer_id: '2',
-      customer_name: 'California',
-      customer_phn: '0178888888888',
+      name: 'California',
+      phn: '0178888888888',
       image_path:
         'https://upload.wikimedia.org/wikipedia/commons/0/01/Flag_of_California.svg',
     },
     {
       customer_id: '3',
-      customer_name: 'Florida',
-      customer_phn: '0168888888888',
+      name: 'Florida',
+      phn: '0168888888888',
       image_path:
         'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Florida.svg',
     },
     {
       customer_id: '4',
-      customer_name: 'Texas',
-      customer_phn: '0158888888888',
+      name: 'Texas',
+      phn: '0158888888888',
       image_path:
         'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg',
     },
@@ -85,6 +86,22 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    // this.loadCustomerSub = this.orderService.getCustomer().subscribe(
+    //   (data) => {
+    //     if (data) {
+    //       this.customers = data;
+    //     }else {
+    //       this.asyncService.finish();
+    //       this.commonService.showErrorMsg('Error! Customers could not found');
+    //     }
+    //   },
+    //   (error) => {
+    //     this.asyncService.finish();
+    //     this.commonService.showErrorMsg(
+    //       'Error! Customers could not found'
+    //     );
+    //   }
+    // );
     this.filteredStates = this.customerControl.valueChanges.pipe(
       startWith(''),
       map((state) =>
@@ -145,14 +162,14 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
 
     return this.customers.filter(
       (state) =>
-        state.customer_name.toLowerCase().indexOf(filterValue) === 0 ||
-        state.customer_phn.toLowerCase().indexOf(filterValue) === 0
+        state.name.toLowerCase().indexOf(filterValue) === 0 ||
+        state.phn.toLowerCase().indexOf(filterValue) === 0
     );
   }
   onSelectCustomer(id) {
     const cus = this.customers.find((item) => item.customer_id === id);
-    this.customerControl.patchValue(cus.customer_name);
-    this.customer_name.patchValue(cus.customer_name);
+    this.customerControl.patchValue(cus.name);
+    this.customer_name.patchValue(cus.name);
     this.customer_id.patchValue(cus.customer_id);
   }
 
@@ -212,7 +229,7 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
         (error) => {
           this.asyncService.finish();
           this.commonService.showErrorMsg(
-            'Error! The customer information is not added!'
+            'Error! The order is not created!'
           );
         }
       );
@@ -226,6 +243,9 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.orderAddSub) {
       this.orderAddSub.unsubscribe();
+    }
+    if (this.loadCustomerSub) {
+      this.loadCustomerSub.unsubscribe();
     }
     this.asyncService.finish();
   }
