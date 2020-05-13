@@ -21,6 +21,7 @@ import { OrderAddModalComponent } from '../order-add-modal/order-add-modal.compo
 import { DetailsCollectedModalComponent } from '../details-collected-modal/details-collected-modal.component';
 import { OrderConfirmedModalComponent } from '../order-confirmed-modal/order-confirmed-modal.component';
 import { OrderService } from '../services/orders.service';
+import { VendorAddModalComponent } from 'src/app/customer/vendor-add-modal/vendor-add-modal.component';
 @Component({
   selector: 'app-orders-board',
   templateUrl: './orders-board.component.html',
@@ -95,19 +96,18 @@ export class OrdersBoardComponent implements OnInit {
         customer_phn: '01709874653',
         customer_email: 'juthi@gmail.com',
         status: 'detailsCollected',
-        truck_type:[
+        truck_type: [
           {
-            type:'covered',
-            capacity:"3",
-            quantity:'3'
+            type: 'covered',
+            capacity: '3',
+            quantity: '3',
           },
           {
-            type:'open',
-            capacity:"3",
-            quantity:'3'
+            type: 'open',
+            capacity: '3',
+            quantity: '3',
           },
-        ]
-
+        ],
       },
       {
         customer_id: '1',
@@ -268,6 +268,17 @@ export class OrdersBoardComponent implements OnInit {
   // All modal functionality
   customerAdd(): void {
     const dialogRef = this.dialog.open(CustomerAddModalComponent, {
+      width: '400px',
+      height: '500px',
+      // data: {name: this.name, animal: this.animal}
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
+  }
+  vendorAdd(): void {
+    const dialogRef = this.dialog.open(VendorAddModalComponent, {
       width: '400px',
       height: '500px',
       // data: {name: this.name, animal: this.animal}

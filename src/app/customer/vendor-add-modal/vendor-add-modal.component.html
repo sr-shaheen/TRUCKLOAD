@@ -1,0 +1,145 @@
+<h3 mat-dialog-title>Truck Owner Profile {{ data ? "Edit" : "Add" }}</h3>
+
+<div mat-dialog-content>
+  <mat-progress-bar
+    *ngIf="asyncService?.isLoading | async"
+    mode="indeterminate"
+  >
+  </mat-progress-bar>
+  <form
+    [id]="formId"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit(form.value)"
+    novalidate
+  >
+    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" class="tab">
+      <div
+        fxLayout="row wrap"
+        fxLayoutGap="10px"
+        fxFlex="100%"
+        fxFlex.sm="50%"
+        fxLayout.lt-sm="column"
+        fxFlex.xs="100%"
+        fxLayoutAlign="flex-start"
+      >
+        <mat-form-field
+          fxFlex="0 1 calc(100% - 10px)"
+          fxFlex.lt-md="0 1 calc(100% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
+          <mat-label>Owner Name</mat-label>
+          <input
+            matInput
+            placeholder="Owner Name"
+            formControlName="vendor_name"
+            required
+          />
+          <mat-error
+            *ngIf="
+              vendor_name.invalid &&
+              (vendor_name.dirty || vendor_name.touched)
+            "
+          >
+            <ng-container *ngIf="vendor_name.hasError('required')"
+              >Truck Owner Name is required.</ng-container
+            >
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          fxFlex="0 1 calc(100% - 10px)"
+          fxFlex.lt-md="0 1 calc(100% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
+          <mat-label>Owner Phone</mat-label>
+          <input
+            matInput
+            placeholder="Owner Phone"
+            formControlName="vendor_phn"
+            required
+          />
+          <mat-error
+            *ngIf="
+              vendor_phn.invalid &&
+              (vendor_phn.dirty || vendor_phn.touched)
+            "
+          >
+            <ng-container *ngIf="vendor_phn.hasError('required')"
+              >Truck owner phone is required.</ng-container
+            >
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field
+          fxFlex="0 1 calc(100% - 10px)"
+          fxFlex.lt-md="0 1 calc(100% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
+          <mat-label>Owner Email</mat-label>
+          <input
+            matInput
+            placeholder="Owner Email"
+            formControlName="vendor_email"
+          />
+          <mat-error
+            *ngIf="
+              vendor_email.invalid &&
+              (vendor_email.dirty || vendor_email.touched)
+            "
+          >
+            <ng-container *ngIf="vendor_email.hasError('required')"
+              >Truck Owner email is required.</ng-container
+            >
+            <ng-container *ngIf="vendor_email.hasError('email')"
+              >Invalid Email address</ng-container
+            >
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          fxFlex="0 1 calc(100% - 10px)"
+          fxFlex.lt-md="0 1 calc(100% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
+          <mat-label>Owner Type</mat-label>
+          <mat-select formControlName="vendor_type" required>
+            <mat-option *ngFor="let type of types" [value]="type.value">
+              {{ type.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="
+              vendor_type.invalid &&
+              (vendor_type.dirty || vendor_type.touched)
+            "
+          >
+            <ng-container *ngIf="vendor_type.hasError('required')"
+              >Truck owner Type is required.</ng-container
+            >
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>
+<br />
+
+<div mat-dialog-actions fxLayoutAlign="end end">
+  <button type="button" class="mat-raised-button" [mat-dialog-close]>
+    Cancel
+  </button>
+  <button
+    [attr.form]="formId"
+    type="submit"
+    class="mat-raised-button mat-primary"
+    [disabled]="asyncService?.isLoading | async"
+  >
+    Submit
+  </button>
+</div>

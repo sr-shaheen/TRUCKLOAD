@@ -5,17 +5,17 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription, of } from 'rxjs';
 import { CommonService } from 'src/app/shared/services/common.service';
 import { CustomerService } from '../services/customer.service';
-import { Customer } from '../models/customer.model';
+import { Vendor } from '../models/vendor.model';
 
 @Component({
-  selector: 'app-customer-add-modal',
-  templateUrl: './customer-add-modal.component.html',
-  styleUrls: ['./customer-add-modal.component.scss'],
+  selector: 'app-vendor-add-modal',
+  templateUrl: './vendor-add-modal.component.html',
+  styleUrls: ['./vendor-add-modal.component.scss'],
 })
-export class CustomerAddModalComponent implements OnInit {
-  formId = 'customerFrom';
+export class VendorAddModalComponent implements OnInit {
+  formId = 'vendorFrom';
 
-  customerServiceSub: Subscription;
+  vendorServiceSub: Subscription;
 
   form: FormGroup;
 
@@ -29,74 +29,76 @@ export class CustomerAddModalComponent implements OnInit {
     private commonService: CommonService,
     public asyncService: AsyncService,
     private customerService: CustomerService,
-    public dialogRef: MatDialogRef<CustomerAddModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Customer
+    public dialogRef: MatDialogRef<VendorAddModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Vendor
   ) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      customer_name: ['', [Validators.required]],
-      customer_email: ['', [Validators.required, Validators.email]],
-      customer_phn: ['', [Validators.required]],
-      customer_type: ['', [Validators.required]],
-      orientation: ['customer', [Validators.required]],
+      vendor_name: ['', [Validators.required]],
+      vendor_email: [''],
+      vendor_phn: ['', [Validators.required]],
+      vendor_type: ['', [Validators.required]],
+      orientation: ['vendor', [Validators.required]],
     });
     if (this.data) {
       this.form.patchValue(this.data);
     }
   }
 
-  get customer_name() {
-    return this.form.get('customer_name');
+  get vendor_name() {
+    return this.form.get('vendor_name');
   }
-  get customer_email() {
-    return this.form.get('customer_email');
+  get vendor_email() {
+    return this.form.get('vendor_email');
   }
-  get customer_phn() {
-    return this.form.get('customer_phn');
+  get vendor_phn() {
+    return this.form.get('vendor_phn');
   }
-  get customer_type() {
-    return this.form.get('customer_type');
+  get vendor_type() {
+    return this.form.get('vendor_type');
   }
 
-  onSubmit(customer: Customer) {
+  onSubmit(vendor: Vendor) {
     if (this.form.valid) {
       this.asyncService.start();
       let observer = of(null);
       if (this.data) {
-        observer = this.customerService.updateCustomer(
-          this.data.customer_id,
-          customer
+        observer = this.customerService.updatevendor(
+          this.data.vendor_id,
+          vendor
         );
       } else {
-        observer = this.customerService.addCustomer(customer);
+        observer = this.customerService.addVendor(vendor);
       }
 
-      this.customerServiceSub = observer.subscribe(
+      this.vendorServiceSub = observer.subscribe(
         (isAdded) => {
           this.asyncService.finish();
           if (isAdded) {
             this.commonService.showSuccessMsg(
-              'Success! The Customer has been added successfully.'
+              'Success! The Truck owner has been added successfully.'
             );
           } else {
             this.asyncService.finish();
             this.commonService.showErrorMsg(
-              'Error! The Customer is not added.'
+              'Error! The Truck owner is not added.'
             );
           }
         },
         (error) => {
           this.asyncService.finish();
-          this.commonService.showErrorMsg('Error! The Customer is not added.');
+          this.commonService.showErrorMsg(
+            'Error! The Truck owner is not added.'
+          );
         }
       );
     }
   }
 
   ngOnDestroy(): void {
-    if (this.customerServiceSub) {
-      this.customerServiceSub.unsubscribe();
+    if (this.vendorServiceSub) {
+      this.vendorServiceSub.unsubscribe();
     }
   }
 }

@@ -42,6 +42,16 @@ export class CustomerService {
         catchError((error) => of(false))
       );
   }
+  updatevendor(id: string, vendor: Vendor): Observable<boolean> {
+    return this.http
+      .put<any>(`http://localhost:7075/api/vendor/${id}`, vendor)
+      .pipe(
+        map((response) =>
+          response.isExecuted && response.data ? true : false
+        ),
+        catchError((error) => of(false))
+      );
+  }
   getCustomerList(): Observable<Vendor[]> {
     return this.http.get<any>(`http://localhost:7075/api/customerlist`).pipe(
       map((response) =>

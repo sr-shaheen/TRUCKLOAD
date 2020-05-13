@@ -12,6 +12,7 @@ import { CustomerService } from '../customer/services/customer.service';
 import { OrderService } from './services/orders.service';
 import { DetailsCollectedModalComponent } from './details-collected-modal/details-collected-modal.component';
 import { OrderConfirmedModalComponent } from './order-confirmed-modal/order-confirmed-modal.component';
+import { VendorAddModalComponent } from '../customer/vendor-add-modal/vendor-add-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { OrderConfirmedModalComponent } from './order-confirmed-modal/order-conf
   ],
   entryComponents: [
     CustomerAddModalComponent,
+    VendorAddModalComponent,
     TruckAddModalComponent,
     OrderAddModalComponent,
     DetailsCollectedModalComponent,
