@@ -1,4 +1,4 @@
-<h3 mat-dialog-title>Profile {{ data ? "Edit" : "Add" }}</h3>
+<h3 mat-dialog-title>Customer Profile {{ data ? "Edit" : "Add" }}</h3>
 
 <div mat-dialog-content>
   <mat-progress-bar
@@ -29,21 +29,21 @@
           fxFlex.xs="100%"
           appearance="fill"
         >
-          <mat-label>Name</mat-label>
+          <mat-label>Customer Name</mat-label>
           <input
             matInput
-            placeholder="Name"
-            formControlName="name"
+            placeholder="Customer"
+            formControlName="customer_name"
             required
           />
           <mat-error
             *ngIf="
-              name.invalid &&
-              (name.dirty || name.touched)
+              customer_name.invalid &&
+              (customer_name.dirty || customer_name.touched)
             "
           >
-            <ng-container *ngIf="name.hasError('required')"
-              >Name is required.</ng-container
+            <ng-container *ngIf="customer_name.hasError('required')"
+              >Customer Name is required.</ng-container
             >
           </mat-error>
         </mat-form-field>
@@ -54,21 +54,21 @@
           fxFlex.xs="100%"
           appearance="fill"
         >
-          <mat-label>Phone</mat-label>
+          <mat-label>Customer Phone</mat-label>
           <input
             matInput
-            placeholder="Phone"
-            formControlName="phn"
+            placeholder="Customer Phone"
+            formControlName="customer_phn"
             required
           />
           <mat-error
             *ngIf="
-              phn.invalid &&
-              (phn.dirty || phn.touched)
+              customer_phn.invalid &&
+              (customer_phn.dirty || customer_phn.touched)
             "
           >
-            <ng-container *ngIf="phn.hasError('required')"
-              >Phone is required.</ng-container
+            <ng-container *ngIf="customer_phn.hasError('required')"
+              >Customer phone is required.</ng-container
             >
           </mat-error>
         </mat-form-field>
@@ -80,23 +80,23 @@
           fxFlex.xs="100%"
           appearance="fill"
         >
-          <mat-label>Email</mat-label>
+          <mat-label>Customer Email</mat-label>
           <input
             matInput
-            placeholder="Email"
-            formControlName="email"
+            placeholder="Customer Emal"
+            formControlName="customer_email"
             required
           />
           <mat-error
             *ngIf="
-              email.invalid &&
-              (email.dirty || email.touched)
+              customer_email.invalid &&
+              (customer_email.dirty || customer_email.touched)
             "
           >
-            <ng-container *ngIf="email.hasError('required')"
-              >Email is required.</ng-container
+            <ng-container *ngIf="customer_email.hasError('required')"
+              >Customer email is required.</ng-container
             >
-            <ng-container *ngIf="email.hasError('email')"
+            <ng-container *ngIf="customer_email.hasError('email')"
               >Invalid Email address</ng-container
             >
           </mat-error>
@@ -108,47 +108,23 @@
           fxFlex.xs="100%"
           appearance="fill"
         >
-          <mat-label>Orientation</mat-label>
-          <mat-select formControlName="orientation" required>
-            <mat-option *ngFor="let orientation of orientations" [value]="orientation.value">
-              {{ orientation.name }}
+          <mat-label>Customer Type</mat-label>
+          <mat-select formControlName="customer_type" required>
+            <mat-option *ngFor="let type of types" [value]="type.value">
+              {{ type.name }}
             </mat-option>
           </mat-select>
           <mat-error
             *ngIf="
-              orientation.invalid &&
-              (orientation.dirty || orientation.touched)
+              customer_type.invalid &&
+              (customer_type.dirty || customer_type.touched)
             "
           >
-            <ng-container *ngIf="orientation.hasError('required')"
-              >Orientation is required.</ng-container
+            <ng-container *ngIf="customer_type.hasError('required')"
+              >Customer Type is required.</ng-container
             >
           </mat-error>
         </mat-form-field>
-        <mat-form-field
-        fxFlex="0 1 calc(100% - 10px)"
-        fxFlex.lt-md="0 1 calc(100% - 10px)"
-        fxFlex.lt-sm="100%"
-        fxFlex.xs="100%"
-        appearance="fill"
-      >
-        <mat-label>Type</mat-label>
-        <mat-select formControlName="type" required>
-          <mat-option *ngFor="let type of types" [value]="type.value">
-            {{ type.name }}
-          </mat-option>
-        </mat-select>
-        <mat-error
-          *ngIf="
-            type.invalid &&
-            (type.dirty || type.touched)
-          "
-        >
-          <ng-container *ngIf="type.hasError('required')"
-            >Type is required.</ng-container
-          >
-        </mat-error>
-      </mat-form-field>
       </div>
     </div>
   </form>
