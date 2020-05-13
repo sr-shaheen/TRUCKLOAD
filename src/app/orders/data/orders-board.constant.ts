@@ -20,9 +20,9 @@ export const statusDictionary = {
 
 export const ordersBoardColors = {
   ordersPlaced: { bgColor: 'rgb(196, 23, 23)', color: '#FFFFFF' },
-  detailsCollected: { bgColor: 'rgba(51, 153, 102, 0.75)', color: '#FFFFFF' },
-  orderConfirmed: { bgColor: 'rgb(204, 153, 0)', color: '#FFFFFF' },
-  loadCompleted: { bgColor: 'rgb(204, 204, 0)', color: '#FFFFFF' },
+  detailsCollected: { bgColor: '#E65100', color: '#FFFFFF' },
+  orderConfirmed: { bgColor: '#FFC107', color: '#FFFFFF' }, 
+  loadCompleted: { bgColor: 'rgba(51, 153, 102, 0.75)', color: '#FFFFFF' },
   inTransit: { bgColor: 'rgb(139,195,74)', color: '#FFFFFF' },
   uploadComplete: { bgColor: 'rgb(0,153,0)', color: '#FFFFFF' },
   consignmentDone: { bgColor: 'rgb(0,102,34)', color: '#FFFFFF' },
