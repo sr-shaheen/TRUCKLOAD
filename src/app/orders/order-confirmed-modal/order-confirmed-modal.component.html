@@ -13,8 +13,8 @@
   </thead>
   <tbody style="width: 80%; text-align: center;">
     <tr *ngFor="let item of truckTypes; let i = index">
-      <td>{{ item?.type }}</td>
       <td>{{ item?.capacity }} Tons</td>
+      <td>{{ item?.type }}</td>
       <td>{{ item?.quantity }}</td>
     </tr>
   </tbody>
@@ -127,8 +127,8 @@
     </thead>
     <tbody style="width: 80%; text-align: center;">
       <tr *ngFor="let item of truckProvide; let i = index">
-        <td>{{ item?.type }}</td>
         <td>{{ item?.capacity }} Tons</td>
+        <td>{{ item?.type }}</td>
         <td>{{ item?.truck_reg }}</td>
         <td>
           <button (click)="deleteItem(i)" mat-mini-fab color="warn">

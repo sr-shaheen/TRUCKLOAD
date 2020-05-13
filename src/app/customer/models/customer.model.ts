@@ -5,7 +5,7 @@ export interface Customer {
   customer_phn: string;
   customer_type: string;
   orientation:string;
-  timeesstmp?: string;
+  created_at?: string;
   pk?: string;
   gk?: string;
 }

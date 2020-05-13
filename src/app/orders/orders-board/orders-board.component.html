@@ -1,39 +1,48 @@
-<div fxLayout="row" fxLayoutAlign="end start">
-  <!-- <button class="btn" fxFlex="10" (click)="truckAdd()">Add Truck</button>
-  <button class="btn" fxFlex="10" (click)="customerAdd()">Add Customer</button>
-  <button class="btn" fxFlexOffset="66" (click)="orderAdd()">
-    Add new orders
-  </button> -->
-  <button
-    class="btn"
-    mat-mini-fab
-    color="primary"
-    (click)="truckAdd()"
-    matTooltip="Add Truck"
-    matTooltipPosition="above"
-  >
-    <mat-icon>local_shipping</mat-icon>
-  </button>
-  <button
-    class="btn"
-    mat-mini-fab
-    color="primary"
-    (click)="customerAdd()"
-    matTooltip="Add Customer"
-    matTooltipPosition="above"
-  >
-    <mat-icon>person_add</mat-icon>
-  </button>
-  <button
-    class="btn"
-    mat-mini-fab
-    color="primary"
-    (click)="orderAdd()"
-    matTooltip="Add Order"
-    matTooltipPosition="above"
-  >
-    <mat-icon>add_shopping_cart</mat-icon>
-  </button>
+<div fxLayout="row" fxLayoutAlign="space-between start">
+  <div fxLayout="row">
+    <button
+      class="btn"
+      mat-mini-fab
+      color="primary"
+      (click)="vendorAdd()"
+      matTooltip="Add Truck Owner"
+      matTooltipPosition="above"
+    >
+      <mat-icon>person_add</mat-icon>
+    </button>
+    <button
+      class="btn"
+      mat-mini-fab
+      color="primary"
+      (click)="truckAdd()"
+      matTooltip="Add Truck"
+      matTooltipPosition="above"
+    >
+      <mat-icon>local_shipping</mat-icon>
+    </button>
+  </div>
+  <div fxLayout="row">
+    <button
+      class="btn"
+      mat-mini-fab
+      color="primary"
+      (click)="customerAdd()"
+      matTooltip="Add Customer"
+      matTooltipPosition="above"
+    >
+      <mat-icon>person_add</mat-icon>
+    </button>
+    <button
+      class="btn"
+      mat-mini-fab
+      color="primary"
+      (click)="orderAdd()"
+      matTooltip="Add Order"
+      matTooltipPosition="above"
+    >
+      <mat-icon>add_shopping_cart</mat-icon>
+    </button>
+  </div>
 </div>
 <mat-divider> </mat-divider>
 
