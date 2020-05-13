@@ -13,8 +13,8 @@
   </thead>
   <tbody style="width: 80%; text-align: center;">
     <tr *ngFor="let item of truckTypes; let i = index">
-      <td>{{ item?.type }}</td>
       <td>{{ item?.capacity }} Tons</td>
+      <td>{{ item?.type }}</td>
       <td>{{ item?.quantity }}</td>
     </tr>
   </tbody>
@@ -110,7 +110,7 @@
           </mat-error>
         </mat-form-field>
         <div style="width: 50px;">
-          <button type="button" mat-mini-fab (click)="addItem()">
+          <button type="button" mat-mini-fab (click)="addItem()" color="warn">
             <mat-icon>add box</mat-icon>
           </button>
         </div>
@@ -127,11 +127,11 @@
     </thead>
     <tbody style="width: 80%; text-align: center;">
       <tr *ngFor="let item of truckProvide; let i = index">
-        <td>{{ item?.type }}</td>
         <td>{{ item?.capacity }} Tons</td>
+        <td>{{ item?.type }}</td>
         <td>{{ item?.truck_reg }}</td>
         <td>
-          <button (click)="deleteItem(i)" mat-mini-fab color="warn">
+          <button (click)="deleteItem(i)" mat-mini-fab style="background-color: red;">
             <mat-icon>delete forever</mat-icon>
           </button>
         </td>

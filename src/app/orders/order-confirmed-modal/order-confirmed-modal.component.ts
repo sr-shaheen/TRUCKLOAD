@@ -17,6 +17,8 @@ export class OrderConfirmedModalComponent implements OnInit {
   form: FormGroup;
   orderConfirmedSub: Subscription;
 
+  submitFlag: boolean;
+  requiredTruckCount = 0;
   truckTypes = [];
   truckProvide = [];
   truckFilter = [];
@@ -108,10 +110,9 @@ export class OrderConfirmedModalComponent implements OnInit {
   }
 
   getCapacity(capacity) {
-    console.log(capacity, 'lllllllllll');
+    this.type.patchValue('');
   }
   getType(type) {
-    console.log(type, 'lllllllllll');
     this.truckFilter = this.truckData.filter(
       (item) => item.type === type && item.capacity === this.capacity.value
     );
@@ -124,7 +125,7 @@ export class OrderConfirmedModalComponent implements OnInit {
         truck_reg: this.truck_reg.value,
       };
       if (!this.truckProvide.find((i) => i.truck_reg === item.truck_reg)) {
-        this.truckProvide = [item, ...this.truckProvide];
+      this.truckProvide = [item, ...this.truckProvide];
       } else {
         this.commonService.showErrorMsg('Item already added!!!!');
       }
@@ -138,26 +139,40 @@ export class OrderConfirmedModalComponent implements OnInit {
   }
 
   deleteItem(index) {
-    this.truckTypes.splice(index, 1);
+    this.truckProvide.splice(index, 1);
   }
 
   onSubmit(confirmed) {
-    // this.orderConfirmedSub = this.orderService
-    //   .updateBoardStatus('id','data')
-    //   .subscribe(
-    //     (data) => {
-    //       if (data) {
-    //         this.asyncService.finish();
-    //         this.commonService.showSuccessMsg("Board Updated!!!")
-    //       } else {
-    //         this.asyncService.finish();
-    //         this.commonService.showErrorMsg('Error! Not Updated!!');
-    //       }
-    //     },
-    //     (error) => {
-    //       this.asyncService.finish();
-    //       this.commonService.showErrorMsg('Error! Not Updated!!');
-    //     }
-    //   );
+    this.submitFlag = true;
+    this.truckTypes.forEach((item) => {
+      const data = this.truckProvide.filter(
+        (i) => i.capacity === item.capacity && i.type === item.type
+      );
+
+      if (data.length !== parseInt(item.quantity)) {
+        this.submitFlag = false;
+        this.commonService.showErrorMsg('Check properly !!!');
+      }
+    });
+    if (this.submitFlag) {
+      this.commonService.showSuccessMsg('Ready!!!');
+      // this.orderConfirmedSub = this.orderService
+      //   .updateBoardStatus('id','data')
+      //   .subscribe(
+      //     (data) => {
+      //       if (data) {
+      //         this.asyncService.finish();
+      //         this.commonService.showSuccessMsg("Board Updated!!!")
+      //       } else {
+      //         this.asyncService.finish();
+      //         this.commonService.showErrorMsg('Error! Not Updated!!');
+      //       }
+      //     },
+      //     (error) => {
+      //       this.asyncService.finish();
+      //       this.commonService.showErrorMsg('Error! Not Updated!!');
+      //     }
+      //   );
+    }
   }
 }

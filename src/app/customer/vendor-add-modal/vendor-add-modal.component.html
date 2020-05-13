@@ -1,4 +1,4 @@
-<h3 mat-dialog-title>Customer Profile {{ data ? "Edit" : "Add" }}</h3>
+<h3 mat-dialog-title>Truck Owner Profile {{ data ? "Edit" : "Add" }}</h3>
 
 <div mat-dialog-content>
   <mat-progress-bar
@@ -29,21 +29,21 @@
           fxFlex.xs="100%"
           appearance="fill"
         >
-          <mat-label>Customer Name</mat-label>
+          <mat-label>Owner Name</mat-label>
           <input
             matInput
-            placeholder="Customer"
-            formControlName="customer_name"
+            placeholder="Owner Name"
+            formControlName="vendor_name"
             required
           />
           <mat-error
             *ngIf="
-              customer_name.invalid &&
-              (customer_name.dirty || customer_name.touched)
+              vendor_name.invalid &&
+              (vendor_name.dirty || vendor_name.touched)
             "
           >
-            <ng-container *ngIf="customer_name.hasError('required')"
-              >Customer Name is required.</ng-container
+            <ng-container *ngIf="vendor_name.hasError('required')"
+              >Truck Owner Name is required.</ng-container
             >
           </mat-error>
         </mat-form-field>
@@ -54,21 +54,21 @@
           fxFlex.xs="100%"
           appearance="fill"
         >
-          <mat-label>Customer Phone</mat-label>
+          <mat-label>Owner Phone</mat-label>
           <input
             matInput
-            placeholder="Customer Phone"
-            formControlName="customer_phn"
+            placeholder="Owner Phone"
+            formControlName="vendor_phn"
             required
           />
           <mat-error
             *ngIf="
-              customer_phn.invalid &&
-              (customer_phn.dirty || customer_phn.touched)
+              vendor_phn.invalid &&
+              (vendor_phn.dirty || vendor_phn.touched)
             "
           >
-            <ng-container *ngIf="customer_phn.hasError('required')"
-              >Customer phone is required.</ng-container
+            <ng-container *ngIf="vendor_phn.hasError('required')"
+              >Truck owner phone is required.</ng-container
             >
           </mat-error>
         </mat-form-field>
@@ -80,23 +80,22 @@
           fxFlex.xs="100%"
           appearance="fill"
         >
-          <mat-label>Customer Email</mat-label>
+          <mat-label>Owner Email</mat-label>
           <input
             matInput
-            placeholder="Customer Emal"
-            formControlName="customer_email"
-            required
+            placeholder="Owner Email"
+            formControlName="vendor_email"
           />
           <mat-error
             *ngIf="
-              customer_email.invalid &&
-              (customer_email.dirty || customer_email.touched)
+              vendor_email.invalid &&
+              (vendor_email.dirty || vendor_email.touched)
             "
           >
-            <ng-container *ngIf="customer_email.hasError('required')"
-              >Customer email is required.</ng-container
+            <ng-container *ngIf="vendor_email.hasError('required')"
+              >Truck Owner email is required.</ng-container
             >
-            <ng-container *ngIf="customer_email.hasError('email')"
+            <ng-container *ngIf="vendor_email.hasError('email')"
               >Invalid Email address</ng-container
             >
           </mat-error>
@@ -108,59 +107,23 @@
           fxFlex.xs="100%"
           appearance="fill"
         >
-          <mat-label>Customer Type</mat-label>
-          <mat-select formControlName="customer_type" required>
+          <mat-label>Owner Type</mat-label>
+          <mat-select formControlName="vendor_type" required>
             <mat-option *ngFor="let type of types" [value]="type.value">
               {{ type.name }}
             </mat-option>
           </mat-select>
           <mat-error
             *ngIf="
-              customer_type.invalid &&
-              (customer_type.dirty || customer_type.touched)
+              vendor_type.invalid &&
+              (vendor_type.dirty || vendor_type.touched)
             "
           >
-            <ng-container *ngIf="customer_type.hasError('required')"
-              >Customer Type is required.</ng-container
+            <ng-container *ngIf="vendor_type.hasError('required')"
+              >Truck owner Type is required.</ng-container
             >
           </mat-error>
         </mat-form-field>
-
-
-        <mat-form-field
-            fxFlex="0 1 calc(70% - 10px)"
-            fxFlex.lt-md="0 1 calc(50% - 10px)"
-            fxFlex.lt-sm="100%"
-            fxFlex.xs="100%"
-            appearance="fill"
-          >
-            <mat-label>Image</mat-label>
-            <input
-              readonly
-              matInput
-              formControlName="pictureName"
-              style="cursor: pointer;"
-            />
-            <mat-icon
-              matSuffix
-              (click)="userPictureUpload.click()"
-              style="cursor: pointer;"
-              >open_in_browser</mat-icon
-            >
-            <input
-              hidden
-              type="file"
-              placeholder="Image"
-              accept="image/*"
-              capture
-              #userPictureUpload
-              (change)="onChangeUserPicture($event)"
-            />
-          </mat-form-field>
-
-          <div fxLayout="row">
-            <avatar [imageSrc]="userAvatar" [size]="50"></avatar>
-          </div>
       </div>
     </div>
   </form>
