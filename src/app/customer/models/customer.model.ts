@@ -8,4 +8,6 @@ export interface Customer {
   created_at?: string;
   pk?: string;
   gk?: string;
+  pictureName?: string;
+  userPicture?: string;
 }

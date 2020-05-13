@@ -19,6 +19,10 @@ export class CustomerAddModalComponent implements OnInit {
 
   form: FormGroup;
 
+  defaultImage = "/assets/images/avatar_square_blue.png";
+  userPicture: string;
+  userAvatar: string = this.defaultImage;
+
   types: any[] = [
     { name: 'Corporate', value: 'corporate' },
     { name: 'SME', value: 'SME' },
@@ -40,6 +44,7 @@ export class CustomerAddModalComponent implements OnInit {
       customer_phn: ['', [Validators.required]],
       customer_type: ['', [Validators.required]],
       orientation: ['customer', [Validators.required]],
+      pictureName: [''],
     });
     if (this.data) {
       this.form.patchValue(this.data);
@@ -59,6 +64,24 @@ export class CustomerAddModalComponent implements OnInit {
     return this.form.get('customer_type');
   }
 
+  onChangeUserPicture({ target }: Event): void {
+    try {
+      const files = (<HTMLInputElement>target).files;
+      if (files && files.length > 0) {
+        const file = files[0];
+        this.form.patchValue({ pictureName: file.name });
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = event => {
+          this.userPicture = (<string>event.target["result"]).split(",")[1];
+          this.userAvatar = <string>event.target["result"];
+        };
+      } else {
+        this.form.patchValue({ pictureName: "" });
+        this.userPicture = this.defaultImage;
+      }
+    } catch (error) {}
+  }
   onSubmit(customer: Customer) {
     if (this.form.valid) {
       this.asyncService.start();
