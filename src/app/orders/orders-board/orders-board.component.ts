@@ -100,12 +100,12 @@ export class OrdersBoardComponent implements OnInit {
           {
             type: 'covered',
             capacity: '3',
-            quantity: '3',
+            quantity: '2',
           },
           {
             type: 'open',
             capacity: '3',
-            quantity: '3',
+            quantity: '1',
           },
         ],
       },
