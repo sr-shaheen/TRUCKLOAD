@@ -317,7 +317,7 @@
           </mat-error>
         </mat-form-field>
         <div style="width: 50px;">
-          <button type="button" mat-mini-fab (click)="addItem()">
+          <button type="button" mat-mini-fab (click)="addItem()" color="warn">
             <mat-icon>add box</mat-icon>
           </button>
         </div>
@@ -338,7 +338,7 @@
         <td>{{ item?.capacity }} Tons</td>
         <td>{{ item?.quantity }}</td>
         <td>
-          <button (click)="deleteItem(i)" mat-mini-fab color="warn">
+          <button (click)="deleteItem(i)" mat-mini-fab style="background-color: red;">
             <mat-icon>delete forever</mat-icon>
           </button>
         </td>

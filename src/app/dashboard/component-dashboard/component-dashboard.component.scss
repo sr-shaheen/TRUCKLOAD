@@ -28,11 +28,14 @@
 .tp-section1 {
   display: flex;
   align-content: center;
+  text-align: center;
+  //@extend  align-items: center;
+  padding-left: 90px;
   height: 40px;
   width: 250px;
   background-color: rgb(196, 23, 23);
-  color:white;
-  // overflow: hidden;
+  color: white;
+  font-size:16px ;
 }
 .tp-section1 a {
   float: left;

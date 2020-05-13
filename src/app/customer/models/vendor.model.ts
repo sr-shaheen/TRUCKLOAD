@@ -5,7 +5,7 @@ export interface Vendor {
   vendor_phn: string;
   vendor_type: string;
   orientation:string;
-  timeesstmp?: string;
+  created_at?: string;
   pk?: string;
   gk?: string;
 }

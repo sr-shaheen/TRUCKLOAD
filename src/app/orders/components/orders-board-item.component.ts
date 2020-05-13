@@ -8,14 +8,13 @@ import { OrdersBoardItem } from '../models/orders-board-item.model';
     <div style="cursor: pointer;">
       <p>Name: {{ order?.customer_name }}</p>
       <p>Cell No: {{ order?.customer_phn }}</p>
-      <p>Email: {{ order?.customer_email }}</p>
       <!-- <p>Unloading:{{ order?.unloadingPoint }}</p> -->
     </div>
   `,
   styles: [
     `
       p {
-        line-height: 5px;
+        line-height: 15px;
       }
     `,
   ],
