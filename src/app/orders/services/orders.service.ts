@@ -11,15 +11,15 @@ import { Order } from '../models/order.model';
 export class OrderService {
   constructor(private http: HttpClient) {}
   addTruck(truck: Truck): Observable<boolean> {
-    const postData = { item: truck };
-    return this.http.post<any>('http://localhost:7075/api/trucks', postData).pipe(
+   // const postData = { item: truck };
+    return this.http.post<any>('https://lqjaa1c4yi.execute-api.ap-southeast-1.amazonaws.com/dev/truck', truck).pipe(
       map((response) => (response.isExecuted && response.data ? true : false)),
       catchError((error) => of(false))
     );
   }
   addOrder(order: Order): Observable<boolean> {
     const postData = { item: order };
-    return this.http.post<any>('http://localhost:7075/api/trucks', postData).pipe(
+    return this.http.post<any>('https://lqjaa1c4yi.execute-api.ap-southeast-1.amazonaws.com/dev/order', postData).pipe(
       map((response) => (response.isExecuted && response.data ? true : false)),
       catchError((error) => of(false))
     );

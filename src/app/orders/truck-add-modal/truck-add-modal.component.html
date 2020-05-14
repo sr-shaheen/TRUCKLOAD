@@ -108,7 +108,60 @@
           </mat-error>
         </mat-form-field>
 
+
+        <mat-form-field *ngIf="statuscheck ;else plzcheck"
+          fxFlex="0 1 calc(100% - 10px)"
+          fxFlex.lt-md="0 1 calc(100% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status" required>
+            <mat-option
+              *ngFor="let status of  statusesvendor"
+              [value]="status.value"
+            >
+              {{ status.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="status.invalid && (status.dirty || status.touched)"
+          >
+            <ng-container *ngIf="status.hasError('required')"
+              >Status is required.</ng-container
+            >
+          </mat-error>
+        </mat-form-field>
+        <ng-template #plzcheck>
+        <mat-form-field 
+          fxFlex="0 1 calc(100% - 10px)"
+          fxFlex.lt-md="0 1 calc(100% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status" required>
+            <mat-option
+              *ngFor="let status of statuses "
+              [value]="status.value"
+            >
+              {{ status.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="status.invalid && (status.dirty || status.touched)"
+          >
+            <ng-container *ngIf="status.hasError('required')"
+              >Status is required.</ng-container
+            >
+          </mat-error>
+        </mat-form-field>
+
+      </ng-template>
         <mat-form-field
+
           fxFlex="0 1 calc(100% - 10px)"
           fxFlex.lt-md="0 1 calc(100% - 10px)"
           fxFlex.lt-sm="100%"
@@ -161,7 +214,7 @@
           appearance="fill"
         >
           <mat-label>Device Id</mat-label>
-          <input matInput placeholder="Device Id" formControlName="device_id" />
+          <input matInput placeholder="Device Id" formControlName="device_id" required />
           <mat-error
             *ngIf="device_id.invalid && (device_id.dirty || device_id.touched)"
           >

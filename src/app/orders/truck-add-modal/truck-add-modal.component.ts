@@ -64,8 +64,15 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
       image_path:
         'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg',
     },
+    {
+      vendor_id: 'vendor_trcl_01673092106',
+      name: 'Truckload Companies Ltd',
+      phn: '0158888888888',
+      image_path:
+        'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg',
+    },
   ];
-
+statuscheck:boolean=false;
   capacities: any[] = [
     { name: '3 ton', value: '3' },
     { name: '5 ton', value: '5' },
@@ -75,6 +82,14 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
     { name: 'Covered', value: 'covered' },
     { name: 'Open', value: 'open' },
   ];
+  statuses: any[] = [
+    { name: 'Not available', value: 'not available' },
+    { name: 'Available', value: 'available' },
+  ];
+  statusesvendor: any[] = [
+    { name: 'returned', value: 'returned' },
+    { name: 'rented', value: 'rented' },
+  ];
   constructor(
     private fb: FormBuilder,
     private commonService: CommonService,
@@ -83,6 +98,7 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    
     // this.loadVendorSub = this.orderService.getVendor().subscribe(
     //   (data) => {
     //     if (data) {
@@ -110,6 +126,7 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
       vendor_phn: ['', [Validators.required, Validators.minLength(11)]],
       capacity: ['', [Validators.required]],
       type: ['', [Validators.required]],
+      status:['', [Validators.required]],
     });
   }
   private _filterStates(value: string): Vendor[] {
@@ -127,6 +144,19 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
     this.vendor_name.patchValue(cus.name);
     this.vendor_id.patchValue(cus.vendor_id);
     this.vendor_phn.patchValue(cus.phn);
+    console.log('cusssssssssssssss',cus);
+    if(cus.vendor_id==='vendor_trcl_01673092106')
+    {
+      //this.status.patchValue(this.statuses);
+      this.statuscheck=true;
+      console.log(this.statuscheck);
+      
+    }
+    else{
+      this.statuscheck=false;
+    }
+ 
+    
   }
   get truck_reg() {
     return this.form.get('truck_reg');
@@ -142,6 +172,9 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
   }
   get vendor_phn() {
     return this.form.get('vendor_phn');
+  }
+  get status() {
+    return this.form.get('status');
   }
   get capacity() {
     return this.form.get('capacity');
