@@ -18,8 +18,8 @@ export class OrderService {
     );
   }
   addOrder(order: Order): Observable<boolean> {
-    const postData = { item: order };
-    return this.http.post<any>('https://lqjaa1c4yi.execute-api.ap-southeast-1.amazonaws.com/dev/order', postData).pipe(
+   // const postData = { item: order };
+    return this.http.post<any>('https://lqjaa1c4yi.execute-api.ap-southeast-1.amazonaws.com/dev/order', order).pipe(
       map((response) => (response.isExecuted && response.data ? true : false)),
       catchError((error) => of(false))
     );

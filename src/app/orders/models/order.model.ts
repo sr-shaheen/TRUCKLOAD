@@ -6,6 +6,7 @@ export interface Order{
   starting_date:string;
   loading_point:string;
   unloading_point:string;
+  orientation:string;
   truck_type?:TruckType[];
 }
 export interface TruckType{
