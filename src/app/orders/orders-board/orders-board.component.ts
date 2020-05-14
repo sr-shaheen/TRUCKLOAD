@@ -290,8 +290,8 @@ export class OrdersBoardComponent implements OnInit {
   }
   truckAdd(): void {
     const dialogRef = this.dialog.open(TruckAddModalComponent, {
-      width: '400px',
-      height: '580px',
+      width: '600px',
+      height: '450px',
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');

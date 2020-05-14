@@ -199,20 +199,13 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
   }
   onSubmit({ type, quantity, capacity, ...data }: any): void {
     const order = data as Order;
-    console.log(order, 'submit');
+ 
 
     if (this.form.valid) {
-      this.asyncService.start();
-
-      order.expected_delivery_date = moment(
-        order.expected_delivery_date
-      ).format('YYYY-MM-DD');
-      order.loading_date = moment(order.loading_date).format('YYYY-MM-DD');
-      order.starting_date = moment(order.starting_date).format('YYYY-MM-DD');
-
+    this.asyncService.start();
+    this.commonService.removeEmptyProperties(order)
       order.truck_type = this.truckTypes;
 
-      console.log(order, 'valid');
 
       this.orderAddSub = this.orderService.addOrder(order).subscribe(
         (isAdded) => {

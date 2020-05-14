@@ -71,7 +71,7 @@
         <mat-form-field fxFlex="0 1 calc(30% - 10px)" fxFlex.lt-md="0 1 calc(50% - 10px)" fxFlex.lt-sm="100%"
           fxFlex.xs="100%" appearance="fill">
           <mat-label>Loading point</mat-label>
-          <input matInput placeholder="Loading point" formControlName="loading_point"  />
+          <input matInput placeholder="Loading point" formControlName="loading_point" required />
           <mat-error *ngIf="
               loading_point.invalid &&
               (loading_point.dirty || loading_point.touched)
@@ -83,7 +83,7 @@
         <mat-form-field fxFlex="0 1 calc(30% - 10px)" fxFlex.lt-md="0 1 calc(50% - 10px)" fxFlex.lt-sm="100%"
           fxFlex.xs="100%" appearance="fill">
           <mat-label>Unloading point</mat-label>
-          <input matInput placeholder="Unloading point" formControlName="unloading_point"  />
+          <input matInput placeholder="Unloading point" formControlName="unloading_point"  required/>
           <mat-error *ngIf="
               unloading_point.invalid &&
               (unloading_point.dirty || unloading_point.touched)
