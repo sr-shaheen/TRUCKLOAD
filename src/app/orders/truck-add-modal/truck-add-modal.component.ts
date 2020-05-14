@@ -72,7 +72,6 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
         'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg',
     },
   ];
-statuscheck:boolean=false;
   capacities: any[] = [
     { name: '3 ton', value: '3' },
     { name: '5 ton', value: '5' },
@@ -82,11 +81,12 @@ statuscheck:boolean=false;
     { name: 'Covered', value: 'covered' },
     { name: 'Open', value: 'open' },
   ];
-  statuses: any[] = [
+  statuses:any[];
+  statusTruckOwner: any[] = [
     { name: 'Not available', value: 'not available' },
     { name: 'Available', value: 'available' },
   ];
-  statusesvendor: any[] = [
+  statusOtherVendor: any[] = [
     { name: 'returned', value: 'returned' },
     { name: 'rented', value: 'rented' },
   ];
@@ -144,16 +144,12 @@ statuscheck:boolean=false;
     this.vendor_name.patchValue(cus.name);
     this.vendor_id.patchValue(cus.vendor_id);
     this.vendor_phn.patchValue(cus.phn);
-    console.log('cusssssssssssssss',cus);
     if(cus.vendor_id==='vendor_trcl_01673092106')
     {
-      //this.status.patchValue(this.statuses);
-      this.statuscheck=true;
-      console.log(this.statuscheck);
-      
+      this.statuses=this.statusTruckOwner;
     }
     else{
-      this.statuscheck=false;
+     this.statuses=this.statusOtherVendor;
     }
  
     
