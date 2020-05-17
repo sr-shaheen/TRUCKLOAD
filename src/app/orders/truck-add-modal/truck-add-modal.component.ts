@@ -12,7 +12,6 @@ import { OrderService } from '../services/orders.service';
 import { Truck } from '../models/truck.model';
 import { startWith, map } from 'rxjs/operators';
 import { MatDialogRef } from '@angular/material/dialog';
-
 export interface Vendor {
   vendor_id: string;
   name: string;

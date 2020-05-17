@@ -11,14 +11,13 @@ import { CommonService } from 'src/app/shared/services/common.service';
 import { OrderService } from '../services/orders.service';
 import { map, startWith } from 'rxjs/operators';
 
-import * as moment from 'moment';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Order } from '../models/order.model';
 
 export interface Customer {
   customer_id: string;
   name: string;
-  phn: string;
+  phone: string;
   image_path: string;
 }
 @Component({
@@ -47,36 +46,8 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
     { name: 'Covered', value: 'covered' },
     { name: 'Open', value: 'open' },
   ];
-  customers: Customer[] = [
-    {
-      customer_id: '1',
-      name: 'Arkansas',
-      phn: '0198888888888',
-      image_path:
-        'https://upload.wikimedia.org/wikipedia/commons/9/9d/Flag_of_Arkansas.svg',
-    },
-    {
-      customer_id: '2',
-      name: 'California',
-      phn: '0178888888888',
-      image_path:
-        'https://upload.wikimedia.org/wikipedia/commons/0/01/Flag_of_California.svg',
-    },
-    {
-      customer_id: '3',
-      name: 'Florida',
-      phn: '0168888888888',
-      image_path:
-        'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Florida.svg',
-    },
-    {
-      customer_id: '4',
-      name: 'Texas',
-      phn: '0158888888888',
-      image_path:
-        'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg',
-    },
-  ];
+  customers:Customer[] = [];
+
   constructor(
     private fb: FormBuilder,
     private commonService: CommonService,
@@ -86,22 +57,20 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // this.loadCustomerSub = this.orderService.getCustomer().subscribe(
-    //   (data) => {
-    //     if (data) {
-    //       this.customers = data;
-    //     }else {
-    //       this.asyncService.finish();
-    //       this.commonService.showErrorMsg('Error! Customers could not found');
-    //     }
-    //   },
-    //   (error) => {
-    //     this.asyncService.finish();
-    //     this.commonService.showErrorMsg(
-    //       'Error! Customers could not found'
-    //     );
-    //   }
-    // );
+    this.loadCustomerSub = this.orderService.getCustomer().subscribe(
+      (data) => {
+        if (data) {
+          this.customers = data;
+        } else {
+          this.asyncService.finish();
+          this.commonService.showErrorMsg('Error! Customers could not found');
+        }
+      },
+      (error) => {
+        this.asyncService.finish();
+        this.commonService.showErrorMsg('Error! Customers could not found');
+      }
+    );
     this.filteredStates = this.customerControl.valueChanges.pipe(
       startWith(''),
       map((state) =>
@@ -111,12 +80,12 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       customer_id: ['', [Validators.required]],
       customer_name: ['', [Validators.required]],
-      expected_delivery_date: ['',],
-      loading_date: ['', ],
-      starting_date: ['', ],
-      loading_point: ['',[Validators.required] ],
-      unloading_point: ['',[Validators.required] ],
-      orientation:['order'],
+      expected_delivery_date: [''],
+      loading_date: [''],
+      starting_date: [''],
+      loading_point: ['', [Validators.required]],
+      unloading_point: ['', [Validators.required]],
+      orientation: ['order'],
       capacity: [''],
       type: [''],
       quantity: [''],
@@ -164,7 +133,7 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
     return this.customers.filter(
       (state) =>
         state.name.toLowerCase().indexOf(filterValue) === 0 ||
-        state.phn.toLowerCase().indexOf(filterValue) === 0
+        state.phone.toLowerCase().indexOf(filterValue) === 0
     );
   }
   onSelectCustomer(id) {
@@ -199,13 +168,11 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
   }
   onSubmit({ type, quantity, capacity, ...data }: any): void {
     const order = data as Order;
- 
 
     if (this.form.valid) {
-    this.asyncService.start();
-    this.commonService.removeEmptyProperties(order)
+      this.asyncService.start();
+      this.commonService.removeEmptyProperties(order);
       order.truck_type = this.truckTypes;
-
 
       this.orderAddSub = this.orderService.addOrder(order).subscribe(
         (isAdded) => {
@@ -222,9 +189,7 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
         },
         (error) => {
           this.asyncService.finish();
-          this.commonService.showErrorMsg(
-            'Error! The order is not created!'
-          );
+          this.commonService.showErrorMsg('Error! The order is not created!');
         }
       );
     }
