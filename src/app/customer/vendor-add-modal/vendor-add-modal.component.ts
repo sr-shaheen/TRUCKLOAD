@@ -21,7 +21,7 @@ export class VendorAddModalComponent implements OnInit {
 
   types: any[] = [
     { name: 'Corporate', value: 'corporate' },
-    { name: 'SME', value: 'SME' },
+    { name: 'SME', value: 'sme' },
     { name: 'Individual', value: 'Individual' },
   ];
   constructor(
@@ -35,10 +35,10 @@ export class VendorAddModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      vendor_name: ['', [Validators.required]],
-      vendor_email: [''],
-      vendor_phn: ['', [Validators.required]],
-      vendor_type: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      email: [''],
+      phone: ['', [Validators.required]],
+      type: ['', [Validators.required]],
       orientation: ['vendor', [Validators.required]],
     });
     if (this.data) {
@@ -46,17 +46,17 @@ export class VendorAddModalComponent implements OnInit {
     }
   }
 
-  get vendor_name() {
-    return this.form.get('vendor_name');
+  get name() {
+    return this.form.get('name');
   }
-  get vendor_email() {
-    return this.form.get('vendor_email');
+  get email() {
+    return this.form.get('email');
   }
-  get vendor_phn() {
-    return this.form.get('vendor_phn');
+  get phone() {
+    return this.form.get('phone');
   }
-  get vendor_type() {
-    return this.form.get('vendor_type');
+  get type() {
+    return this.form.get('type');
   }
 
   onSubmit(vendor: Vendor) {
@@ -79,6 +79,7 @@ export class VendorAddModalComponent implements OnInit {
             this.commonService.showSuccessMsg(
               'Success! The Truck owner has been added successfully.'
             );
+            this.close();
           } else {
             this.asyncService.finish();
             this.commonService.showErrorMsg(
@@ -95,6 +96,10 @@ export class VendorAddModalComponent implements OnInit {
       );
     }
   }
+
+  close = (): void => {
+    this.dialogRef.close();
+  };
 
   ngOnDestroy(): void {
     if (this.vendorServiceSub) {
