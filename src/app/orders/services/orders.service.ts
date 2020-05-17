@@ -52,7 +52,7 @@ export class OrderService {
     );
   }
   getVendor(): Observable<any[]> {
-    return this.http.get<any>("http://localhost:7075/api/trucks").pipe(
+    return this.http.get<any>("https://lqjaa1c4yi.execute-api.ap-southeast-1.amazonaws.com/dev/all?orientation=vendor").pipe(
       map(response =>
         response.isExecuted && response.data ? response.data : []
       ),

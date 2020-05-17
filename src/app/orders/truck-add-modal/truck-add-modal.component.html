@@ -71,14 +71,8 @@
               *ngFor="let state of filteredStates | async"
               [value]="state.vendor_id"
             >
-              <img
-                class="example-option-img"
-                aria-hidden
-                [src]="state.image_path"
-                height="25"
-              />
               <span>{{ state.name }}</span> |
-              <small>Phone: {{ state.phn }}</small>
+              <small>Phone: {{ state.phone }}</small>
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
@@ -93,24 +87,18 @@
           <mat-label>Vendor phone</mat-label>
           <input
             matInput
-            placeholder="vendor_phn"
-            formControlName="vendor_phn"
+            placeholder="phone"
+            formControlName="phone"
             required
           />
-          <mat-error
-            *ngIf="
-              vendor_phn.invalid && (vendor_phn.dirty || vendor_phn.touched)
-            "
-          >
-            <ng-container *ngIf="vendor_phn.hasError('required')"
+          <mat-error *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+            <ng-container *ngIf="phone.hasError('required')"
               >Vendor phone is required.</ng-container
             >
           </mat-error>
         </mat-form-field>
 
-
         <mat-form-field
-     
           fxFlex="0 1 calc(50% - 10px)"
           fxFlex.lt-md="0 1 calc(50% - 10px)"
           fxFlex.lt-sm="100%"
@@ -119,25 +107,18 @@
         >
           <mat-label>Status</mat-label>
           <mat-select formControlName="status" required>
-            <mat-option
-              *ngFor="let status of  statuses"
-              [value]="status.value"
-            >
+            <mat-option *ngFor="let status of statuses" [value]="status.value">
               {{ status.name }}
             </mat-option>
           </mat-select>
-          <mat-error
-            *ngIf="status.invalid && (status.dirty || status.touched)"
-          >
+          <mat-error *ngIf="status.invalid && (status.dirty || status.touched)">
             <ng-container *ngIf="status.hasError('required')"
               >Status is required.</ng-container
             >
           </mat-error>
         </mat-form-field>
-    
-        
-        <mat-form-field
 
+        <mat-form-field
           fxFlex="0 1 calc(50% - 10px)"
           fxFlex.lt-md="0 1 calc(50% - 10px)"
           fxFlex.lt-sm="100%"
