@@ -59,4 +59,20 @@ export class OrderService {
       catchError(error => of([]))
     );
   }
+  ownTruck(): Observable<any[]> {
+    return this.http.get<any>("https://lqjaa1c4yi.execute-api.ap-southeast-1.amazonaws.com/dev/status?status=available").pipe(
+      map(response =>
+        response.isExecuted && response.data ? response.data : []
+      ),
+      catchError(error => of([]))
+    );
+  }
+  otherTruck(): Observable<any[]> {
+    return this.http.get<any>("https://lqjaa1c4yi.execute-api.ap-southeast-1.amazonaws.com/dev/status?status=returned").pipe(
+      map(response =>
+        response.isExecuted && response.data ? response.data : []
+      ),
+      catchError(error => of([]))
+    );
+  }
 }
