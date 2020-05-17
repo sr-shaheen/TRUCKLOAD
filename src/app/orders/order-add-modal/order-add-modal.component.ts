@@ -38,6 +38,7 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
   filteredStates: Observable<Customer[]>;
 
   truckTypes = [];
+
   capacities: any[] = [
     { name: '3 ton', value: '3' },
     { name: '5 ton', value: '5' },
@@ -164,6 +165,8 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
       };
       // if (!this.truckTypes.find(i => i.itemId === item.itemId)) {
       this.truckTypes = [item, ...this.truckTypes];
+     
+     
       // } else {
       //   this.commonService.showErrorMsg("Item already added!!!!");
       // }

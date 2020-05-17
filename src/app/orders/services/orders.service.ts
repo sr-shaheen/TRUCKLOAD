@@ -32,9 +32,9 @@ export class OrderService {
       catchError(error => of([]))
     );
   }
-  updateBoardStatus(id: string, data: any): Observable<boolean> {
+  updateOrderBoard( data: any): Observable<boolean> {
     return this.http
-      .put<IContainer>(`/service/appointment-queue/${id}`, data)
+      .patch<IContainer>("https://lqjaa1c4yi.execute-api.ap-southeast-1.amazonaws.com/dev/status", data)
       .pipe(
         map((response) =>
           response.isExecuted && response.data ? true : false

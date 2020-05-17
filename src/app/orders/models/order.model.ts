@@ -11,6 +11,11 @@ export interface Order {
   orientation: string;
   number_of_consignment:string;
   truck_type?: TruckType[];
+  status:string;
+  order_id:string;
+  pk:string;
+  sk:string;
+  comment?:string
 }
 export interface TruckType {
   capacity: string;

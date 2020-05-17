@@ -41,7 +41,7 @@ export class DetailsCollectedModalComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.data, 'ssssssssssss');
+ console.log(this.data, 'ssssssssssss');
 
     this.form = this.fb.group({
       customer_id: ['', [Validators.required]],
@@ -57,6 +57,8 @@ export class DetailsCollectedModalComponent implements OnInit, OnDestroy {
       type: [''],
       quantity: [''],
       truck_type: [''],
+      orientation:['order'],
+    //  status:['detailsCollected']
     });
     this.truckTypes=this.data.truck_type;
     this.form.patchValue(this.data);
@@ -111,6 +113,7 @@ export class DetailsCollectedModalComponent implements OnInit, OnDestroy {
       };
       // if (!this.truckTypes.find(i => i.itemId === item.itemId)) {
       this.truckTypes = [item, ...this.truckTypes];
+      console.log('truckkkkkkkkkkkkkkkkllllllllklllklkk',this.truckTypes);
       // } else {
       //   this.commonService.showErrorMsg("Item already added!!!!");
       // }
@@ -126,9 +129,15 @@ export class DetailsCollectedModalComponent implements OnInit, OnDestroy {
     this.truckTypes.splice(index, 1);
   }
   onSubmit({ type, quantity, capacity, ...data }: any): void {
+    console.log('dattaaaaaaaaa',data);
+    
     const order = data as Order;
-    console.log(order, 'submit');
-
+    order.status='detailsCollected'
+    order.order_id=this.data.order_id
+    order.pk=this.data.order_id
+    order.sk=this.data.customer_id
+    console.log(order , 'submit detailed');
+  
     if (this.form.valid) {
       this.asyncService.start();
 
@@ -140,7 +149,7 @@ export class DetailsCollectedModalComponent implements OnInit, OnDestroy {
 
       order.truck_type = this.truckTypes;
 
-      this.detailsCollectedSub = this.orderService.addOrder(order).subscribe(
+      this.detailsCollectedSub = this.orderService.updateOrderBoard(order).subscribe(
         (isAdded) => {
           if (isAdded) {
             this.commonService.showSuccessMsg(
