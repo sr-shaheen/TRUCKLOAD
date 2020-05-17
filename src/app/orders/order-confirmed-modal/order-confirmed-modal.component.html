@@ -26,6 +26,7 @@
     [formGroup]="form"
     (ngSubmit)="onSubmit(form.value)"
     novalidate
+    *ngIf="truckData.length>0"
   >
     <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" class="tab">
       <div

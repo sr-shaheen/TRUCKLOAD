@@ -3,8 +3,9 @@ import { CommonService } from 'src/app/shared/services/common.service';
 import { AsyncService } from 'src/app/shared/services/async.service';
 import { OrderService } from '../services/orders.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
+import { Subscription, forkJoin } from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { TruckList } from '../models/truck.model';
 
 @Component({
   selector: 'app-order-confirmed-modal',
@@ -31,53 +32,54 @@ export class OrderConfirmedModalComponent implements OnInit {
     { name: 'Covered', value: 'covered' },
     { name: 'Open', value: 'open' },
   ];
-  truckData: any[] = [
-    {
-      truck_reg: '12312323',
-      vendor_name: 'mofiz',
-      vendor_id: '55558',
-      device_id: '79879879',
-      vendor_phn: '8798797979898',
-      capacity: '3',
-      type: 'covered',
-    },
-    {
-      truck_reg: '12312323',
-      vendor_name: 'mofiz',
-      vendor_id: '55558',
-      device_id: '79879879',
-      vendor_phn: '8798797979898',
-      capacity: '5',
-      type: 'covered',
-    },
-    {
-      truck_reg: '12312323',
-      vendor_name: 'mofiz',
-      vendor_id: '55558',
-      device_id: '79879879',
-      vendor_phn: '8798797979898',
-      capacity: '3',
-      type: 'open',
-    },
-    {
-      truck_reg: '12312323',
-      vendor_name: 'mofiz',
-      vendor_id: '55558',
-      device_id: '79879879',
-      vendor_phn: '8798797979898',
-      capacity: '5',
-      type: 'open',
-    },
-    {
-      truck_reg: '12312323',
-      vendor_name: 'mofiz',
-      vendor_id: '55558',
-      device_id: '79879879',
-      vendor_phn: '8798797979898',
-      capacity: '7',
-      type: 'open',
-    },
-  ];
+  truckData: TruckList[] = [];
+  // truckData: any[] = [
+  //   {
+  //     truck_reg: '12312323',
+  //     vendor_name: 'mofiz',
+  //     vendor_id: '55558',
+  //     device_id: '79879879',
+  //     vendor_phn: '8798797979898',
+  //     capacity: '3',
+  //     type: 'covered',
+  //   },
+  //   {
+  //     truck_reg: '12312323',
+  //     vendor_name: 'mofiz',
+  //     vendor_id: '55558',
+  //     device_id: '79879879',
+  //     vendor_phn: '8798797979898',
+  //     capacity: '5',
+  //     type: 'covered',
+  //   },
+  //   {
+  //     truck_reg: '12312323',
+  //     vendor_name: 'mofiz',
+  //     vendor_id: '55558',
+  //     device_id: '79879879',
+  //     vendor_phn: '8798797979898',
+  //     capacity: '3',
+  //     type: 'open',
+  //   },
+  //   {
+  //     truck_reg: '12312323',
+  //     vendor_name: 'mofiz',
+  //     vendor_id: '55558',
+  //     device_id: '79879879',
+  //     vendor_phn: '8798797979898',
+  //     capacity: '5',
+  //     type: 'open',
+  //   },
+  //   {
+  //     truck_reg: '12312323',
+  //     vendor_name: 'mofiz',
+  //     vendor_id: '55558',
+  //     device_id: '79879879',
+  //     vendor_phn: '8798797979898',
+  //     capacity: '7',
+  //     type: 'open',
+  //   },
+  // ];
   constructor(
     private fb: FormBuilder,
     private commonService: CommonService,
@@ -88,7 +90,14 @@ export class OrderConfirmedModalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.data, 'ddddddddddddd');
+    this.asyncService.start();
+    let ownTruck = this.orderService.ownTruck();
+    let otherTruck = this.orderService.otherTruck();
+    forkJoin([ownTruck, otherTruck]).subscribe((results) => {
+      this.truckData = [...results[0], ...results[1]];
+      this.asyncService.finish();
+      console.log(this.truckData, 'dddddddddddddddddddd');
+    });
 
     this.form = this.fb.group({
       capacity: [''],
@@ -125,7 +134,7 @@ export class OrderConfirmedModalComponent implements OnInit {
         truck_reg: this.truck_reg.value,
       };
       if (!this.truckProvide.find((i) => i.truck_reg === item.truck_reg)) {
-      this.truckProvide = [item, ...this.truckProvide];
+        this.truckProvide = [item, ...this.truckProvide];
       } else {
         this.commonService.showErrorMsg('Item already added!!!!');
       }
