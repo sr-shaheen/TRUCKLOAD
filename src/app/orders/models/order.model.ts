@@ -1,6 +1,6 @@
 export interface Order{
   customer_id:string;
-  customer_name:string;
+   name:string;
   expected_delivery_date:string;
   loading_date:string;
   starting_date:string;

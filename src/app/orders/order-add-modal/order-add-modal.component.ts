@@ -79,7 +79,7 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
     );
     this.form = this.fb.group({
       customer_id: ['', [Validators.required]],
-      customer_name: ['', [Validators.required]],
+      name: ['', [Validators.required]],
       expected_delivery_date: [''],
       loading_date: [''],
       starting_date: [''],
@@ -96,8 +96,8 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
   get customer_id() {
     return this.form.get('customer_id');
   }
-  get customer_name() {
-    return this.form.get('customer_name');
+  get name() {
+    return this.form.get('name');
   }
   get expected_delivery_date() {
     return this.form.get('expected_delivery_date');
@@ -139,7 +139,7 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
   onSelectCustomer(id) {
     const cus = this.customers.find((item) => item.customer_id === id);
     this.customerControl.patchValue(cus.name);
-    this.customer_name.patchValue(cus.name);
+    this.name.patchValue(cus.name);
     this.customer_id.patchValue(cus.customer_id);
   }
 
