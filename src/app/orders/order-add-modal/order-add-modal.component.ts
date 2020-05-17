@@ -90,6 +90,7 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
       type: [''],
       quantity: [''],
       truck_type: [''],
+      status: ['ordersPlaced']
     });
   }
 
