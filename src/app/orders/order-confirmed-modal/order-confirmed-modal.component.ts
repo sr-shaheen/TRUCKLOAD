@@ -33,53 +33,7 @@ export class OrderConfirmedModalComponent implements OnInit {
     { name: 'Open', value: 'open' },
   ];
   truckData: TruckList[] = [];
-  // truckData: any[] = [
-  //   {
-  //     truck_reg: '12312323',
-  //     vendor_name: 'mofiz',
-  //     vendor_id: '55558',
-  //     device_id: '79879879',
-  //     vendor_phn: '8798797979898',
-  //     capacity: '3',
-  //     type: 'covered',
-  //   },
-  //   {
-  //     truck_reg: '12312323',
-  //     vendor_name: 'mofiz',
-  //     vendor_id: '55558',
-  //     device_id: '79879879',
-  //     vendor_phn: '8798797979898',
-  //     capacity: '5',
-  //     type: 'covered',
-  //   },
-  //   {
-  //     truck_reg: '12312323',
-  //     vendor_name: 'mofiz',
-  //     vendor_id: '55558',
-  //     device_id: '79879879',
-  //     vendor_phn: '8798797979898',
-  //     capacity: '3',
-  //     type: 'open',
-  //   },
-  //   {
-  //     truck_reg: '12312323',
-  //     vendor_name: 'mofiz',
-  //     vendor_id: '55558',
-  //     device_id: '79879879',
-  //     vendor_phn: '8798797979898',
-  //     capacity: '5',
-  //     type: 'open',
-  //   },
-  //   {
-  //     truck_reg: '12312323',
-  //     vendor_name: 'mofiz',
-  //     vendor_id: '55558',
-  //     device_id: '79879879',
-  //     vendor_phn: '8798797979898',
-  //     capacity: '7',
-  //     type: 'open',
-  //   },
-  // ];
+
   constructor(
     private fb: FormBuilder,
     private commonService: CommonService,
@@ -128,10 +82,18 @@ export class OrderConfirmedModalComponent implements OnInit {
   }
   addItem() {
     if (this.capacity.value && this.type.value && this.truck_reg.value) {
+      const itemData = this.truckData.find(
+        (item) => item.truck_reg === this.truck_reg.value
+      );
       const item = {
         capacity: this.capacity.value,
         type: this.type.value,
         truck_reg: this.truck_reg.value,
+        truck_id: itemData.truck_id,
+        device_id: itemData.device_id ? itemData.device_id : undefined,
+        orientation: itemData.orientation,
+        vendor_name:itemData.vendor_name
+
       };
       if (!this.truckProvide.find((i) => i.truck_reg === item.truck_reg)) {
         this.truckProvide = [item, ...this.truckProvide];
