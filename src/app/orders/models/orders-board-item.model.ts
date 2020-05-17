@@ -1,8 +1,8 @@
 export interface OrdersBoardItem {
   customer_id: string;
-  customer_name: string;
-  customer_phn: string;
-  customer_email: string;
+ name: string;
+ phone: string;
+ email: string;
   image_path?: string;
   status: string;
   expected_delivery_date?: string;
@@ -11,6 +11,7 @@ export interface OrdersBoardItem {
   arrival_date?: string;
   loading_point?: string;
   unloading_point?: string;
+  number_of_consignment:string;
   truck_type?:TruckType[];
 }
 export interface TruckType {

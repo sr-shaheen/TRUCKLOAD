@@ -74,100 +74,100 @@ export class OrdersBoardComponent implements OnInit {
     });
   };
   private loadOrdersBoard = (): void => {
-    // this.asyncService.start();
-    this.filterBoardData([
-      {
-        customer_id: '1',
-        customer_name: 'Shahin',
-        customer_phn: '01688024100',
-        customer_email: 'shaheen@gmail.com',
-        status: 'ordersPlaced',
-      },
-      {
-        customer_id: '1',
-        customer_name: 'Sumon',
-        customer_phn: '01688024100',
-        customer_email: 'sumon@gmail.com',
-        status: 'ordersPlaced',
-      },
-      {
-        customer_id: '1',
-        customer_name: 'Juthi',
-        customer_phn: '01709874653',
-        customer_email: 'juthi@gmail.com',
-        status: 'detailsCollected',
-        truck_type: [
-          {
-            type: 'covered',
-            capacity: '3',
-            quantity: '2',
-          },
-          {
-            type: 'open',
-            capacity: '3',
-            quantity: '1',
-          },
-        ],
-      },
-      {
-        customer_id: '1',
-        customer_name: 'Abrar',
-        customer_phn: '01709809853',
-        customer_email: 'abrar@gmail.com',
-        status: 'loadCompleted',
-      },
-      {
-        customer_id: '1',
-        customer_name: 'Shahriar',
-        customer_phn: '01777024100',
-        customer_email: 'shah@gmail.com',
-        status: 'inTransit',
-      },
-      {
-        customer_id: '1',
-        customer_name: 'Adiba',
-        customer_phn: '01699924100',
-        customer_email: 'Adiba@gmail.com',
-        status: 'uploadComplete',
-      },
-      {
-        customer_id: '1',
-        customer_name: 'Sandil',
-        customer_phn: '01685554100',
-        customer_email: 'Sandil@gmail.com',
-        status: 'consignmentDone',
-      },
-      {
-        customer_id: '1',
-        customer_name: 'Nabi',
-        customer_phn: '01580004100',
-        customer_email: 'Nabi@gmail.com',
-        status: 'ordersPlaced',
-      },
-      {
-        customer_id: '1',
-        customer_name: 'Alif',
-        customer_phn: '01580004100',
-        customer_email: 'Nabi@gmail.com',
-        status: 'ordersPlaced',
-      },
-    ]);
-    // this.ordersBoardSub = this.orderService
-    //   .getOrdersBoard()
-    //   .subscribe(
-    //     (data) => {
-    //       if (data) {
-    //         this.filterBoardData(data);
-    //       }
-    //       this.asyncService.finish();
-    //     },
-    //     (error) => {
-    //       this.asyncService.finish();
-    //       this.commonService.showErrorMsg(
-    //         'Error! Order board data is not loaded.'
-    //       );
-    //     }
-    //   );
+    this.asyncService.start();
+    // this.filterBoardData([
+    //   {
+    //     customer_id: '1',
+    //     customer_name: 'Shahin',
+    //     customer_phn: '01688024100',
+    //     customer_email: 'shaheen@gmail.com',
+    //     status: 'ordersPlaced',
+    //   },
+    //   {
+    //     customer_id: '1',
+    //     customer_name: 'Sumon',
+    //     customer_phn: '01688024100',
+    //     customer_email: 'sumon@gmail.com',
+    //     status: 'ordersPlaced',
+    //   },
+    //   {
+    //     customer_id: '1',
+    //     customer_name: 'Juthi',
+    //     customer_phn: '01709874653',
+    //     customer_email: 'juthi@gmail.com',
+    //     status: 'detailsCollected',
+    //     truck_type: [
+    //       {
+    //         type: 'covered',
+    //         capacity: '3',
+    //         quantity: '2',
+    //       },
+    //       {
+    //         type: 'open',
+    //         capacity: '3',
+    //         quantity: '1',
+    //       },
+    //     ],
+    //   },
+    //   {
+    //     customer_id: '1',
+    //     customer_name: 'Abrar',
+    //     customer_phn: '01709809853',
+    //     customer_email: 'abrar@gmail.com',
+    //     status: 'loadCompleted',
+    //   },
+    //   {
+    //     customer_id: '1',
+    //     customer_name: 'Shahriar',
+    //     customer_phn: '01777024100',
+    //     customer_email: 'shah@gmail.com',
+    //     status: 'inTransit',
+    //   },
+    //   {
+    //     customer_id: '1',
+    //     customer_name: 'Adiba',
+    //     customer_phn: '01699924100',
+    //     customer_email: 'Adiba@gmail.com',
+    //     status: 'uploadComplete',
+    //   },
+    //   {
+    //     customer_id: '1',
+    //     customer_name: 'Sandil',
+    //     customer_phn: '01685554100',
+    //     customer_email: 'Sandil@gmail.com',
+    //     status: 'consignmentDone',
+    //   },
+    //   {
+    //     customer_id: '1',
+    //     customer_name: 'Nabi',
+    //     customer_phn: '01580004100',
+    //     customer_email: 'Nabi@gmail.com',
+    //     status: 'ordersPlaced',
+    //   },
+    //   {
+    //     customer_id: '1',
+    //     customer_name: 'Alif',
+    //     customer_phn: '01580004100',
+    //     customer_email: 'Nabi@gmail.com',
+    //     status: 'ordersPlaced',
+    //   },
+    // ]);
+    this.ordersBoardSub = this.orderService
+      .getOrdersBoard()
+      .subscribe(
+        (data) => {
+          if (data) {
+            this.filterBoardData(data);
+          }
+          this.asyncService.finish();
+        },
+        (error) => {
+          this.asyncService.finish();
+          this.commonService.showErrorMsg(
+            'Error! Order board data is not loaded.'
+          );
+        }
+      );
   };
 
   drop(event: CdkDragDrop<any[]>) {
