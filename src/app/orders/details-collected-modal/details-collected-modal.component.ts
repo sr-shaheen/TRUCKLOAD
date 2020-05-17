@@ -9,12 +9,6 @@ import * as moment from 'moment';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Order } from '../models/order.model';
 
-export interface Customer {
-  customer_id: string;
-  customer_name: string;
-  customer_phn: string;
-  image_path: string;
-}
 @Component({
   selector: 'app-details-collected-modal',
   templateUrl: './details-collected-modal.component.html',
@@ -37,36 +31,6 @@ export class DetailsCollectedModalComponent implements OnInit, OnDestroy {
     { name: 'Covered', value: 'covered' },
     { name: 'Open', value: 'open' },
   ];
-  customers: Customer[] = [
-    {
-      customer_id: '1',
-      customer_name: 'Arkansas',
-      customer_phn: '0198888888888',
-      image_path:
-        'https://upload.wikimedia.org/wikipedia/commons/9/9d/Flag_of_Arkansas.svg',
-    },
-    {
-      customer_id: '2',
-      customer_name: 'California',
-      customer_phn: '0178888888888',
-      image_path:
-        'https://upload.wikimedia.org/wikipedia/commons/0/01/Flag_of_California.svg',
-    },
-    {
-      customer_id: '3',
-      customer_name: 'Florida',
-      customer_phn: '0168888888888',
-      image_path:
-        'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Florida.svg',
-    },
-    {
-      customer_id: '4',
-      customer_name: 'Texas',
-      customer_phn: '0158888888888',
-      image_path:
-        'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg',
-    },
-  ];
   constructor(
     private fb: FormBuilder,
     private commonService: CommonService,
@@ -81,9 +45,9 @@ export class DetailsCollectedModalComponent implements OnInit, OnDestroy {
 
     this.form = this.fb.group({
       customer_id: ['', [Validators.required]],
-      customer_name: ['', [Validators.required]],
-      customer_phn: ['', [Validators.required]],
-      customer_email: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      phone: ['', [Validators.required]],
+      email: ['', [Validators.required]],
       expected_delivery_date: ['', [Validators.required]],
       loading_date: ['', [Validators.required]],
       starting_date: ['', [Validators.required]],
@@ -94,20 +58,21 @@ export class DetailsCollectedModalComponent implements OnInit, OnDestroy {
       quantity: [''],
       truck_type: [''],
     });
+    this.truckTypes=this.data.truck_type;
     this.form.patchValue(this.data);
   }
 
   get customer_id() {
     return this.form.get('customer_id');
   }
-  get customer_name() {
-    return this.form.get('customer_name');
+  get name() {
+    return this.form.get('name');
   }
-  get customer_phn() {
-    return this.form.get('customer_phn');
+  get phone() {
+    return this.form.get('phone');
   }
-  get customer_email() {
-    return this.form.get('customer_email');
+  get email() {
+    return this.form.get('email');
   }
   get expected_delivery_date() {
     return this.form.get('expected_delivery_date');

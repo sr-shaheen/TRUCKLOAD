@@ -45,6 +45,8 @@
   </div>
 </div>
 <mat-divider> </mat-divider>
+<mat-progress-bar *ngIf="asyncService?.isLoading | async" mode="indeterminate">
+</mat-progress-bar>
 
 <div fxLayout="column" class="orders-board-container">
   <div

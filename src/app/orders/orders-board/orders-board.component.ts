@@ -46,7 +46,7 @@ export class OrdersBoardComponent implements OnInit {
 
   constructor(
     private commonService: CommonService,
-    private asyncService: AsyncService,
+    public asyncService: AsyncService,
     private orderService: OrderService,
     public dialog: MatDialog
   ) {}
@@ -152,27 +152,23 @@ export class OrdersBoardComponent implements OnInit {
     //     status: 'ordersPlaced',
     //   },
     // ]);
-    this.ordersBoardSub = this.orderService
-      .getOrdersBoard()
-      .subscribe(
-        (data) => {
-          if (data) {
-            this.filterBoardData(data);
-          }
-          this.asyncService.finish();
-        },
-        (error) => {
-          this.asyncService.finish();
-          this.commonService.showErrorMsg(
-            'Error! Order board data is not loaded.'
-          );
+    this.ordersBoardSub = this.orderService.getOrdersBoard().subscribe(
+      (data) => {
+        if (data) {
+          this.filterBoardData(data);
         }
-      );
+        this.asyncService.finish();
+      },
+      (error) => {
+        this.asyncService.finish();
+        this.commonService.showErrorMsg(
+          'Error! Order board data is not loaded.'
+        );
+      }
+    );
   };
 
   drop(event: CdkDragDrop<any[]>) {
-    console.log(event, 'eventttttt');
-
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -270,7 +266,6 @@ export class OrdersBoardComponent implements OnInit {
     const dialogRef = this.dialog.open(CustomerAddModalComponent, {
       width: '400px',
       height: '500px',
-      // data: {name: this.name, animal: this.animal}
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -304,7 +299,7 @@ export class OrdersBoardComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
+      this.loadOrdersBoard();
     });
   }
 

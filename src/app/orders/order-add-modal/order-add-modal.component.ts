@@ -18,6 +18,7 @@ export interface Customer {
   customer_id: string;
   name: string;
   phone: string;
+  email?: string;
   image_path: string;
 }
 @Component({
@@ -46,7 +47,7 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
     { name: 'Covered', value: 'covered' },
     { name: 'Open', value: 'open' },
   ];
-  customers:Customer[] = [];
+  customers: Customer[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -80,6 +81,8 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       customer_id: ['', [Validators.required]],
       name: ['', [Validators.required]],
+      phone: ['', [Validators.required]],
+      email: ['', [Validators.required]],
       expected_delivery_date: [''],
       loading_date: [''],
       starting_date: [''],
@@ -90,7 +93,7 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
       type: [''],
       quantity: [''],
       truck_type: [''],
-      status: ['ordersPlaced']
+      status: ['ordersPlaced'],
     });
   }
 
@@ -99,6 +102,12 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
   }
   get name() {
     return this.form.get('name');
+  }
+  get phone() {
+    return this.form.get('phone');
+  }
+  get email() {
+    return this.form.get('email');
   }
   get expected_delivery_date() {
     return this.form.get('expected_delivery_date');
@@ -141,6 +150,8 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
     const cus = this.customers.find((item) => item.customer_id === id);
     this.customerControl.patchValue(cus.name);
     this.name.patchValue(cus.name);
+    this.phone.patchValue(cus.phone);
+    this.email.patchValue(cus.email);
     this.customer_id.patchValue(cus.customer_id);
   }
 
@@ -174,6 +185,7 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
       this.asyncService.start();
       this.commonService.removeEmptyProperties(order);
       order.truck_type = this.truckTypes;
+      order.number_of_consignment = this.truckTypes.length.toString();
 
       this.orderAddSub = this.orderService.addOrder(order).subscribe(
         (isAdded) => {

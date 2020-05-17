@@ -3,20 +3,51 @@
 </h3>
 
 <div mat-dialog-content style="height: 500px;">
-  <mat-progress-bar *ngIf="asyncService?.isLoading | async" mode="indeterminate">
+  <mat-progress-bar
+    *ngIf="asyncService?.isLoading | async"
+    mode="indeterminate"
+  >
   </mat-progress-bar>
-  <form [id]="formId" [formGroup]="form" (ngSubmit)="onSubmit(form.value)" novalidate>
+  <form
+    [id]="formId"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit(form.value)"
+    novalidate
+  >
     <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" class="tab">
-      <div fxLayout="row wrap" fxLayoutGap="10px" fxFlex="100%" fxFlex.sm="50%" fxLayout.lt-sm="column" fxFlex.xs="100%"
-        fxLayoutAlign="flex-start">
-        <mat-form-field fxFlex="0 1 calc(30% - 10px)" fxFlex.lt-md="0 1 calc(50% - 10px)" fxFlex.lt-sm="100%"
-          fxFlex.xs="100%" appearance="fill">
+      <div
+        fxLayout="row wrap"
+        fxLayoutGap="10px"
+        fxFlex="100%"
+        fxFlex.sm="50%"
+        fxLayout.lt-sm="column"
+        fxFlex.xs="100%"
+        fxLayoutAlign="flex-start"
+      >
+        <mat-form-field
+          fxFlex="0 1 calc(30% - 10px)"
+          fxFlex.lt-md="0 1 calc(50% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
           <mat-label>Search Customer</mat-label>
-          <input matInput placeholder="Customer Name | Phone" aria-label="State" [matAutocomplete]="auto"
-            [formControl]="customerControl" />
+          <input
+            matInput
+            placeholder="Customer Name | Phone"
+            aria-label="State"
+            [matAutocomplete]="auto"
+            [formControl]="customerControl"
+          />
           <mat-icon matSuffix>search</mat-icon>
-          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectCustomer($event.option.value)">
-            <mat-option *ngFor="let state of filteredStates | async" [value]="state.customer_id">
+          <mat-autocomplete
+            #auto="matAutocomplete"
+            (optionSelected)="onSelectCustomer($event.option.value)"
+          >
+            <mat-option
+              *ngFor="let state of filteredStates | async"
+              [value]="state.customer_id"
+            >
               <!-- <img class="example-option-img" aria-hidden [src]="state.image_path" height="25" /> -->
               <span>{{ state.name }}</span> |
               <small>Phone: {{ state.phone }}</small>
@@ -24,89 +55,183 @@
           </mat-autocomplete>
         </mat-form-field>
 
-        <mat-form-field fxFlex="0 1 calc(30% - 10px)" fxFlex.lt-md="0 1 calc(50% - 10px)" fxFlex.lt-sm="100%"
-          fxFlex.xs="100%" appearance="fill">
+        <mat-form-field
+          fxFlex="0 1 calc(30% - 10px)"
+          fxFlex.lt-md="0 1 calc(50% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
           <mat-label>Expected delivery date</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="expected_delivery_date"
-            placeholder="Expected delivery date" />
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="expected_delivery_date"
+            placeholder="Expected delivery date"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
-          <mat-error *ngIf="
+          <mat-error
+            *ngIf="
               expected_delivery_date.invalid &&
               (expected_delivery_date.dirty || expected_delivery_date.touched)
-            ">
-            <ng-container *ngIf="expected_delivery_date.hasError('required')">Expected delivery date is required.
+            "
+          >
+            <ng-container *ngIf="expected_delivery_date.hasError('required')"
+              >Expected delivery date is required.
             </ng-container>
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field fxFlex="0 1 calc(30% - 10px)" fxFlex.lt-md="0 1 calc(50% - 10px)" fxFlex.lt-sm="100%"
-          fxFlex.xs="100%" appearance="fill">
+        <mat-form-field
+          fxFlex="0 1 calc(30% - 10px)"
+          fxFlex.lt-md="0 1 calc(50% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
           <mat-label>Loading date</mat-label>
-          <input matInput [matDatepicker]="picker1" formControlName="loading_date" placeholder="Loading date" />
-          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            formControlName="loading_date"
+            placeholder="Loading date"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
-          <mat-error *ngIf="
+          <mat-error
+            *ngIf="
               loading_date.invalid &&
               (loading_date.dirty || loading_date.touched)
-            ">
-            <ng-container *ngIf="loading_date.hasError('required')">Loading date is required.</ng-container>
+            "
+          >
+            <ng-container *ngIf="loading_date.hasError('required')"
+              >Loading date is required.</ng-container
+            >
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field fxFlex="0 1 calc(30% - 10px)" fxFlex.lt-md="0 1 calc(50% - 10px)" fxFlex.lt-sm="100%"
-          fxFlex.xs="100%" appearance="fill">
+        <mat-form-field
+          fxFlex="0 1 calc(30% - 10px)"
+          fxFlex.lt-md="0 1 calc(50% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
           <mat-label>Starting date</mat-label>
-          <input matInput [matDatepicker]="picker2" formControlName="starting_date" placeholder="Starting date" />
-          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            formControlName="starting_date"
+            placeholder="Starting date"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
-          <mat-error *ngIf="
+          <mat-error
+            *ngIf="
               starting_date.invalid &&
               (starting_date.dirty || starting_date.touched)
-            ">
-            <ng-container *ngIf="starting_date.hasError('required')">Starting date is required.</ng-container>
+            "
+          >
+            <ng-container *ngIf="starting_date.hasError('required')"
+              >Starting date is required.</ng-container
+            >
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field fxFlex="0 1 calc(30% - 10px)" fxFlex.lt-md="0 1 calc(50% - 10px)" fxFlex.lt-sm="100%"
-          fxFlex.xs="100%" appearance="fill">
+        <mat-form-field
+          fxFlex="0 1 calc(30% - 10px)"
+          fxFlex.lt-md="0 1 calc(50% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
           <mat-label>Loading point</mat-label>
-          <input matInput placeholder="Loading point" formControlName="loading_point" required />
-          <mat-error *ngIf="
+          <input
+            matInput
+            placeholder="Loading point"
+            formControlName="loading_point"
+            required
+          />
+          <mat-error
+            *ngIf="
               loading_point.invalid &&
               (loading_point.dirty || loading_point.touched)
-            ">
-            <ng-container *ngIf="loading_point.hasError('required')">Loading point is required.</ng-container>
+            "
+          >
+            <ng-container *ngIf="loading_point.hasError('required')"
+              >Loading point is required.</ng-container
+            >
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field fxFlex="0 1 calc(30% - 10px)" fxFlex.lt-md="0 1 calc(50% - 10px)" fxFlex.lt-sm="100%"
-          fxFlex.xs="100%" appearance="fill">
+        <mat-form-field
+          fxFlex="0 1 calc(30% - 10px)"
+          fxFlex.lt-md="0 1 calc(50% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
           <mat-label>Unloading point</mat-label>
-          <input matInput placeholder="Unloading point" formControlName="unloading_point"  required/>
-          <mat-error *ngIf="
+          <input
+            matInput
+            placeholder="Unloading point"
+            formControlName="unloading_point"
+            required
+          />
+          <mat-error
+            *ngIf="
               unloading_point.invalid &&
               (unloading_point.dirty || unloading_point.touched)
-            ">
-            <ng-container *ngIf="unloading_point.hasError('required')">Unloading point is required.</ng-container>
+            "
+          >
+            <ng-container *ngIf="unloading_point.hasError('required')"
+              >Unloading point is required.</ng-container
+            >
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field fxFlex="0 1 calc(28% - 10px)" fxFlex.lt-md="0 1 calc(50% - 10px)" fxFlex.lt-sm="100%"
-          fxFlex.xs="100%" appearance="fill">
+        <mat-form-field
+          fxFlex="0 1 calc(28% - 10px)"
+          fxFlex.lt-md="0 1 calc(50% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
           <mat-label>Capacity</mat-label>
           <mat-select formControlName="capacity">
-            <mat-option *ngFor="let capacity of capacities" [value]="capacity.value">
+            <mat-option
+              *ngFor="let capacity of capacities"
+              [value]="capacity.value"
+            >
               {{ capacity.name }}
             </mat-option>
           </mat-select>
-          <mat-error *ngIf="capacity.invalid && (capacity.dirty || capacity.touched)">
-            <ng-container *ngIf="capacity.hasError('required')">Capacity is required.</ng-container>
+          <mat-error
+            *ngIf="capacity.invalid && (capacity.dirty || capacity.touched)"
+          >
+            <ng-container *ngIf="capacity.hasError('required')"
+              >Capacity is required.</ng-container
+            >
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field fxFlex="0 1 calc(28% - 10px)" fxFlex.lt-md="0 1 calc(50% - 10px)" fxFlex.lt-sm="100%"
-          fxFlex.xs="100%" appearance="fill">
+        <mat-form-field
+          fxFlex="0 1 calc(28% - 10px)"
+          fxFlex.lt-md="0 1 calc(50% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
           <mat-label>Type</mat-label>
           <mat-select formControlName="type">
             <mat-option *ngFor="let type of types" [value]="type.value">
@@ -114,20 +239,41 @@
             </mat-option>
           </mat-select>
           <mat-error *ngIf="type.invalid && (type.dirty || type.touched)">
-            <ng-container *ngIf="type.hasError('required')">Type is required.</ng-container>
+            <ng-container *ngIf="type.hasError('required')"
+              >Type is required.</ng-container
+            >
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field fxFlex="0 1 calc(28% - 10px)" fxFlex.lt-md="0 1 calc(50% - 10px)" fxFlex.lt-sm="100%"
-          fxFlex.xs="100%" appearance="fill">
+        <mat-form-field
+          fxFlex="0 1 calc(28% - 10px)"
+          fxFlex.lt-md="0 1 calc(50% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
           <mat-label>Quantity</mat-label>
-          <input type="number" matInput placeholder="Quantity" formControlName="quantity" />
-          <mat-error *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)">
-            <ng-container *ngIf="quantity.hasError('required')">Quantity is required.</ng-container>
+          <input
+            type="number"
+            matInput
+            placeholder="Quantity"
+            formControlName="quantity"
+          />
+          <mat-error
+            *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)"
+          >
+            <ng-container *ngIf="quantity.hasError('required')"
+              >Quantity is required.</ng-container
+            >
           </mat-error>
         </mat-form-field>
         <div style="width: 50px;">
-          <button type="button" mat-mini-fab (click)="addItem()" style="background-color: blue;">
+          <button
+            type="button"
+            mat-mini-fab
+            (click)="addItem()"
+            style="background-color: blue;"
+          >
             <mat-icon>add box</mat-icon>
           </button>
         </div>
@@ -148,7 +294,11 @@
         <td>{{ item?.capacity }} Tons</td>
         <td>{{ item?.quantity }}</td>
         <td>
-          <button (click)="deleteItem(i)" mat-mini-fab style="background-color: red;">
+          <button
+            (click)="deleteItem(i)"
+            mat-mini-fab
+            style="background-color: red;"
+          >
             <mat-icon>delete forever</mat-icon>
           </button>
         </td>
@@ -161,8 +311,12 @@
   <button type="button" class="mat-raised-button" [mat-dialog-close]>
     Cancel
   </button>
-  <button [attr.form]="formId" type="submit" class="mat-raised-button mat-primary"
-    [disabled]="asyncService?.isLoading | async">
+  <button
+    [attr.form]="formId"
+    type="submit"
+    class="mat-raised-button mat-primary"
+    [disabled]="asyncService?.isLoading | async"
+  >
     Submit
   </button>
 </div>
