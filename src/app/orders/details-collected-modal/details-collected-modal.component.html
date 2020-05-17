@@ -25,7 +25,7 @@
         fxLayoutAlign="flex-start"
       >
         <mat-form-field
-          fxFlex="0 1 calc(33.33% - 10px)"
+          fxFlex="0 1 calc(30% - 10px)"
           fxFlex.lt-md="0 1 calc(50% - 10px)"
           fxFlex.lt-sm="100%"
           fxFlex.xs="100%"
@@ -35,77 +35,65 @@
           <input
             matInput
             placeholder="Customer Name"
-            formControlName="customer_name"
+            formControlName="name"
             required
+            readonly
           />
-          <mat-error
-            *ngIf="
-              customer_name.invalid &&
-              (customer_name.dirty || customer_name.touched)
-            "
-          >
-            <ng-container *ngIf="customer_name.hasError('required')"
+          <mat-error *ngIf="name.invalid && (name.dirty || name.touched)">
+            <ng-container *ngIf="name.hasError('required')"
               >Customer Name is required.</ng-container
             >
           </mat-error>
         </mat-form-field>
 
         <mat-form-field
-        fxFlex="0 1 calc(33.33% - 10px)"
-        fxFlex.lt-md="0 1 calc(50% - 10px)"
-        fxFlex.lt-sm="100%"
-        fxFlex.xs="100%"
-        appearance="fill"
-      >
-        <mat-label>Customer Phone</mat-label>
-        <input
-          matInput
-          placeholder="Customer Phone"
-          formControlName="customer_phn"
-          required
-        />
-        <mat-error
-          *ngIf="
-            customer_phn.invalid &&
-            (customer_phn.dirty || customer_phn.touched)
-          "
+          fxFlex="0 1 calc(30% - 10px)"
+          fxFlex.lt-md="0 1 calc(50% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
         >
-          <ng-container *ngIf="customer_phn.hasError('required')"
-            >Customer phone is required.</ng-container
-          >
-        </mat-error>
-      </mat-form-field>
+          <mat-label>Customer Phone</mat-label>
+          <input
+            matInput
+            placeholder="Customer Phone"
+            formControlName="phone"
+            required
+            readonly
+          />
+          <mat-error *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+            <ng-container *ngIf="phone.hasError('required')"
+              >Customer phone is required.</ng-container
+            >
+          </mat-error>
+        </mat-form-field>
 
-      <mat-form-field
-        fxFlex="0 1 calc(33.33% - 10px)"
-        fxFlex.lt-md="0 1 calc(50% - 10px)"
-        fxFlex.lt-sm="100%"
-        fxFlex.xs="100%"
-        appearance="fill"
-      >
-        <mat-label>Customer Email</mat-label>
-        <input
-          matInput
-          placeholder="Customer Emal"
-          formControlName="customer_email"
-          required
-        />
-        <mat-error
-          *ngIf="
-            customer_email.invalid &&
-            (customer_email.dirty || customer_email.touched)
-          "
-        >
-          <ng-container *ngIf="customer_email.hasError('required')"
-            >Customer email is required.</ng-container
-          >
-          <ng-container *ngIf="customer_email.hasError('email')"
-            >Invalid Email address</ng-container
-          >
-        </mat-error>
-      </mat-form-field>
         <mat-form-field
           fxFlex="0 1 calc(30% - 10px)"
+          fxFlex.lt-md="0 1 calc(50% - 10px)"
+          fxFlex.lt-sm="100%"
+          fxFlex.xs="100%"
+          appearance="fill"
+        >
+          <mat-label>Customer Email</mat-label>
+          <input
+            matInput
+            placeholder="Customer Email"
+            formControlName="email"
+            required
+            readonly
+          />
+          <mat-error *ngIf="email.invalid && (email.dirty || email.touched)">
+            <ng-container *ngIf="email.hasError('required')"
+              >Customer email is required.</ng-container
+            >
+            <ng-container *ngIf="email.hasError('email')"
+              >Invalid Email address</ng-container
+            >
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          fxFlex="0 1 calc(28% - 10px)"
           fxFlex.lt-md="0 1 calc(50% - 10px)"
           fxFlex.lt-sm="100%"
           fxFlex.xs="100%"
@@ -136,7 +124,7 @@
         </mat-form-field>
 
         <mat-form-field
-          fxFlex="0 1 calc(30% - 10px)"
+          fxFlex="0 1 calc(28% - 10px)"
           fxFlex.lt-md="0 1 calc(50% - 10px)"
           fxFlex.lt-sm="100%"
           fxFlex.xs="100%"
@@ -167,7 +155,7 @@
         </mat-form-field>
 
         <mat-form-field
-          fxFlex="0 1 calc(30% - 10px)"
+          fxFlex="0 1 calc(28% - 10px)"
           fxFlex.lt-md="0 1 calc(50% - 10px)"
           fxFlex.lt-sm="100%"
           fxFlex.xs="100%"
@@ -198,7 +186,7 @@
         </mat-form-field>
 
         <mat-form-field
-          fxFlex="0 1 calc(50% - 10px)"
+          fxFlex="0 1 calc(45% - 10px)"
           fxFlex.lt-md="0 1 calc(50% - 10px)"
           fxFlex.lt-sm="100%"
           fxFlex.xs="100%"
@@ -224,7 +212,7 @@
         </mat-form-field>
 
         <mat-form-field
-          fxFlex="0 1 calc(50% - 10px)"
+          fxFlex="0 1 calc(45% - 10px)"
           fxFlex.lt-md="0 1 calc(50% - 10px)"
           fxFlex.lt-sm="100%"
           fxFlex.xs="100%"
@@ -338,7 +326,11 @@
         <td>{{ item?.capacity }} Tons</td>
         <td>{{ item?.quantity }}</td>
         <td>
-          <button (click)="deleteItem(i)" mat-mini-fab style="background-color: red;">
+          <button
+            (click)="deleteItem(i)"
+            mat-mini-fab
+            style="background-color: red;"
+          >
             <mat-icon>delete forever</mat-icon>
           </button>
         </td>

@@ -39,10 +39,10 @@ export class CustomerAddModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      customer_name: ['', [Validators.required]],
-      customer_email: ['', [Validators.required, Validators.email]],
-      customer_phn: ['', [Validators.required]],
-      customer_type: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required]],
+      type: ['', [Validators.required]],
       orientation: ['customer', [Validators.required]],
       pictureName: [''],
     });
@@ -51,17 +51,17 @@ export class CustomerAddModalComponent implements OnInit {
     }
   }
 
-  get customer_name() {
-    return this.form.get('customer_name');
+  get name() {
+    return this.form.get('name');
   }
-  get customer_email() {
-    return this.form.get('customer_email');
+  get email() {
+    return this.form.get('email');
   }
-  get customer_phn() {
-    return this.form.get('customer_phn');
+  get phone() {
+    return this.form.get('phone');
   }
-  get customer_type() {
-    return this.form.get('customer_type');
+  get type() {
+    return this.form.get('type');
   }
 
   onChangeUserPicture({ target }: Event): void {
@@ -102,6 +102,7 @@ export class CustomerAddModalComponent implements OnInit {
             this.commonService.showSuccessMsg(
               'Success! The Customer has been added successfully.'
             );
+            this.close();
           } else {
             this.asyncService.finish();
             this.commonService.showErrorMsg(
@@ -117,6 +118,9 @@ export class CustomerAddModalComponent implements OnInit {
     }
   }
 
+  close = (): void => {
+    this.dialogRef.close();
+  };
   ngOnDestroy(): void {
     if (this.customerServiceSub) {
       this.customerServiceSub.unsubscribe();

@@ -11,11 +11,11 @@ import { CommonService } from 'src/app/shared/services/common.service';
 import { OrderService } from '../services/orders.service';
 import { Truck } from '../models/truck.model';
 import { startWith, map } from 'rxjs/operators';
-
+import { MatDialogRef } from '@angular/material/dialog';
 export interface Vendor {
   vendor_id: string;
   name: string;
-  phn: string;
+  phone: string;
   image_path: string;
 }
 
@@ -35,37 +35,44 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
   vendorControl = new FormControl();
   filteredStates: Observable<Vendor[]>;
 
-  vendors: Vendor[] = [
-    {
-      vendor_id: '1',
-      name: 'Arkansas',
-      phn: '0198888888888',
-      image_path:
-        'https://upload.wikimedia.org/wikipedia/commons/9/9d/Flag_of_Arkansas.svg',
-    },
-    {
-      vendor_id: '2',
-      name: 'California',
-      phn: '0178888888888',
-      image_path:
-        'https://upload.wikimedia.org/wikipedia/commons/0/01/Flag_of_California.svg',
-    },
-    {
-      vendor_id: '3',
-      name: 'Florida',
-      phn: '0168888888888',
-      image_path:
-        'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Florida.svg',
-    },
-    {
-      vendor_id: '4',
-      name: 'Texas',
-      phn: '0158888888888',
-      image_path:
-        'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg',
-    },
-  ];
-
+  vendors: Vendor[] = [];
+  // vendors: Vendor[] = [
+  //   {
+  //     vendor_id: '1',
+  //     name: 'Arkansas',
+  //     phone: '0198888888888',
+  //     image_path:
+  //       'https://upload.wikimedia.org/wikipedia/commons/9/9d/Flag_of_Arkansas.svg',
+  //   },
+  //   {
+  //     vendor_id: '2',
+  //     name: 'California',
+  //     phone: '0178888888888',
+  //     image_path:
+  //       'https://upload.wikimedia.org/wikipedia/commons/0/01/Flag_of_California.svg',
+  //   },
+  //   {
+  //     vendor_id: '3',
+  //     name: 'Florida',
+  //     phone: '0168888888888',
+  //     image_path:
+  //       'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Florida.svg',
+  //   },
+  //   {
+  //     vendor_id: '4',
+  //     name: 'Texas',
+  //     phone: '0158888888888',
+  //     image_path:
+  //       'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg',
+  //   },
+  //   {
+  //     vendor_id: 'vendor_trcl_01673092106',
+  //     name: 'Truckload Companies Ltd',
+  //     phone: '0158888888888',
+  //     image_path:
+  //       'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg',
+  //   },
+  // ];
   capacities: any[] = [
     { name: '3 ton', value: '3' },
     { name: '5 ton', value: '5' },
@@ -75,28 +82,39 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
     { name: 'Covered', value: 'covered' },
     { name: 'Open', value: 'open' },
   ];
+  statuses: any[];
+  statusTruckOwner: any[] = [
+    { name: 'Not available', value: 'not available' },
+    { name: 'Available', value: 'available' },
+  ];
+  statusOtherVendor: any[] = [
+    { name: 'returned', value: 'returned' },
+    { name: 'rented', value: 'rented' },
+  ];
   constructor(
     private fb: FormBuilder,
     private commonService: CommonService,
     public asyncService: AsyncService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    public dialogRef: MatDialogRef<TruckAddModalComponent>
   ) {}
 
   ngOnInit(): void {
-    // this.loadVendorSub = this.orderService.getVendor().subscribe(
-    //   (data) => {
-    //     if (data) {
-    //       this.vendors = data;
-    //     } else {
-    //       this.asyncService.finish();
-    //       this.commonService.showErrorMsg('Error! Vendors could not found');
-    //     }
-    //   },
-    //   (error) => {
-    //     this.asyncService.finish();
-    //     this.commonService.showErrorMsg('Error! Vendors could not found');
-    //   }
-    // );
+    this.loadVendorSub = this.orderService.getVendor().subscribe(
+      (data) => {
+        if (data) {
+          this.vendors = data;
+          console.log(this.vendors);
+        } else {
+          this.asyncService.finish();
+          this.commonService.showErrorMsg('Error! Vendors could not found');
+        }
+      },
+      (error) => {
+        this.asyncService.finish();
+        this.commonService.showErrorMsg('Error! Vendors could not found');
+      }
+    );
 
     this.filteredStates = this.vendorControl.valueChanges.pipe(
       startWith(''),
@@ -107,9 +125,12 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
       vendor_name: ['', [Validators.required]],
       vendor_id: ['', [Validators.required]],
       device_id: [''],
-      vendor_phn: ['', [Validators.required, Validators.minLength(11)]],
+      phone: ['', [Validators.required]],
       capacity: ['', [Validators.required]],
       type: ['', [Validators.required]],
+      status: ['', [Validators.required]],
+      orientation:[''],
+
     });
   }
   private _filterStates(value: string): Vendor[] {
@@ -118,7 +139,7 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
     return this.vendors.filter(
       (state) =>
         state.name.toLowerCase().indexOf(filterValue) === 0 ||
-        state.phn.toLowerCase().indexOf(filterValue) === 0
+        state.phone.toLowerCase().indexOf(filterValue) === 0
     );
   }
   onSelectvendor(id) {
@@ -126,7 +147,14 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
     this.vendorControl.patchValue(cus.name);
     this.vendor_name.patchValue(cus.name);
     this.vendor_id.patchValue(cus.vendor_id);
-    this.vendor_phn.patchValue(cus.phn);
+    this.phone.patchValue(cus.phone);
+    if (cus.vendor_id === '018789678979_trll_vendor') {
+      this.statuses = this.statusTruckOwner;
+      this.orientation.patchValue('own');
+    } else {
+      this.statuses = this.statusOtherVendor;
+      this.orientation.patchValue('other');
+    }
   }
   get truck_reg() {
     return this.form.get('truck_reg');
@@ -140,8 +168,11 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
   get device_id() {
     return this.form.get('device_id');
   }
-  get vendor_phn() {
-    return this.form.get('vendor_phn');
+  get phone() {
+    return this.form.get('phone');
+  }
+  get status() {
+    return this.form.get('status');
   }
   get capacity() {
     return this.form.get('capacity');
@@ -149,10 +180,14 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
   get type() {
     return this.form.get('type');
   }
+  get orientation() {
+    return this.form.get('orientation');
+  }
 
   onSubmit(truck: Truck) {
     if (this.form.valid) {
       this.asyncService.start();
+      this.commonService.removeEmptyProperties(truck);
       this.customerServiceSub = this.orderService.addTruck(truck).subscribe(
         (isAdded) => {
           this.asyncService.finish();
@@ -160,6 +195,7 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
             this.commonService.showSuccessMsg(
               'Success! The Truck has been added successfully.'
             );
+            this.close();
           } else {
             this.asyncService.finish();
             this.commonService.showErrorMsg('Error! The Truck is not added.');
@@ -172,6 +208,10 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
       );
     }
   }
+
+  close = (): void => {
+    this.dialogRef.close();
+  };
   ngOnDestroy(): void {
     if (this.customerServiceSub) {
       this.customerServiceSub.unsubscribe();

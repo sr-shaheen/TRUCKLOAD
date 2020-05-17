@@ -7,7 +7,7 @@
         <a>Overall</a>
      </section> -->
       <mat-toolbar class="tp-section1">
-        Overall
+        <a [routerLink]="['/dashboard']" [routerLinkActive]="['active']">Overall</a>
       </mat-toolbar>
       <section class="tp-section">
         <a [routerLink]="['/dashboard/customer-dashboard']" [routerLinkActive]="['active']">
