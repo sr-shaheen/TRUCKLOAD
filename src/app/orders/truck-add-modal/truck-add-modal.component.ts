@@ -11,7 +11,7 @@ import { CommonService } from 'src/app/shared/services/common.service';
 import { OrderService } from '../services/orders.service';
 import { Truck } from '../models/truck.model';
 import { startWith, map } from 'rxjs/operators';
-
+import { MatDialogRef } from '@angular/material/dialog';
 export interface Vendor {
   vendor_id: string;
   name: string;
@@ -94,7 +94,8 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private commonService: CommonService,
     public asyncService: AsyncService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    public dialogRef: MatDialogRef<TruckAddModalComponent>
   ) {}
 
   ngOnInit(): void {
@@ -190,6 +191,7 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
             this.commonService.showSuccessMsg(
               'Success! The Truck has been added successfully.'
             );
+            this.close();
           } else {
             this.asyncService.finish();
             this.commonService.showErrorMsg('Error! The Truck is not added.');
@@ -202,6 +204,10 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
       );
     }
   }
+
+  close = (): void => {
+    this.dialogRef.close();
+  };
   ngOnDestroy(): void {
     if (this.customerServiceSub) {
       this.customerServiceSub.unsubscribe();

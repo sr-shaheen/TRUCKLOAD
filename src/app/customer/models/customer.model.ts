@@ -1,9 +1,9 @@
 export interface Customer {
   customer_id?: string;
-  customer_name: string;
-  customer_email: string;
-  customer_phn: string;
-  customer_type: string;
+  name: string;
+  email: string;
+  phone: string;
+  type: string;
   orientation:string;
   created_at?: string;
   pk?: string;

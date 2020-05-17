@@ -102,6 +102,7 @@ export class CustomerAddModalComponent implements OnInit {
             this.commonService.showSuccessMsg(
               'Success! The Customer has been added successfully.'
             );
+            this.close();
           } else {
             this.asyncService.finish();
             this.commonService.showErrorMsg(
@@ -117,6 +118,9 @@ export class CustomerAddModalComponent implements OnInit {
     }
   }
 
+  close = (): void => {
+    this.dialogRef.close();
+  };
   ngOnDestroy(): void {
     if (this.customerServiceSub) {
       this.customerServiceSub.unsubscribe();

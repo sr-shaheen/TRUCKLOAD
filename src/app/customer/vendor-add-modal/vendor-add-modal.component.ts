@@ -79,6 +79,7 @@ export class VendorAddModalComponent implements OnInit {
             this.commonService.showSuccessMsg(
               'Success! The Truck owner has been added successfully.'
             );
+            this.close();
           } else {
             this.asyncService.finish();
             this.commonService.showErrorMsg(
@@ -95,7 +96,9 @@ export class VendorAddModalComponent implements OnInit {
       );
     }
   }
-
+  close = (): void => {
+    this.dialogRef.close();
+  };
   ngOnDestroy(): void {
     if (this.vendorServiceSub) {
       this.vendorServiceSub.unsubscribe();
