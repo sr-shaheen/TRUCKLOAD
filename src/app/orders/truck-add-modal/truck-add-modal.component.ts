@@ -148,7 +148,7 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
     this.vendor_name.patchValue(cus.name);
     this.vendor_id.patchValue(cus.vendor_id);
     this.phone.patchValue(cus.phone);
-    if (cus.vendor_id === '1234567890_trbl_vendor') {
+    if (cus.vendor_id === '018789678979_trll_vendor') {
       this.statuses = this.statusTruckOwner;
       this.orientation.patchValue('own');
     } else {
