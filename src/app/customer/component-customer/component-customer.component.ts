@@ -60,6 +60,5 @@ export class ComponentCustomerComponent implements OnInit {
     if (this.customerListSub) {
       this.customerListSub.unsubscribe();
     }
- 
   }
 }

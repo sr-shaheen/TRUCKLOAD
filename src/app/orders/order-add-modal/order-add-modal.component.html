@@ -17,9 +17,9 @@
           <mat-icon matSuffix>search</mat-icon>
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectCustomer($event.option.value)">
             <mat-option *ngFor="let state of filteredStates | async" [value]="state.customer_id">
-              <img class="example-option-img" aria-hidden [src]="state.image_path" height="25" />
+              <!-- <img class="example-option-img" aria-hidden [src]="state.image_path" height="25" /> -->
               <span>{{ state.name }}</span> |
-              <small>Phone: {{ state.phn }}</small>
+              <small>Phone: {{ state.phone }}</small>
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
