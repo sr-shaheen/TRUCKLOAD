@@ -55,8 +55,8 @@ export class CustomerService {
         catchError((error) => of(false))
       );
   }
-  getCustomerList(): Observable<Vendor[]> {
-    return this.http.get<any>(`http://localhost:7075/api/customerlist`).pipe(
+  getCustomerList(): Observable<Customer[]> {
+    return this.http.get<any>(`https://lqjaa1c4yi.execute-api.ap-southeast-1.amazonaws.com/dev/all?orientation=customer`).pipe(
       map((response) => (response ? response.data : null)),
       catchError((error) => of(null))
     );
