@@ -126,10 +126,12 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
       vendor_name: ['', [Validators.required]],
       vendor_id: ['', [Validators.required]],
       device_id: [''],
-      phone: ['', [Validators.required, Validators.minLength(11)]],
+      phone: ['', [Validators.required]],
       capacity: ['', [Validators.required]],
       type: ['', [Validators.required]],
       status: ['', [Validators.required]],
+      orientation:[''],
+
     });
   }
   private _filterStates(value: string): Vendor[] {
@@ -149,8 +151,10 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
     this.phone.patchValue(cus.phone);
     if (cus.vendor_id === '1234567890_trbl_vendor') {
       this.statuses = this.statusTruckOwner;
+      this.orientation.patchValue('own');
     } else {
       this.statuses = this.statusOtherVendor;
+      this.orientation.patchValue('other');
     }
   }
   get truck_reg() {
@@ -176,6 +180,9 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
   }
   get type() {
     return this.form.get('type');
+  }
+  get orientation() {
+    return this.form.get('orientation');
   }
 
   onSubmit(truck: Truck) {
