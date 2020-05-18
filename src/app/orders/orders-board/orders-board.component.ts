@@ -236,30 +236,40 @@ export class OrdersBoardComponent implements OnInit {
     const draggedServiceData =
       event.previousContainer.data[event.previousIndex];
 
-    // this.updateBoardSub = this.orderService
-    //   .updateBoardStatus(draggedServiceData.customer_id, draggedServiceData)
-    //   .subscribe(
-    //     (data) => {
-    //       if (data) {
-    //         this.asyncService.finish();
-    //         this.commonService.showSuccessMsg("Board Updated!!!")
-    //       } else {
-    //         this.asyncService.finish();
-    //         this.commonService.showErrorMsg('Error! Not Updated!!');
-    //       }
-    //     },
-    //     (error) => {
-    //       this.asyncService.finish();
-    //       this.commonService.showErrorMsg('Error! Not Updated!!');
-    //     }
-    //   );
+    console.log('nextStatus', nextStatus);
+    console.log('draggedServiceData', draggedServiceData);
+    let moveOrderstatusObj = [
+      {
+        pk: draggedServiceData.order_id,
+        sk: draggedServiceData.customer_id,
+        status: nextStatus,
+      },
+    ];
 
-    transferArrayItem(
-      event.previousContainer.data,
-      event.container.data,
-      event.previousIndex,
-      event.currentIndex
-    );
+    this.updateBoardSub = this.orderService
+      .updateConfirmed(moveOrderstatusObj)
+      .subscribe(
+        (data) => {
+          if (data) {
+            this.asyncService.finish();
+            this.commonService.showSuccessMsg('Board Updated!!!');
+          } else {
+            this.asyncService.finish();
+            this.commonService.showErrorMsg('Error! Not Updated!!');
+          }
+        },
+        (error) => {
+          this.asyncService.finish();
+          this.commonService.showErrorMsg('Error! Not Updated!!');
+        }
+      );
+
+    // transferArrayItem(
+    //   event.previousContainer.data,
+    //   event.container.data,
+    //   event.previousIndex,
+    //   event.currentIndex
+    // );
   };
   // All modal functionality
   customerAdd(): void {

@@ -58,6 +58,7 @@ export class OrderConfirmedModalComponent implements OnInit {
       truck_reg: [''],
     });
     this.truckTypes = this.data.truck_type;
+    
   }
 
   get capacity() {
@@ -113,6 +114,7 @@ export class OrderConfirmedModalComponent implements OnInit {
   }
 
   onSubmit(confirmed) {
+    //async swervce strt
     // validation logic
     this.submitFlag = true;
     this.truckTypes.forEach((item) => {
@@ -128,6 +130,7 @@ export class OrderConfirmedModalComponent implements OnInit {
     // end validation logic
 
     if (this.submitFlag) {
+      this.asyncService.start();
       let mapData = this.truckProvide.map((item) => ({
         pk: item.truck_id,
         sk: item.vendor_id,
