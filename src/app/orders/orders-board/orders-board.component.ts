@@ -235,9 +235,6 @@ export class OrdersBoardComponent implements OnInit {
     const nextStatus = event.container.id;
     const draggedServiceData =
       event.previousContainer.data[event.previousIndex];
-
-    console.log('nextStatus', nextStatus);
-    console.log('draggedServiceData', draggedServiceData);
     let moveOrderstatusObj = [
       {
         pk: draggedServiceData.order_id,
@@ -253,6 +250,7 @@ export class OrdersBoardComponent implements OnInit {
           if (data) {
             this.asyncService.finish();
             this.commonService.showSuccessMsg('Board Updated!!!');
+            this.loadOrdersBoard();
           } else {
             this.asyncService.finish();
             this.commonService.showErrorMsg('Error! Not Updated!!');

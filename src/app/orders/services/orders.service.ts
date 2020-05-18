@@ -90,7 +90,7 @@ export class OrderService {
       .patch<IContainer>("https://lqjaa1c4yi.execute-api.ap-southeast-1.amazonaws.com/dev/status", data)
       .pipe(
         map((response) =>
-          response.isExecuted && response.data ? true : false
+          response.isExecuted ? true : false
         ),
         catchError((error) => of(false))
       );
