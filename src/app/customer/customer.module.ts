@@ -5,11 +5,11 @@ import { CustomerRoutingModule } from './customer-routing.module';
 import { ComponentCustomerComponent } from './component-customer/component-customer.component';
 import { CustomerAddModalComponent } from './customer-add-modal/customer-add-modal.component';
 import { CustomerService } from './services/customer.service';
-import { CustomerListComponent } from './customer-list/customer-list.component';
+
 import { VendorAddModalComponent } from './vendor-add-modal/vendor-add-modal.component';
 
 @NgModule({
-  declarations: [ComponentCustomerComponent, CustomerAddModalComponent, CustomerListComponent, VendorAddModalComponent],
+  declarations: [ComponentCustomerComponent, CustomerAddModalComponent,  VendorAddModalComponent],
   entryComponents: [CustomerAddModalComponent,VendorAddModalComponent],
   imports: [SharedModule, CustomerRoutingModule],
   providers: [CustomerService],

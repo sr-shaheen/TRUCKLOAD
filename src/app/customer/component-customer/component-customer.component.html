@@ -11,3 +11,63 @@
   </button>
 </div>
 <mat-divider> </mat-divider>
+
+<div
+fxLayout="row"
+fxLayout.xs="column"
+fxLayout.sm="column"
+style="padding-bottom: 100px"
+>
+<div
+  fxLayout="row wrap"
+  fxLayoutGap="10px"
+  fxFlex="100%"
+  fxFlex.sm="50%"
+  fxLayout.lt-sm="column"
+  fxFlex.xs="100%"
+  fxLayoutAlign="flex-start"
+>
+  <mat-card
+  *ngFor="let customer of customerListObserver | async"
+    fxFlex="0 1 calc(25% - 10px)"
+    fxFlex.lt-md="0 1 calc(33.33% - 10px)"
+    fxFlex.lt-sm="50%"
+    fxFlex.xs="50%"
+    appearance="fill"
+    class="pp"
+  >
+    <div style="width: 100%; display: flex; flex-direction: row;">
+      <div style="width: 90%;">
+        <p>Customer Name: {{customer.name}} </p>
+        <p>Phone: {{customer.phone}} </p>
+        <p>Email: {{customer.email}} </p>
+      </div>
+      <div style="width: 10%; display: flex; flex-direction: column;margin-top: -12px">
+        <button
+          mat-icon-button
+          matTooltip="Store"
+          class="btt"
+       
+        >
+          <mat-icon style="font-size: 14px;">double_arrow</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          matTooltip="Edit"
+          class="btt"
+        >
+          <mat-icon style="font-size: 14px;">edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          matTooltip="Delete"
+          class="btt"
+     
+        >
+          <mat-icon style="font-size: 14px;">delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-card>
+</div>
+</div>

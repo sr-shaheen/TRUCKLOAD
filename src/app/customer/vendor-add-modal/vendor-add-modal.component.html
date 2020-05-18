@@ -33,16 +33,16 @@
           <input
             matInput
             placeholder="Owner Name"
-            formControlName="vendor_name"
+            formControlName="name"
             required
           />
           <mat-error
             *ngIf="
-              vendor_name.invalid &&
-              (vendor_name.dirty || vendor_name.touched)
+              name.invalid &&
+              (name.dirty || name.touched)
             "
           >
-            <ng-container *ngIf="vendor_name.hasError('required')"
+            <ng-container *ngIf="name.hasError('required')"
               >Truck Owner Name is required.</ng-container
             >
           </mat-error>
@@ -58,16 +58,16 @@
           <input
             matInput
             placeholder="Owner Phone"
-            formControlName="vendor_phn"
+            formControlName="phone"
             required
           />
           <mat-error
             *ngIf="
-              vendor_phn.invalid &&
-              (vendor_phn.dirty || vendor_phn.touched)
+              phone.invalid &&
+              (phone.dirty || phone.touched)
             "
           >
-            <ng-container *ngIf="vendor_phn.hasError('required')"
+            <ng-container *ngIf="phone.hasError('required')"
               >Truck owner phone is required.</ng-container
             >
           </mat-error>
@@ -84,18 +84,18 @@
           <input
             matInput
             placeholder="Owner Email"
-            formControlName="vendor_email"
+            formControlName="email"
           />
           <mat-error
             *ngIf="
-              vendor_email.invalid &&
-              (vendor_email.dirty || vendor_email.touched)
+              email.invalid &&
+              (email.dirty || email.touched)
             "
           >
-            <ng-container *ngIf="vendor_email.hasError('required')"
+            <ng-container *ngIf="email.hasError('required')"
               >Truck Owner email is required.</ng-container
             >
-            <ng-container *ngIf="vendor_email.hasError('email')"
+            <ng-container *ngIf="email.hasError('email')"
               >Invalid Email address</ng-container
             >
           </mat-error>
@@ -108,18 +108,18 @@
           appearance="fill"
         >
           <mat-label>Owner Type</mat-label>
-          <mat-select formControlName="vendor_type" required>
+          <mat-select formControlName="type" required>
             <mat-option *ngFor="let type of types" [value]="type.value">
               {{ type.name }}
             </mat-option>
           </mat-select>
           <mat-error
             *ngIf="
-              vendor_type.invalid &&
-              (vendor_type.dirty || vendor_type.touched)
+              type.invalid &&
+              (type.dirty || type.touched)
             "
           >
-            <ng-container *ngIf="vendor_type.hasError('required')"
+            <ng-container *ngIf="type.hasError('required')"
               >Truck owner Type is required.</ng-container
             >
           </mat-error>

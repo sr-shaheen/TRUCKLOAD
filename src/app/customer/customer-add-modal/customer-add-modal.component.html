@@ -33,16 +33,16 @@
           <input
             matInput
             placeholder="Customer"
-            formControlName="customer_name"
+            formControlName="name"
             required
           />
           <mat-error
             *ngIf="
-              customer_name.invalid &&
-              (customer_name.dirty || customer_name.touched)
+              name.invalid &&
+              (name.dirty || name.touched)
             "
           >
-            <ng-container *ngIf="customer_name.hasError('required')"
+            <ng-container *ngIf="name.hasError('required')"
               >Customer Name is required.</ng-container
             >
           </mat-error>
@@ -58,16 +58,16 @@
           <input
             matInput
             placeholder="Customer Phone"
-            formControlName="customer_phn"
+            formControlName="phone"
             required
           />
           <mat-error
             *ngIf="
-              customer_phn.invalid &&
-              (customer_phn.dirty || customer_phn.touched)
+              phone.invalid &&
+              (phone.dirty || phone.touched)
             "
           >
-            <ng-container *ngIf="customer_phn.hasError('required')"
+            <ng-container *ngIf="phone.hasError('required')"
               >Customer phone is required.</ng-container
             >
           </mat-error>
@@ -84,19 +84,19 @@
           <input
             matInput
             placeholder="Customer Emal"
-            formControlName="customer_email"
+            formControlName="email"
             required
           />
           <mat-error
             *ngIf="
-              customer_email.invalid &&
-              (customer_email.dirty || customer_email.touched)
+              email.invalid &&
+              (email.dirty || email.touched)
             "
           >
-            <ng-container *ngIf="customer_email.hasError('required')"
+            <ng-container *ngIf="email.hasError('required')"
               >Customer email is required.</ng-container
             >
-            <ng-container *ngIf="customer_email.hasError('email')"
+            <ng-container *ngIf="email.hasError('email')"
               >Invalid Email address</ng-container
             >
           </mat-error>
@@ -109,18 +109,18 @@
           appearance="fill"
         >
           <mat-label>Customer Type</mat-label>
-          <mat-select formControlName="customer_type" required>
+          <mat-select formControlName="type" required>
             <mat-option *ngFor="let type of types" [value]="type.value">
               {{ type.name }}
             </mat-option>
           </mat-select>
           <mat-error
             *ngIf="
-              customer_type.invalid &&
-              (customer_type.dirty || customer_type.touched)
+              type.invalid &&
+              (type.dirty || type.touched)
             "
           >
-            <ng-container *ngIf="customer_type.hasError('required')"
+            <ng-container *ngIf="type.hasError('required')"
               >Customer Type is required.</ng-container
             >
           </mat-error>
