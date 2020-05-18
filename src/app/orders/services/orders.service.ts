@@ -75,4 +75,24 @@ export class OrderService {
       catchError(error => of([]))
     );
   }
+
+
+  addlease(lease: any): Observable<boolean> {
+    // const postData = { item: order };
+     return this.http.post<any>('https://lqjaa1c4yi.execute-api.ap-southeast-1.amazonaws.com/dev/lease', lease).pipe(
+       map((response) => (response.isExecuted && response.data ? true : false)),
+       catchError((error) => of(false))
+     );
+   }
+
+   updateConfirmed( data: any): Observable<boolean> {
+    return this.http
+      .patch<IContainer>("https://lqjaa1c4yi.execute-api.ap-southeast-1.amazonaws.com/dev/status", data)
+      .pipe(
+        map((response) =>
+          response.isExecuted && response.data ? true : false
+        ),
+        catchError((error) => of(false))
+      );
+  }
 }

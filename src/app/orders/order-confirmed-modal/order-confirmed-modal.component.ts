@@ -6,6 +6,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Subscription, forkJoin } from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { TruckList } from '../models/truck.model';
+import { OrdersBoardItem } from '../models/orders-board-item.model';
 
 @Component({
   selector: 'app-order-confirmed-modal',
@@ -17,6 +18,7 @@ export class OrderConfirmedModalComponent implements OnInit {
 
   form: FormGroup;
   orderConfirmedSub: Subscription;
+  orderLeaseSub: Subscription;
 
   submitFlag: boolean;
   requiredTruckCount = 0;
@@ -40,17 +42,14 @@ export class OrderConfirmedModalComponent implements OnInit {
     public asyncService: AsyncService,
     private orderService: OrderService,
     public dialogRef: MatDialogRef<OrderConfirmedModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: OrdersBoardItem
   ) {}
 
   ngOnInit(): void {
-    this.asyncService.start();
     let ownTruck = this.orderService.ownTruck();
     let otherTruck = this.orderService.otherTruck();
     forkJoin([ownTruck, otherTruck]).subscribe((results) => {
       this.truckData = [...results[0], ...results[1]];
-      this.asyncService.finish();
-      console.log(this.truckData, 'dddddddddddddddddddd');
     });
 
     this.form = this.fb.group({
@@ -92,8 +91,8 @@ export class OrderConfirmedModalComponent implements OnInit {
         truck_id: itemData.truck_id,
         device_id: itemData.device_id ? itemData.device_id : undefined,
         orientation: itemData.orientation,
-        vendor_name:itemData.vendor_name
-
+        vendor_name: itemData.vendor_name,
+        vendor_id: itemData.vendor_id,
       };
       if (!this.truckProvide.find((i) => i.truck_reg === item.truck_reg)) {
         this.truckProvide = [item, ...this.truckProvide];
@@ -114,6 +113,7 @@ export class OrderConfirmedModalComponent implements OnInit {
   }
 
   onSubmit(confirmed) {
+    // validation logic
     this.submitFlag = true;
     this.truckTypes.forEach((item) => {
       const data = this.truckProvide.filter(
@@ -125,25 +125,73 @@ export class OrderConfirmedModalComponent implements OnInit {
         this.commonService.showErrorMsg('Check properly !!!');
       }
     });
+    // end validation logic
+
     if (this.submitFlag) {
-      this.commonService.showSuccessMsg('Ready!!!');
-      // this.orderConfirmedSub = this.orderService
-      //   .updateBoardStatus('id','data')
-      //   .subscribe(
-      //     (data) => {
-      //       if (data) {
-      //         this.asyncService.finish();
-      //         this.commonService.showSuccessMsg("Board Updated!!!")
-      //       } else {
-      //         this.asyncService.finish();
-      //         this.commonService.showErrorMsg('Error! Not Updated!!');
-      //       }
-      //     },
-      //     (error) => {
-      //       this.asyncService.finish();
-      //       this.commonService.showErrorMsg('Error! Not Updated!!');
-      //     }
-      //   );
+      let mapData = this.truckProvide.map((item) => ({
+        pk: item.truck_id,
+        sk: item.vendor_id,
+        status: item.orientation === 'own' ? 'notAvailable' : 'rented',
+      }));
+
+      const leaseObj = {
+        order_id: this.data.order_id,
+        orientation: 'lease',
+        information: mapData,
+      };
+      console.log(leaseObj, 'Leaseeeeeeeeee');
+
+      this.orderLeaseSub = this.orderService.addlease(leaseObj).subscribe(
+        (data) => {
+          if (data) {
+            mapData.push({
+              pk: this.data.order_id,
+              sk: this.data.customer_id,
+              status: 'orderConfirmed',
+            });
+            console.log(mapData, 'Updateeeeeeee');
+
+            this.orderConfirmedSub = this.orderService
+              .updateConfirmed(mapData)
+              .subscribe(
+                (data) => {
+                  if (data) {
+                    this.asyncService.finish();
+                    this.commonService.showSuccessMsg('Board Updated!!!');
+                  } else {
+                    this.asyncService.finish();
+                    this.commonService.showErrorMsg('Error! Not Updated!!');
+                  }
+                },
+                (error) => {
+                  this.asyncService.finish();
+                  this.commonService.showErrorMsg('Error! Not Updated!!');
+                }
+              );
+          } else {
+            this.asyncService.finish();
+            this.commonService.showErrorMsg('Error! Lease not created!!');
+          }
+        },
+        (error) => {
+          this.asyncService.finish();
+          this.commonService.showErrorMsg('Error! Lease not created!!');
+        }
+      );
     }
+  }
+
+  close = (): void => {
+    this.dialogRef.close();
+  };
+
+  ngOnDestroy(): void {
+    if (this.orderLeaseSub) {
+      this.orderLeaseSub.unsubscribe();
+    }
+    if (this.orderConfirmedSub) {
+      this.orderConfirmedSub.unsubscribe();
+    }
+    this.asyncService.finish();
   }
 }
