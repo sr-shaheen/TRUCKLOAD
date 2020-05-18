@@ -34,7 +34,7 @@ export class OrderService {
   }
   updateOrderBoard( data: any): Observable<boolean> {
     return this.http
-      .patch<IContainer>("https://lqjaa1c4yi.execute-api.ap-southeast-1.amazonaws.com/dev/status", data)
+      .patch<IContainer>("https://lqjaa1c4yi.execute-api.ap-southeast-1.amazonaws.com/dev/order", data)
       .pipe(
         map((response) =>
           response.isExecuted && response.data ? true : false
