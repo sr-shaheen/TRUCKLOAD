@@ -22,7 +22,7 @@ export class ComponentCustomerComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private commonService: CommonService,
-    private asyncService: AsyncService,
+    public asyncService: AsyncService,
     private customerService: CustomerService
   ) {}
 
