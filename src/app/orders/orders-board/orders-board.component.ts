@@ -215,8 +215,8 @@ export class OrdersBoardComponent implements OnInit {
           this.commonService.showDialog(
             {
               title: `Move!!  ${
-                event.previousContainer.data[event.previousIndex].status
-              } ==> ${event.container.id}.`,
+                event.previousContainer.data[event.previousIndex].status.toLowerCase()
+              } To ${event.container.id.toLowerCase()}.`,
               content: 'Are you sure?',
             },
             () => this.updateOrdersBoard(event)

@@ -7,9 +7,10 @@ import { OrdersBoardItem } from '../models/orders-board-item.model';
   template: `
     <div style="cursor: pointer;">
       <p>Name: {{ order?.name }}</p>
-      <!-- <p>Unloading:{{ order?.unloadingPoint }}</p> -->
-      <p>Loading point : {{ order?.loading_point }}</p>
-      <p> Number of Consignment:{{order?.number_of_consignment}}</p>
+      <p>Loading : {{ order?.loading_point }}</p>
+      <p>Unloading : {{ order?.unloading_point }}</p>
+      <p>Starting : {{ order?.starting_date | date }}</p>
+      <p>No of Truck:{{ order?.number_of_consignment }}</p>
     </div>
   `,
   styles: [

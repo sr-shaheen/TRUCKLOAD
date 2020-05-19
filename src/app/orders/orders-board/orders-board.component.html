@@ -151,11 +151,6 @@
           [style.color]="colors.ordersPlaced.color"
         >
           <orders-board-item [order]="item"></orders-board-item>
-          <!-- <avatar
-            [size]="30"
-            [imageSrc]="item.imagePath"
-            class="item-avatar"
-          ></avatar> -->
         </div>
       </div>
     </div>
@@ -167,7 +162,7 @@
         cdkDropList
         #detailsCollectedList="cdkDropList"
         [cdkDropListData]="detailsCollected"
-        [cdkDropListConnectedTo]="[ordersPlacedList, orderConfirmedList]"
+        [cdkDropListConnectedTo]="[orderConfirmedList]"
         (cdkDropListDropped)="drop($event)"
       >
         <div
@@ -178,11 +173,6 @@
           [style.color]="colors.detailsCollected.color"
         >
           <orders-board-item [order]="item"></orders-board-item>
-          <!-- <avatar
-            [size]="30"
-            [imageSrc]="item.imagePath"
-            class="item-avatar"
-          ></avatar> -->
         </div>
       </div>
     </div>
@@ -194,7 +184,7 @@
         cdkDropList
         #orderConfirmedList="cdkDropList"
         [cdkDropListData]="orderConfirmed"
-        [cdkDropListConnectedTo]="[detailsCollectedList, loadCompletedList]"
+        [cdkDropListConnectedTo]="[loadCompletedList]"
         (cdkDropListDropped)="drop($event)"
       >
         <div
@@ -205,11 +195,6 @@
           [style.color]="colors.orderConfirmed.color"
         >
           <orders-board-item [order]="item"></orders-board-item>
-          <!-- <avatar
-            [size]="30"
-            [imageSrc]="item.imagePath"
-            class="item-avatar"
-          ></avatar> -->
         </div>
       </div>
     </div>
@@ -221,7 +206,7 @@
         cdkDropList
         #loadCompletedList="cdkDropList"
         [cdkDropListData]="loadCompleted"
-        [cdkDropListConnectedTo]="[orderConfirmedList, inTransitList]"
+        [cdkDropListConnectedTo]="[inTransitList]"
         (cdkDropListDropped)="drop($event)"
       >
         <div
@@ -232,11 +217,6 @@
           [style.color]="colors.loadCompleted.color"
         >
           <orders-board-item [order]="item"></orders-board-item>
-          <!-- <avatar
-            [size]="30"
-            [imageSrc]="item.imagePath"
-            class="item-avatar"
-          ></avatar> -->
         </div>
       </div>
     </div>
@@ -248,7 +228,7 @@
         cdkDropList
         #inTransitList="cdkDropList"
         [cdkDropListData]="inTransit"
-        [cdkDropListConnectedTo]="[loadCompletedList, uploadCompleteList]"
+        [cdkDropListConnectedTo]="[uploadCompleteList]"
         (cdkDropListDropped)="drop($event)"
       >
         <div
@@ -259,11 +239,6 @@
           [style.color]="colors.inTransit.color"
         >
           <orders-board-item [order]="item"></orders-board-item>
-          <!-- <avatar
-            [size]="30"
-            [imageSrc]="item.imagePath"
-            class="item-avatar"
-          ></avatar> -->
         </div>
       </div>
     </div>
@@ -274,23 +249,14 @@
         class="item-container"
         cdkDropList
         #uploadCompleteList="cdkDropList"
-        [cdkDropListData]="uploadComplete"
-        [cdkDropListConnectedTo]="[inTransitList, consignmentDoneList]"
-        (cdkDropListDropped)="drop($event)"
       >
         <div
           class="item"
-          cdkDrag
           *ngFor="let item of uploadComplete"
           [style.background-color]="colors.uploadComplete.bgColor"
           [style.color]="colors.uploadComplete.color"
         >
           <orders-board-item [order]="item"></orders-board-item>
-          <!-- <avatar
-            [size]="30"
-            [imageSrc]="item.imagePath"
-            class="item-avatar"
-          ></avatar> -->
         </div>
       </div>
     </div>
@@ -313,11 +279,6 @@
           [style.color]="colors.consignmentDone.color"
         >
           <orders-board-item [order]="item"></orders-board-item>
-          <!-- <avatar
-            [size]="30"
-            [imageSrc]="item.imagePath"
-            class="item-avatar"
-          ></avatar> -->
         </div>
       </div>
     </div>
