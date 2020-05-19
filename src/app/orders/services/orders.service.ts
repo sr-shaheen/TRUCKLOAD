@@ -95,4 +95,13 @@ export class OrderService {
         catchError((error) => of(false))
       );
   }
+
+  getLease(orderId:string): Observable<any[]> {
+    return this.http.get<any>(`https://lqjaa1c4yi.execute-api.ap-southeast-1.amazonaws.com/dev/object?pk=${orderId}&sk=lease`).pipe(
+      map(response =>
+        response.isExecuted && response.data ? response.data : []
+      ),
+      catchError(error => of([]))
+    );
+  }
 }
