@@ -53,10 +53,9 @@ export class DetailsCollectedModalComponent implements OnInit, OnDestroy {
       unloading_point: ['', [Validators.required]],
       capacity: [''],
       type: [''],
-      quantity: [''],
+      quantity: ['', [Validators.min(1)]],
       truck_type: [''],
       orientation: ['order'],
-      //  status:['detailsCollected']
     });
     this.truckTypes = this.data.truck_type;
     this.form.patchValue(this.data);
@@ -103,6 +102,11 @@ export class DetailsCollectedModalComponent implements OnInit, OnDestroy {
   }
 
   addItem() {
+    if (this.quantity.value < 0) {
+      this.quantity.patchValue('');
+      this.commonService.showErrorMsg('Quantity must be positive number');
+      return;
+    }
     if (this.capacity.value && this.quantity.value && this.type.value) {
       const item = {
         capacity: this.capacity.value,
