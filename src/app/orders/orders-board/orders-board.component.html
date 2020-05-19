@@ -249,9 +249,13 @@
         class="item-container"
         cdkDropList
         #uploadCompleteList="cdkDropList"
+        [cdkDropListData]="uploadComplete"
+        [cdkDropListConnectedTo]="[consignmentDoneList]"
+        (cdkDropListDropped)="drop($event)"
       >
         <div
           class="item"
+          cdkDrag
           *ngFor="let item of uploadComplete"
           [style.background-color]="colors.uploadComplete.bgColor"
           [style.color]="colors.uploadComplete.color"
@@ -267,13 +271,9 @@
         class="item-container"
         cdkDropList
         #consignmentDoneList="cdkDropList"
-        [cdkDropListData]="consignmentDone"
-        [cdkDropListConnectedTo]="[uploadCompleteList]"
-        (cdkDropListDropped)="drop($event)"
       >
         <div
           class="item"
-          cdkDrag
           *ngFor="let item of consignmentDone"
           [style.background-color]="colors.consignmentDone.bgColor"
           [style.color]="colors.consignmentDone.color"
