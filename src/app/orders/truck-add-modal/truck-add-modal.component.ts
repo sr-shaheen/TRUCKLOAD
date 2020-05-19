@@ -36,43 +36,7 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
   filteredStates: Observable<Vendor[]>;
 
   vendors: Vendor[] = [];
-  // vendors: Vendor[] = [
-  //   {
-  //     vendor_id: '1',
-  //     name: 'Arkansas',
-  //     phone: '0198888888888',
-  //     image_path:
-  //       'https://upload.wikimedia.org/wikipedia/commons/9/9d/Flag_of_Arkansas.svg',
-  //   },
-  //   {
-  //     vendor_id: '2',
-  //     name: 'California',
-  //     phone: '0178888888888',
-  //     image_path:
-  //       'https://upload.wikimedia.org/wikipedia/commons/0/01/Flag_of_California.svg',
-  //   },
-  //   {
-  //     vendor_id: '3',
-  //     name: 'Florida',
-  //     phone: '0168888888888',
-  //     image_path:
-  //       'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Florida.svg',
-  //   },
-  //   {
-  //     vendor_id: '4',
-  //     name: 'Texas',
-  //     phone: '0158888888888',
-  //     image_path:
-  //       'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg',
-  //   },
-  //   {
-  //     vendor_id: 'vendor_trcl_01673092106',
-  //     name: 'Truckload Companies Ltd',
-  //     phone: '0158888888888',
-  //     image_path:
-  //       'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg',
-  //   },
-  // ];
+
   capacities: any[] = [
     { name: '3 ton', value: '3' },
     { name: '5 ton', value: '5' },
@@ -84,8 +48,8 @@ export class TruckAddModalComponent implements OnInit, OnDestroy {
   ];
   statuses: any[];
   statusTruckOwner: any[] = [
-    { name: 'Not available', value: 'not available' },
     { name: 'Available', value: 'available' },
+    { name: 'Not Available', value: 'notAvailable' },
   ];
   statusOtherVendor: any[] = [
     { name: 'returned', value: 'returned' },
