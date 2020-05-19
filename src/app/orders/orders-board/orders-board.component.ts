@@ -22,6 +22,7 @@ import { DetailsCollectedModalComponent } from '../details-collected-modal/detai
 import { OrderConfirmedModalComponent } from '../order-confirmed-modal/order-confirmed-modal.component';
 import { OrderService } from '../services/orders.service';
 import { VendorAddModalComponent } from 'src/app/customer/vendor-add-modal/vendor-add-modal.component';
+import { TruckList } from '../models/truck.model';
 @Component({
   selector: 'app-orders-board',
   templateUrl: './orders-board.component.html',
@@ -37,13 +38,16 @@ export class OrdersBoardComponent implements OnInit {
   consignmentDone: OrdersBoardItem[] = [];
   movingItem: MovingItem = null;
   colors = ordersBoardColors;
-
+  //truckData: TruckList[] = [];
+  truckData = [];
   status = statusDictionary;
   boardData: OrdersBoardItem;
 
   ordersBoardSub: Subscription;
   updateBoardSub: Subscription;
 
+  loadLease: Subscription;
+  orderLeaseConsignmentSub: Subscription;
   constructor(
     private commonService: CommonService,
     public asyncService: AsyncService,
@@ -205,16 +209,14 @@ export class OrdersBoardComponent implements OnInit {
           dialogRef.afterClosed().subscribe((result) => {
             if (result) {
               this.loadOrdersBoard();
-            } else {
-              console.log(result, 'The dialog was closed');
             }
           });
         } else {
           this.commonService.showDialog(
             {
-              title: `Move!!  ${
-                event.previousContainer.data[event.previousIndex].status
-              } ==> ${event.container.id}.`,
+              title: `Move!!  ${event.previousContainer.data[
+                event.previousIndex
+              ].status.toLowerCase()} To ${event.container.id.toLowerCase()}.`,
               content: 'Are you sure?',
             },
             () => this.updateOrdersBoard(event)
@@ -235,31 +237,78 @@ export class OrdersBoardComponent implements OnInit {
     const nextStatus = event.container.id;
     const draggedServiceData =
       event.previousContainer.data[event.previousIndex];
-
-    // this.updateBoardSub = this.orderService
-    //   .updateBoardStatus(draggedServiceData.customer_id, draggedServiceData)
-    //   .subscribe(
-    //     (data) => {
-    //       if (data) {
-    //         this.asyncService.finish();
-    //         this.commonService.showSuccessMsg("Board Updated!!!")
-    //       } else {
-    //         this.asyncService.finish();
-    //         this.commonService.showErrorMsg('Error! Not Updated!!');
-    //       }
-    //     },
-    //     (error) => {
-    //       this.asyncService.finish();
-    //       this.commonService.showErrorMsg('Error! Not Updated!!');
-    //     }
-    //   );
-
-    transferArrayItem(
-      event.previousContainer.data,
-      event.container.data,
-      event.previousIndex,
-      event.currentIndex
-    );
+    let moveOrderStatus = [
+      {
+        pk: draggedServiceData.order_id,
+        sk: draggedServiceData.customer_id,
+        status: nextStatus,
+      },
+    ];
+    this.asyncService.start();
+    if (nextStatus == 'consignmentDone') {
+      this.loadLease = this.orderService
+        .getLease(draggedServiceData.order_id)
+        .subscribe(
+          (data) => {
+            if (data) {
+              this.truckData = data[0].information;
+              let mapData = this.truckData.map((item) => ({
+                pk: item.pk,
+                sk: item.sk,
+                status:
+                  item.status === 'notAvailable' ? 'Available' : 'returned',
+              }));
+              mapData = [...moveOrderStatus, ...mapData];
+              this.updateBoardSub = this.orderService
+                .updateConfirmed(mapData)
+                .subscribe(
+                  (data) => {
+                    if (data) {
+                      this.asyncService.finish();
+                      this.commonService.showSuccessMsg('Board Updated!!!');
+                      this.loadOrdersBoard();
+                    } else {
+                      this.asyncService.finish();
+                      this.commonService.showErrorMsg('Error! Not Updated!!');
+                    }
+                  },
+                  (error) => {
+                    this.asyncService.finish();
+                    this.commonService.showErrorMsg('Error! Not Updated!!');
+                  }
+                );
+            } else {
+              this.asyncService.finish();
+              this.commonService.showErrorMsg(
+                'Error! No lease Data could not found'
+              );
+            }
+          },
+          (error) => {
+            this.asyncService.finish();
+            this.commonService.showErrorMsg('Error! Customers could not found');
+          }
+        );
+    } else {
+      this.updateBoardSub = this.orderService
+        .updateConfirmed(moveOrderStatus)
+        .subscribe(
+          (data) => {
+            if (data) {
+              this.asyncService.finish();
+              this.commonService.showSuccessMsg('Board Updated!!!');
+              this.loadOrdersBoard();
+            } else {
+              this.asyncService.finish();
+              this.commonService.showErrorMsg('Error! Not Updated!!');
+            }
+          },
+          (error) => {
+            this.asyncService.finish();
+            this.commonService.showErrorMsg('Error! Not Updated!!');
+          }
+        );
+    }
   };
   // All modal functionality
   customerAdd(): void {
