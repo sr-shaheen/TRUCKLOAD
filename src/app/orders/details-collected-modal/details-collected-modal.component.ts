@@ -129,11 +129,16 @@ export class DetailsCollectedModalComponent implements OnInit, OnDestroy {
     this.truckTypes.splice(index, 1);
   }
   onSubmit({ type, quantity, capacity, ...data }: any): void {
+    console.log('dattttaaa', data);
+
     const order = data as Order;
     order.status = 'detailsCollected';
     order.order_id = this.data.order_id;
     order.pk = this.data.order_id;
     order.sk = this.data.customer_id;
+    order.number_of_consignment = this.truckTypes.length.toString();
+
+    console.log('orderrrrrr', order);
 
     if (this.form.valid) {
       this.asyncService.start();

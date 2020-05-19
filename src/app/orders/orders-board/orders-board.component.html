@@ -140,7 +140,7 @@
         cdkDropList
         #ordersPlacedList="cdkDropList"
         [cdkDropListData]="ordersPlaced"
-        [cdkDropListConnectedTo]="[detailsCollectedList, orderConfirmedList]"
+        [cdkDropListConnectedTo]="[detailsCollectedList]"
         (cdkDropListDropped)="drop($event)"
       >
         <div

@@ -34,7 +34,7 @@ export class OrderService {
   }
   updateOrderBoard( data: any): Observable<boolean> {
     return this.http
-      .patch<IContainer>("https://lqjaa1c4yi.execute-api.ap-southeast-1.amazonaws.com/dev/status", data)
+      .patch<IContainer>("https://lqjaa1c4yi.execute-api.ap-southeast-1.amazonaws.com/dev/order", data)
       .pipe(
         map((response) =>
           response.isExecuted && response.data ? true : false
@@ -69,6 +69,35 @@ export class OrderService {
   }
   otherTruck(): Observable<any[]> {
     return this.http.get<any>("https://lqjaa1c4yi.execute-api.ap-southeast-1.amazonaws.com/dev/status?status=returned").pipe(
+      map(response =>
+        response.isExecuted && response.data ? response.data : []
+      ),
+      catchError(error => of([]))
+    );
+  }
+
+
+  addlease(lease: any): Observable<boolean> {
+    // const postData = { item: order };
+     return this.http.post<any>('https://lqjaa1c4yi.execute-api.ap-southeast-1.amazonaws.com/dev/lease', lease).pipe(
+       map((response) => (response.isExecuted && response.data ? true : false)),
+       catchError((error) => of(false))
+     );
+   }
+
+   updateConfirmed( data: any): Observable<boolean> {
+    return this.http
+      .patch<IContainer>("https://lqjaa1c4yi.execute-api.ap-southeast-1.amazonaws.com/dev/status", data)
+      .pipe(
+        map((response) =>
+          response.isExecuted ? true : false
+        ),
+        catchError((error) => of(false))
+      );
+  }
+
+  getLease(orderId:string): Observable<any[]> {
+    return this.http.get<any>(`https://lqjaa1c4yi.execute-api.ap-southeast-1.amazonaws.com/dev/object?pk=${orderId}&sk=lease`).pipe(
       map(response =>
         response.isExecuted && response.data ? response.data : []
       ),

@@ -2,7 +2,7 @@
   Order confirmed
 </h3>
 <mat-divider></mat-divider>
-<mat-progress-bar *ngIf="asyncService?.isLoading | async" mode="indeterminate">
+<mat-progress-bar *ngIf="truckData.length === 0" mode="indeterminate">
 </mat-progress-bar>
 
 <table class="required">
@@ -115,8 +115,13 @@
           </mat-error>
         </mat-form-field>
         <div style="width: 50px;">
-          <button type="button" mat-mini-fab (click)="addItem()" style="background-color: green;">
-            <mat-icon >add box</mat-icon>
+          <button
+            type="button"
+            mat-mini-fab
+            (click)="addItem()"
+            style="background-color: green;"
+          >
+            <mat-icon>add box</mat-icon>
           </button>
         </div>
       </div>
