@@ -271,9 +271,11 @@
         class="item-container"
         cdkDropList
         #consignmentDoneList="cdkDropList"
+        (cdkDropListDropped)="drop($event)"
       >
         <div
           class="item"
+          cdkDrag
           *ngFor="let item of consignmentDone"
           [style.background-color]="colors.consignmentDone.bgColor"
           [style.color]="colors.consignmentDone.color"

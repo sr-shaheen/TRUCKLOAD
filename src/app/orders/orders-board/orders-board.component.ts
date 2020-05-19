@@ -214,9 +214,9 @@ export class OrdersBoardComponent implements OnInit {
         } else {
           this.commonService.showDialog(
             {
-              title: `Move!!  ${
-                event.previousContainer.data[event.previousIndex].status.toLowerCase()
-              } To ${event.container.id.toLowerCase()}.`,
+              title: `Move!!  ${event.previousContainer.data[
+                event.previousIndex
+              ].status.toLowerCase()} To ${event.container.id.toLowerCase()}.`,
               content: 'Are you sure?',
             },
             () => this.updateOrdersBoard(event)
@@ -244,7 +244,7 @@ export class OrdersBoardComponent implements OnInit {
         status: nextStatus,
       },
     ];
-
+    this.asyncService.start();
     if (nextStatus == 'consignmentDone') {
       this.loadLease = this.orderService
         .getLease(draggedServiceData.order_id)
