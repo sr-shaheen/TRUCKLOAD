@@ -295,6 +295,7 @@
             matInput
             placeholder="Quantity"
             formControlName="quantity"
+            min="1"
           />
           <mat-error
             *ngIf="quantity.invalid && (quantity.dirty || quantity.touched)"

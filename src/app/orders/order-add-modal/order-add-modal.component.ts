@@ -92,7 +92,7 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
       orientation: ['order'],
       capacity: [''],
       type: [''],
-      quantity: [''],
+      quantity: ['', [Validators.min(1)]],
       truck_type: [''],
       status: ['ordersPlaced'],
     });
@@ -157,6 +157,11 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
   }
 
   addItem() {
+    if (this.quantity.value < 0) {
+      this.quantity.patchValue('');
+      this.commonService.showErrorMsg('Quantity must be positive number');
+      return;
+    }
     if (this.capacity.value && this.quantity.value && this.type.value) {
       const item = {
         capacity: this.capacity.value,
@@ -165,8 +170,7 @@ export class OrderAddModalComponent implements OnInit, OnDestroy {
       };
       // if (!this.truckTypes.find(i => i.itemId === item.itemId)) {
       this.truckTypes = [item, ...this.truckTypes];
-     
-     
+
       // } else {
       //   this.commonService.showErrorMsg("Item already added!!!!");
       // }

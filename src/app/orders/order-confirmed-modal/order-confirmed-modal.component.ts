@@ -21,7 +21,7 @@ export class OrderConfirmedModalComponent implements OnInit {
   orderLeaseSub: Subscription;
 
   submitFlag: boolean;
-  requiredTruckCount = 0;
+  requiredTruckCount: number;
   truckTypes = [];
   truckProvide = [];
   truckFilter = [];
@@ -58,7 +58,6 @@ export class OrderConfirmedModalComponent implements OnInit {
       truck_reg: [''],
     });
     this.truckTypes = this.data.truck_type;
-    
   }
 
   get capacity() {
@@ -114,10 +113,11 @@ export class OrderConfirmedModalComponent implements OnInit {
   }
 
   onSubmit(confirmed) {
-    //async swervce strt
     // validation logic
     this.submitFlag = true;
+    this.requiredTruckCount = 0;
     this.truckTypes.forEach((item) => {
+      this.requiredTruckCount += parseInt(item.quantity);
       const data = this.truckProvide.filter(
         (i) => i.capacity === item.capacity && i.type === item.type
       );
@@ -129,20 +129,21 @@ export class OrderConfirmedModalComponent implements OnInit {
     });
     // end validation logic
 
-    if (this.submitFlag) {
+    if (
+      this.submitFlag &&
+      this.requiredTruckCount === this.truckProvide.length
+    ) {
       this.asyncService.start();
       let mapData = this.truckProvide.map((item) => ({
         pk: item.truck_id,
         sk: item.vendor_id,
         status: item.orientation === 'own' ? 'notAvailable' : 'rented',
       }));
-
       const leaseObj = {
         order_id: this.data.order_id,
         orientation: 'lease',
         information: mapData,
       };
-
       this.orderLeaseSub = this.orderService.addlease(leaseObj).subscribe(
         (data) => {
           if (data) {
@@ -151,7 +152,6 @@ export class OrderConfirmedModalComponent implements OnInit {
               sk: this.data.customer_id,
               status: 'orderConfirmed',
             });
-
             this.orderConfirmedSub = this.orderService
               .updateConfirmed(mapData)
               .subscribe(
@@ -180,6 +180,8 @@ export class OrderConfirmedModalComponent implements OnInit {
           this.commonService.showErrorMsg('Error! Lease not created!!');
         }
       );
+    } else {
+      this.commonService.showErrorMsg('Check properly !!!');
     }
   }
 
